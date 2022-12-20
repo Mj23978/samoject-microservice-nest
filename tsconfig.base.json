@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@samoject/core": ["libs/core/src/index.ts"],
+      "@samoject/prisma": ["libs/prisma/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,204 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+// generator nestgraphql {
+//     provider = "node node_modules/prisma-nestjs-graphql"
+//     output = "../src/generated"
+//     reExport = All
+// }
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "../ERD.svg"
+  theme = "forest"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String              @id @default(cuid())
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  email         String              @unique
+  password      String
+  firstname     String?
+  lastname      String?
+  username      String
+  active        Boolean
+  role          Role
+  ownedProjects Project[]
+  comments      Message[]
+  workspaces    Workspace[]
+  createdTasks  Task[]              @relation("UserCreatedTasks")
+  followedBy    User[]              @relation("UserFollows")
+  following     User[]              @relation("UserFollows")
+  projects      ProjectsOnUsers[]
+  assignedTasks UserAssignedTasks[]
+  chat          Chat?               @relation(fields: [chatId], references: [id])
+  chatId        String?             @unique
+}
+
+model Task {
+  id        String              @id @default(cuid())
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  project   Project?             @relation(fields: [projectId], references: [id])
+  projectId String?
+  creator   User?               @relation("UserCreatedTasks", fields: [creatorId], references: [id])
+  creatorId String?
+  parentId  String?
+  parent    Task?               @relation("SubTasks", fields: [parentId], references: [id])
+  subTasks  Task[]              @relation("SubTasks")
+  assignes  UserAssignedTasks[]
+  status    String              @default("TODO")
+  details   String
+  chat      Chat?               @relation(fields: [chatId], references: [id])
+  chatId    String?             @unique
+}
+
+model Space {
+  id         String        @id @default(cuid())
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  view       SpaceView     @relation(fields: [viewId], references: [id])
+  viewId     String        @unique
+  project    Project       @relation(fields: [projectId], references: [id])
+  projectId  String
+  settings   SpaceSettings @relation(fields: [settingsId], references: [id])
+  settingsId String        @unique
+  spaceType  String
+  parentId   String?
+  parent     Space?        @relation("SubSpaces", fields: [parentId], references: [id])
+  subspaces  Space[]       @relation("SubSpaces")
+  chat       Chat?         @relation(fields: [chatId], references: [id])
+  chatId     String?       @unique
+}
+
+model SpaceView {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  localId   String
+  space     Space?
+  spaceId   String
+}
+
+model SpaceSettings {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  localId   String
+  space     Space?
+  spaceId   String
+}
+
+model Project {
+  id          String          @id @default(cuid())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  title       String
+  description String?
+  settings    ProjectSettings @relation(fields: [settingsId], references: [id])
+  settingsId  String          @unique
+  workspace   Workspace       @relation(fields: [workspaceId], references: [id])
+  workspaceId String
+  owner       User            @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  chat        Chat?           @relation(fields: [chatId], references: [id])
+  chatId      String?         @unique
+  users  ProjectsOnUsers[]
+  tasks  Task[]
+  spaces Space[]
+}
+
+model ProjectSettings {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  localId   String
+  project   Project?
+  projectId String
+}
+
+model Workspace {
+  id         String            @id @default(cuid())
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  title      String
+  settings   WorkspaceSettings @relation(fields: [settingsId], references: [id])
+  settingsId String            @unique
+  user       User              @relation(fields: [userId], references: [id])
+  userId     String            @unique
+  projects   Project[]
+}
+
+model WorkspaceSettings {
+  id          String     @id @default(cuid())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  localId     String
+  workspace   Workspace?
+  workspaceId String
+}
+
+model ProjectsOnUsers {
+  project    Project  @relation(fields: [projectId], references: [id])
+  projectId  String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([projectId, userId])
+}
+
+model UserAssignedTasks {
+  task       Task     @relation(fields: [taskId], references: [id])
+  taskId     String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([taskId, userId])
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  content     String
+  contentType String    @default("string")
+  type        String    @default("message")
+  sender      User?     @relation(fields: [senderId], references: [id])
+  senderId    String?
+  parentId    String?
+  parent      Message?  @relation("SubMessages", fields: [parentId], references: [id])
+  subMessages Message[] @relation("SubMessages")
+  chat        Chat      @relation(fields: [chatId], references: [id])
+  chatId      String
+}
+
+model Chat {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+  Task      Task?
+  Space     Space?
+  User      User?
+  Project   Project?
+}
+
+enum Role {
+  ADMIN
+  USER
+}

@@ -1,0 +1,238 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  email String [unique, not null]
+  password String [not null]
+  firstname String
+  lastname String
+  username String [not null]
+  active Boolean [not null]
+  role Role [not null]
+  ownedProjects Project [not null]
+  comments Message [not null]
+  workspaces Workspace [not null]
+  createdTasks Task [not null]
+  followedBy User [not null]
+  following User [not null]
+  projects ProjectsOnUsers [not null]
+  assignedTasks UserAssignedTasks [not null]
+  chat Chat
+  chatId String [unique]
+}
+
+Table Task {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  project Project
+  projectId String
+  creator User
+  creatorId String
+  parentId String
+  parent Task
+  subTasks Task [not null]
+  assignes UserAssignedTasks [not null]
+  status String [not null, default: 'TODO']
+  details String [not null]
+  chat Chat
+  chatId String [unique]
+}
+
+Table Space {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  view SpaceView [not null]
+  viewId String [unique, not null]
+  project Project [not null]
+  projectId String [not null]
+  settings SpaceSettings [not null]
+  settingsId String [unique, not null]
+  spaceType String [not null]
+  parentId String
+  parent Space
+  subspaces Space [not null]
+  chat Chat
+  chatId String [unique]
+}
+
+Table SpaceView {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  localId String [not null]
+  space Space
+  spaceId String [not null]
+}
+
+Table SpaceSettings {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  localId String [not null]
+  space Space
+  spaceId String [not null]
+}
+
+Table Project {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  title String [not null]
+  description String
+  settings ProjectSettings [not null]
+  settingsId String [unique, not null]
+  workspace Workspace [not null]
+  workspaceId String [not null]
+  owner User [not null]
+  ownerId String [not null]
+  chat Chat
+  chatId String [unique]
+  users ProjectsOnUsers [not null]
+  tasks Task [not null]
+  spaces Space [not null]
+}
+
+Table ProjectSettings {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  localId String [not null]
+  project Project
+  projectId String [not null]
+}
+
+Table Workspace {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  title String [not null]
+  settings WorkspaceSettings [not null]
+  settingsId String [unique, not null]
+  user User [not null]
+  userId String [unique, not null]
+  projects Project [not null]
+}
+
+Table WorkspaceSettings {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  localId String [not null]
+  workspace Workspace
+  workspaceId String [not null]
+}
+
+Table ProjectsOnUsers {
+  project Project [not null]
+  projectId String [not null]
+  user User [not null]
+  userId String [not null]
+  assignedAt DateTime [default: `now()`, not null]
+  assignedBy String [not null]
+
+  indexes {
+    (projectId, userId) [pk]
+  }
+}
+
+Table UserAssignedTasks {
+  task Task [not null]
+  taskId String [not null]
+  user User [not null]
+  userId String [not null]
+  assignedAt DateTime [default: `now()`, not null]
+  assignedBy String [not null]
+
+  indexes {
+    (taskId, userId) [pk]
+  }
+}
+
+Table Message {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  content String [not null]
+  contentType String [not null, default: 'string']
+  type String [not null, default: 'message']
+  sender User
+  senderId String
+  parentId String
+  parent Message
+  subMessages Message [not null]
+  chat Chat [not null]
+  chatId String [not null]
+}
+
+Table Chat {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  messages Message [not null]
+  Task Task
+  Space Space
+  User User
+  Project Project
+}
+
+Table UserFollows {
+  followedbyId String [ref: > User.id]
+  followingId String [ref: > User.id]
+}
+
+Enum Role {
+  ADMIN
+  USER
+}
+
+Ref: User.chatId - Chat.id
+
+Ref: Task.projectId > Project.id
+
+Ref: Task.creatorId > User.id
+
+Ref: Task.parentId - Task.id
+
+Ref: Task.chatId - Chat.id
+
+Ref: Space.viewId - SpaceView.id
+
+Ref: Space.projectId > Project.id
+
+Ref: Space.settingsId - SpaceSettings.id
+
+Ref: Space.parentId - Space.id
+
+Ref: Space.chatId - Chat.id
+
+Ref: Project.settingsId - ProjectSettings.id
+
+Ref: Project.workspaceId > Workspace.id
+
+Ref: Project.ownerId > User.id
+
+Ref: Project.chatId - Chat.id
+
+Ref: Workspace.settingsId - WorkspaceSettings.id
+
+Ref: Workspace.userId > User.id
+
+Ref: ProjectsOnUsers.projectId > Project.id
+
+Ref: ProjectsOnUsers.userId > User.id
+
+Ref: UserAssignedTasks.taskId > Task.id
+
+Ref: UserAssignedTasks.userId > User.id
+
+Ref: Message.senderId > User.id
+
+Ref: Message.parentId - Message.id
+
+Ref: Message.chatId > Chat.id
