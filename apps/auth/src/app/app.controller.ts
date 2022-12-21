@@ -1,49 +1,28 @@
-import {
-  IncomingMessage,
-  CreateUserInput,
-  UpdateUserInput,
-} from '@nest-microservice-boilerplate/interface';
-import { Controller, Get } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
-import { Types } from 'mongoose';
+import { Controller, Logger, Body, Post, Res } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AuthApiError } from '@supabase/supabase-js';
+import { LoginInput, SignupInput } from '../dto';
+import { Response } from 'express';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
+  private readonly logger = new Logger(AppController.name);
 
-  @Get()
-  getData() {
-    return this.appService.getData();
+  @Post('signup')
+  async signup(@Body() data: SignupInput, @Res() res: Response) {
+    this.logger.log('GET /auth/email called');
+    const result = await this.appService.signup(data.email, data.password);
+    if (result instanceof AuthApiError) {
+      return res.status(result.status).json(result);
+    }
+    return result;
   }
 
-  @MessagePattern('createUser')
-  async create(@Payload() message: IncomingMessage<CreateUserInput>) {
-    const user = message.value;
-    return this.appService.create(user).then((doc) => doc.toObject());
+  @Post('email')
+  async authEmail(@Body() data: LoginInput) {
+    this.logger.log('GET /auth/email called');
+    return await this.appService.signInWithEmail(data.email, data.password);
   }
 
-  @MessagePattern('findAllUser')
-  findAll() {
-    return this.appService.findAll();
-  }
-
-  @MessagePattern('findOneUser')
-  findOne(@Payload() message: IncomingMessage<{ _id: Types.ObjectId }>) {
-    const { _id } = message.value;
-    return this.appService.findOne(_id);
-  }
-
-  @MessagePattern('updateUser')
-  update(@Payload() message: IncomingMessage<UpdateUserInput>) {
-    const user = message.value;
-    const { _id } = user;
-    return this.appService.update(_id, { ...user });
-  }
-
-  @MessagePattern('removeUser')
-  remove(@Payload() message: IncomingMessage<{ _id: Types.ObjectId }>) {
-    const { _id } = message.value;
-    return this.appService.remove(_id);
-  }
 }

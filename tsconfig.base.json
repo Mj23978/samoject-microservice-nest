@@ -16,7 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@samoject/core": ["libs/core/src/index.ts"],
-      "@samoject/prisma": ["libs/prisma/src/index.ts"]
+      "@samoject/env": ["libs/env/src/index.ts"],
+      "@samoject/health": ["libs/health/src/index.ts"],
+      "@samoject/interface": ["libs/interface/src/index.ts"],
+      "@samoject/kafka": ["libs/kafka/src/index.ts"],
+      "@samoject/prisma": ["libs/prisma/src/index.ts"],
+      "@samoject/redis": ["libs/redis/src/index.ts"],
+      "@samoject/supabase": ["libs/supabase/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

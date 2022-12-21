@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@samoject/prisma';
 
 export function loggingMiddleware(logger: any = console): Prisma.Middleware {
   return async (params, next) => {

@@ -1,16 +1,14 @@
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import {
-  CreateUserInput,
-  UpdateUserInput,
-  DeleteUserOutput,
-} from '@nest-microservice-boilerplate/interface';
-import { User } from '@nest-microservice-boilerplate/mongo';
+  CreateUserInput, DeleteUserOutput, UpdateUserInput
+} from '@samoject/interface';
+import { User } from '@samoject/mongo';
 import { Types } from 'mongoose';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {

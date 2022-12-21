@@ -1,41 +1,54 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
 import {
-  CreateUserInput,
-  UpdateUserInput,
-} from '@nest-microservice-boilerplate/interface';
-import { User, UserDocument } from '@nest-microservice-boilerplate/mongo';
+  Inject,
+  Injectable
+} from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
+import { Prisma } from '@prisma/client';
+import { AuthApiError, AuthError } from '@supabase/supabase-js';
+import { Supabase } from '@samoject/supabase';
 
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel('User') private readonly userModel: Model<UserDocument>
-  ) {}
-  getData(): { message: string } {
-    return { message: 'Welcome to user!' };
+    @Inject('USER_SERVICE') private client: ClientProxy,
+    private readonly supabase: Supabase,
+  ) { }
+
+  async signup(email: string, password: string): Promise<AuthApiError | AuthError | { user; session; }> {
+    const client = this.supabase.getClient();
+    const { data, error } = await client.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error.name === 'AuthApiError') {
+      return error as AuthApiError
+    }
+
+    if (error) {
+      return error;
+    }
+
+    this.client.emit<Prisma.UserCreateInput>('user_created', {});
+
+    return data;
   }
 
-  async create(payload: CreateUserInput) {
-    return this.userModel.create(payload);
+  async signInWithEmail(email: string, password: string): Promise<AuthApiError | AuthError | { user; session; }> {
+    const client = this.supabase.getClient();
+    const { data, error } = await client.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (error.name === 'AuthApiError') {
+      return error as AuthApiError
+    }
+
+    if (error) {
+      return error;
+    }
+
+    return data;
   }
 
-  async findAll() {
-    return this.userModel.find().lean();
-  }
-
-  async findOne(_id: Types.ObjectId) {
-    return this.userModel.findById(_id).lean();
-  }
-
-  async update(_id: Types.ObjectId, payload: UpdateUserInput) {
-    return this.userModel.findByIdAndUpdate(_id, payload).lean();
-  }
-
-  async remove(_id: Types.ObjectId) {
-    return this.userModel
-      .findByIdAndDelete(_id)
-      .then(() => ({ deleted: true }))
-      .catch(() => ({ deleted: false }));
-  }
 }

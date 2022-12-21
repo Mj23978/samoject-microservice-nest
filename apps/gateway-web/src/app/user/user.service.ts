@@ -1,17 +1,16 @@
-import {
-  UserEvent,
-  CreateUserInput,
-  UpdateUserInput,
-} from '@nest-microservice-boilerplate/interface';
-import { Injectable, Inject, OnModuleInit } from '@nestjs/common';
-import { Types } from 'mongoose';
+import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
+import {
+  CreateUserInput,
+  UpdateUserInput, UserEvent
+} from '@samoject/interface';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class UserService implements OnModuleInit {
   constructor(
     @Inject('USER_SERVICE') private readonly userClient: ClientKafka
-  ) {}
+  ) { }
 
   async onModuleInit() {
     const subscribes: string[] = Object.keys(UserEvent).map(

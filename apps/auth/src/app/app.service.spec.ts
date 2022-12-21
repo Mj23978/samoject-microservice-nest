@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { User, UserDocument } from '@nest-microservice-boilerplate/mongo';
-import { Model, Query, Types } from 'mongoose';
-import { Test, TestingModule } from '@nestjs/testing';
 import { createMock } from '@golevelup/ts-jest';
+import { Test, TestingModule } from '@nestjs/testing';
+import { User, UserDocument } from '@samoject/mongo';
+import { Model, Query, Types } from 'mongoose';
 
-import { AppService } from './app.service';
 import { getModelToken } from '@nestjs/mongoose';
+import { AppService } from './app.service';
 
 const mockUser = (
   _id = new Types.ObjectId('62296dc8c1f3bf7a236aa87a'),

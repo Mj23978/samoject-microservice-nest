@@ -1,11 +1,11 @@
 import {
   EnvironmentVariables,
-  EnvModule,
-} from '@nest-microservice-boilerplate/env';
-import { HealthModule } from '@nest-microservice-boilerplate/health';
-import { MongoModule } from '@nest-microservice-boilerplate/mongo';
-// import { kafkaClientConfig } from '@nest-microservice-boilerplate/kafka';
-// import { RedisModule } from '@nest-microservice-boilerplate/redis';
+  EnvModule
+} from '@samoject/env';
+import { HealthModule } from '@samoject/health';
+import { MongoModule } from '@samoject/mongo';
+// import { kafkaClientConfig } from '@samoject/kafka';
+// import { RedisModule } from '@samoject/redis';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -35,4 +35,4 @@ import { UserModule } from './user/user.module';
     UserModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

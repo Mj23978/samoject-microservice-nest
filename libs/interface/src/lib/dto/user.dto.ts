@@ -1,5 +1,5 @@
 import { InputType, Field, PartialType, ObjectType } from '@nestjs/graphql';
-import { Types } from 'mongoose';
+import { Role } from '@samoject/prisma';
 @InputType()
 export class CreateUserInput {
   @Field(() => String, { description: 'Username' })
@@ -7,12 +7,15 @@ export class CreateUserInput {
 
   @Field(() => String, { description: 'Password' })
   password: string;
-}
 
-@InputType()
-export class UpdateUserInput extends PartialType(CreateUserInput) {
-  @Field(() => String)
-  _id: Types.ObjectId;
+  @Field(() => String, { description: 'Email' })
+  email: string;
+
+  @Field(() => Boolean, { description: 'Active' })
+  active: boolean;
+
+  @Field(() => Role, { description: 'Role' })
+  role: Role;
 }
 
 @ObjectType()

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "projects": {
+    "auth": "apps/auth",
+    "core": "libs/core",
+    "env": "libs/env",
+    "gateway-web": "apps/gateway-web",
+    "health": "libs/health",
+    "interface": "libs/interface",
+    "kafka": "libs/kafka",
+    "prisma": "libs/prisma",
+    "redis": "libs/redis",
+    "supabase": "libs/supabase",
+    "task": "apps/task",
+    "user": "apps/user"
+  }
+}
