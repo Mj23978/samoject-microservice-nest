@@ -30,10 +30,8 @@ export class AppService {
     return this.prisma.user.update({ where: { id }, data });
   }
 
-  async remove(_id: string) {
+  async remove(id: string) {
     return this.prisma.user
-      .findByIdAndDelete(_id)
-      .then(() => ({ deleted: true }))
-      .catch(() => ({ deleted: false }));
+      .delete({ where: { id } });
   }
 }

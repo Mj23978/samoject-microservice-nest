@@ -1,11 +1,9 @@
 import {
   IncomingMessage,
   CreateUserInput,
-  UpdateUserInput,
 } from '@samoject/interface';
 import { Controller, Get } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { Types } from 'mongoose';
 import { AppService } from './app.service';
 
 @Controller()
@@ -20,7 +18,7 @@ export class AppController {
   @MessagePattern('createUser')
   async create(@Payload() message: IncomingMessage<CreateUserInput>) {
     const user = message.value;
-    return this.appService.create(user).then((doc) => doc.toObject());
+    return await this.appService.create(user);
   }
 
   @MessagePattern('findAllUser')
@@ -29,21 +27,18 @@ export class AppController {
   }
 
   @MessagePattern('findOneUser')
-  findOne(@Payload() message: IncomingMessage<{ _id: Types.ObjectId }>) {
-    const { _id } = message.value;
-    return this.appService.findOne(_id);
+  findOne(@Payload() message: IncomingMessage<{ id: string }>) {
+    return this.appService.findOne(message.value.id);
   }
 
   @MessagePattern('updateUser')
-  update(@Payload() message: IncomingMessage<UpdateUserInput>) {
+  update(@Payload() message: IncomingMessage<CreateUserInput & { id: string }>) {
     const user = message.value;
-    const { _id } = user;
-    return this.appService.update(_id, { ...user });
+    return this.appService.update(message.value.id, { ...user });
   }
 
   @MessagePattern('removeUser')
-  remove(@Payload() message: IncomingMessage<{ _id: Types.ObjectId }>) {
-    const { _id } = message.value;
-    return this.appService.remove(_id);
+  remove(@Payload() message: IncomingMessage<{ id: string }>) {
+    return this.appService.remove(message.value.id);
   }
 }

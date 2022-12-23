@@ -9,12 +9,13 @@ import {
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
+  const v = process.env.SURREALDB_HOST;
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter()
-  );
-
-  const config = app.get(ConfigService);
+    );
+    
+    const config = app.get(ConfigService);
 
   // app.connectMicroservice<MicroserviceOptions>({
   //   transport: Transport.KAFKA,
