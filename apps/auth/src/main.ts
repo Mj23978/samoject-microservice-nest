@@ -9,7 +9,6 @@ import {
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const v = process.env.SURREALDB_HOST;
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter()
@@ -36,7 +35,6 @@ async function bootstrap() {
   //   },
   // });
 
-
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.NATS,
     options: {
@@ -48,7 +46,7 @@ async function bootstrap() {
 
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = config.get('PORT') || 5001;
+  const port = config.get('AUTH_PORT') || 5001;
 
   await app.startAllMicroservices();
   await app.listen(port, '0.0.0.0');

@@ -2,7 +2,7 @@ import {
   IncomingMessage,
   CreateUserInput,
 } from '@samoject/interface';
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
@@ -15,10 +15,21 @@ export class AppController {
     return this.appService.getData();
   }
 
+  @MessagePattern({ cmd: 'sum' })
+  sum(data: number[]): number {
+    console.log('MinionAppController: sum', data);
+    return this.appService.sum(data);
+  }
+
   @MessagePattern('createUser')
-  async create(@Payload() message: IncomingMessage<CreateUserInput>) {
-    const user = message.value;
-    return await this.appService.create(user);
+  @Post('user')
+  async create(@Body() data: CreateUserInput, @Payload() message: IncomingMessage<CreateUserInput>) {
+    if (data.username) {
+      return await this.appService.create(data);
+    } else {
+      const user = message.value;
+      return await this.appService.create(user);
+    }
   }
 
   @MessagePattern('findAllUser')

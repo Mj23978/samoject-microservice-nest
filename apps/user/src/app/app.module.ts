@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { EnvModule } from '@samoject/env';
-import { HealthModule } from '@samoject/health';
+import { ConfigModule } from '@nestjs/config';
+import { config } from '@samoject/core';
 import { PrismaModule } from '@samoject/prisma';
 
 import { AppController } from './app.controller';
@@ -8,8 +8,10 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    EnvModule,
-    HealthModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+    }),
     PrismaModule
   ],
   controllers: [AppController],

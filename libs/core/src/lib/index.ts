@@ -5,6 +5,6 @@ export * from './order/order';
 export * from './order/order-direction';
 export * from './models';
 export * from './decorators/user.decorator';
-export * from './configs/config';
-export * from './configs/config.interface';
+export * from './configs';
 export * from './middleware/logging.middleware';
+export * from './health/health.module';

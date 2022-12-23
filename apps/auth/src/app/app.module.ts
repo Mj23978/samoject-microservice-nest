@@ -1,24 +1,25 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+import { ClientProxyFactory, ClientsModule, Transport } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
-import { EnvModule } from '@samoject/env';
-import { HealthModule } from '@samoject/health';
-import { config, SecurityConfig } from '@samoject/core';
+import { config, natsConfig, SecurityConfig } from '@samoject/core';
 import { GqlAuthGuard } from './gql-auth.guard';
 import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
-    EnvModule,
-    HealthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [config],
     }),
+    ClientsModule.register([{
+      name: 'MATH_SERVICE',
+      ...natsConfig,
+    }]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => {
@@ -47,6 +48,7 @@ import { AppService } from './app.service';
     SupabaseStrategy,
     GqlAuthGuard,
   ],
+  controllers: [AppController],
   exports: [GqlAuthGuard],
 })
 export class AppModule { }

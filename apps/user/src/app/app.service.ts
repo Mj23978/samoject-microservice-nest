@@ -8,14 +8,21 @@ import { PrismaService } from '@samoject/prisma';
 export class AppService {
   constructor(
     private readonly prisma: PrismaService,
-
   ) { }
+
   getData(): { message: string } {
     return { message: 'Welcome to user!' };
   }
 
+  public sum(data: number[]): number {
+    console.log('MinionAppService: sum', data);
+    return (data || []).reduce((a, b) => a + b);
+  }
+
   async create(data: CreateUserInput) {
-    return await this.prisma.user.create({ data });
+    return await this.prisma.user.create({ data: {
+      ...data
+    } });
   }
 
   async findAll() {

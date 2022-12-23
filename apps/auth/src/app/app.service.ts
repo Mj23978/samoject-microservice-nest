@@ -6,11 +6,12 @@ import { ClientProxy } from '@nestjs/microservices';
 import { Prisma } from '@prisma/client';
 import { AuthApiError, AuthError } from '@supabase/supabase-js';
 import { Supabase } from '@samoject/supabase';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppService {
   constructor(
-    @Inject('USER_SERVICE') private client: ClientProxy,
+    @Inject('MATH_SERVICE') private client: ClientProxy,
     private readonly supabase: Supabase,
   ) { }
 
@@ -28,8 +29,6 @@ export class AppService {
     if (error) {
       return error;
     }
-
-    this.client.emit<Prisma.UserCreateInput>('user_created', {});
 
     return data;
   }
@@ -49,6 +48,14 @@ export class AppService {
     }
 
     return data;
+  }
+
+  sum(data: number[]): Observable<number> {
+    return this.client.send<number>({ cmd: 'sum' }, data);
+  }
+
+  reverse(message: any): Observable<string> {
+    return this.client.send<string>({ cmd: 'reverse' }, message);
   }
 
 }
