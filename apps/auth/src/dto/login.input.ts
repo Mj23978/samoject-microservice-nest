@@ -11,4 +11,9 @@ export class LoginInput {
   @IsNotEmpty()
   @MinLength(8)
   password: string;
+
+  @Field()
+  @IsNotEmpty()
+  @MinLength(8)
+  username: string;
 }

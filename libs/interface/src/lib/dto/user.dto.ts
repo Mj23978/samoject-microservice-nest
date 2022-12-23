@@ -5,6 +5,12 @@ export class CreateUserInput {
   @Field(() => String, { description: 'Username' })
   username: string;
 
+  @Field(() => String, { description: 'FirstName' })
+  firstname: string;
+
+  @Field(() => String, { description: 'LastName' })
+  lastname: string;
+
   @Field(() => String, { description: 'Password' })
   password: string;
 

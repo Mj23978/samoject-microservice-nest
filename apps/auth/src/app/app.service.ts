@@ -3,9 +3,9 @@ import {
   Injectable
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Prisma } from '@prisma/client';
-import { AuthApiError, AuthError } from '@supabase/supabase-js';
+import { CreateUserInput } from '@samoject/interface';
 import { Supabase } from '@samoject/supabase';
+import { AuthApiError, AuthError } from '@supabase/supabase-js';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -15,14 +15,14 @@ export class AppService {
     private readonly supabase: Supabase,
   ) { }
 
-  async signup(email: string, password: string): Promise<AuthApiError | AuthError | { user; session; }> {
+  async signup(email: string, password: string, username: string, firstName: string, lastName: string): Promise<Observable<CreateUserInput> | AuthApiError | AuthError> {
     const client = this.supabase.getClient();
     const { data, error } = await client.auth.signUp({
       email: email,
       password: password,
     });
 
-    if (error.name === 'AuthApiError') {
+    if (error?.name === 'AuthApiError') {
       return error as AuthApiError
     }
 
@@ -30,7 +30,15 @@ export class AppService {
       return error;
     }
 
-    return data;
+    return this.client.send<CreateUserInput>({ cmd: 'user.createUser' }, {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      active: true,
+      role: 'USER',
+    });
   }
 
   async signInWithEmail(email: string, password: string): Promise<AuthApiError | AuthError | { user; session; }> {
@@ -52,10 +60,6 @@ export class AppService {
 
   sum(data: number[]): Observable<number> {
     return this.client.send<number>({ cmd: 'sum' }, data);
-  }
-
-  reverse(message: any): Observable<string> {
-    return this.client.send<string>({ cmd: 'reverse' }, message);
   }
 
 }

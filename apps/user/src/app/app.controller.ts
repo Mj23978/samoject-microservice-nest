@@ -17,11 +17,10 @@ export class AppController {
 
   @MessagePattern({ cmd: 'sum' })
   sum(data: number[]): number {
-    console.log('MinionAppController: sum', data);
     return this.appService.sum(data);
   }
 
-  @MessagePattern('createUser')
+  @MessagePattern({ cmd: 'user.createUser'})
   @Post('user')
   async create(@Body() data: CreateUserInput, @Payload() message: IncomingMessage<CreateUserInput>) {
     if (data.username) {
@@ -32,23 +31,23 @@ export class AppController {
     }
   }
 
-  @MessagePattern('findAllUser')
+  @MessagePattern('user.findAllUser')
   findAll() {
     return this.appService.findAll();
   }
 
-  @MessagePattern('findOneUser')
+  @MessagePattern('user.findOneUser')
   findOne(@Payload() message: IncomingMessage<{ id: string }>) {
     return this.appService.findOne(message.value.id);
   }
 
-  @MessagePattern('updateUser')
+  @MessagePattern('user.updateUser')
   update(@Payload() message: IncomingMessage<CreateUserInput & { id: string }>) {
     const user = message.value;
     return this.appService.update(message.value.id, { ...user });
   }
 
-  @MessagePattern('removeUser')
+  @MessagePattern('user.removeUser')
   remove(@Payload() message: IncomingMessage<{ id: string }>) {
     return this.appService.remove(message.value.id);
   }

@@ -36,13 +36,6 @@ import { AppController } from './app.controller';
     SupabaseModule,
   ],
   providers: [
-    {
-      provide: 'USER_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        return ClientProxyFactory.create({ transport: Transport.NATS });
-      },
-      inject: [ConfigService],
-    },
     AppService,
     AppResolver,
     SupabaseStrategy,

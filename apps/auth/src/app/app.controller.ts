@@ -4,6 +4,8 @@ import { AuthApiError } from '@supabase/supabase-js';
 import { LoginInput, SignupInput } from '../dto';
 import { FastifyReply } from 'fastify';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CreateUserInput } from '@samoject/interface';
 
 @Controller()
 export class AppController {
@@ -11,13 +13,16 @@ export class AppController {
   private readonly logger = new Logger(AppController.name);
 
   @Post('signup')
-  async signup(@Body() data: SignupInput, @Res() res: FastifyReply) {
+  async signup(@Body() data: SignupInput) {
     this.logger.log('GET /auth/email called');
-    const result = await this.appService.signup(data.email, data.password);
-    if (result instanceof AuthApiError) {
-      return res.status(result.status).send(result);
+    const result = await this.appService.signup(data.email, data.password, data.username, data.firstname, data.lastname);
+    // if (result instanceof AuthApiError) {
+    //   return res.status(result.status).send(result);
+    // }
+    if (result instanceof Observable<CreateUserInput>) {
+      return result.pipe(tap(result => this.logger.log('AuthController: signup result', result)));
     }
-    return result;
+    return result
   }
 
   @Post('email')
@@ -29,10 +34,9 @@ export class AppController {
   @Get('sum')
   sum(@Query('digits') digits) {
     const data = digits.split(',').map(Number);
-    this.logger.log('MasterAppController: sum', data);
     return this.appService
       .sum(data)
-      .pipe(tap(result => console.log('MasterAppController: sum result', result)));
+      .pipe(tap(result => this.logger.log('AuthController: sum result', result)));
   }
 
 }

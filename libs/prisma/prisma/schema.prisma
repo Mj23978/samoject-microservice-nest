@@ -1,22 +1,16 @@
 generator client {
   provider = "prisma-client-js"
-  output = "../src/generated"
+  output   = "../src/generated"
 }
 
 generator dbml {
   provider = "prisma-dbml-generator"
 }
 
-// generator nestgraphql {
-//     provider = "node node_modules/prisma-nestjs-graphql"
-//     output = "../src/generated"
-//     reExport = All
-// }
-
 generator erd {
   provider = "prisma-erd-generator"
-  output = "../ERD.svg"
-  theme = "forest"
+  output   = "../ERD.svg"
+  theme    = "forest"
 }
 
 datasource db {
@@ -34,53 +28,53 @@ model User {
   lastname      String?
   username      String
   active        Boolean
-  role          Role
-  ownedProjects Project[]
-  comments      Message[]
-  workspaces    Workspace[]
-  createdTasks  Task[]              @relation("UserCreatedTasks")
-  followedBy    User[]              @relation("UserFollows")
-  following     User[]              @relation("UserFollows")
-  projects      ProjectsOnUsers[]
-  assignedTasks UserAssignedTasks[]
-  chat          Chat?               @relation(fields: [chatId], references: [id])
   chatId        String?             @unique
+  role          Role
+  chat          Chat?               @relation(fields: [chatId], references: [id])
+  comments      Message[]
+  ownedProjects Project[]
+  projects      ProjectsOnUsers[]
+  createdTasks  Task[]              @relation("UserCreatedTasks")
+  assignedTasks UserAssignedTasks[]
+  workspaces    Workspace?
+  User_B        User[]              @relation("UserFollows")
+  User_A        User[]              @relation("UserFollows")
 }
 
 model Task {
   id        String              @id @default(cuid())
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
-  project   Project?             @relation(fields: [projectId], references: [id])
   projectId String?
-  creator   User?               @relation("UserCreatedTasks", fields: [creatorId], references: [id])
   creatorId String?
   parentId  String?
-  parent    Task?               @relation("SubTasks", fields: [parentId], references: [id])
-  subTasks  Task[]              @relation("SubTasks")
-  assignes  UserAssignedTasks[]
   status    String              @default("TODO")
   details   String
-  chat      Chat?               @relation(fields: [chatId], references: [id])
   chatId    String?             @unique
+  chat      Chat?               @relation(fields: [chatId], references: [id])
+  creator   User?               @relation("UserCreatedTasks", fields: [creatorId], references: [id])
+  parent    Task?               @relation("SubTasks", fields: [parentId], references: [id])
+  project   Project?            @relation(fields: [projectId], references: [id])
+  subTasks  Task[]              @relation("SubTasks")
+  assignes  UserAssignedTasks[]
 }
 
 model Space {
   id         String        @id @default(cuid())
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
-  view       SpaceView     @relation(fields: [viewId], references: [id])
   viewId     String        @unique
-  project    Project       @relation(fields: [projectId], references: [id])
   projectId  String
-  settings   SpaceSettings @relation(fields: [settingsId], references: [id])
   settingsId String        @unique
   spaceType  String
   parentId   String?
-  parent     Space?        @relation("SubSpaces", fields: [parentId], references: [id])
-  subspaces  Space[]       @relation("SubSpaces")
-  chat       Chat?         @relation(fields: [chatId], references: [id])
   chatId     String?       @unique
+  chat       Chat?         @relation(fields: [chatId], references: [id])
+  parent     Space?        @relation("SubSpaces", fields: [parentId], references: [id])
+  project    Project       @relation(fields: [projectId], references: [id])
+  settings   SpaceSettings @relation(fields: [settingsId], references: [id])
+  view       SpaceView     @relation(fields: [viewId], references: [id])
+  subspaces  Space[]       @relation("SubSpaces")
 }
 
 model SpaceView {
@@ -88,8 +82,8 @@ model SpaceView {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   localId   String
-  space     Space?
   spaceId   String
+  space     Space?
 }
 
 model SpaceSettings {
@@ -97,27 +91,27 @@ model SpaceSettings {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   localId   String
-  space     Space?
   spaceId   String
+  space     Space?
 }
 
 model Project {
-  id          String          @id @default(cuid())
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id          String            @id @default(cuid())
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
   title       String
   description String?
-  settings    ProjectSettings @relation(fields: [settingsId], references: [id])
-  settingsId  String          @unique
-  workspace   Workspace       @relation(fields: [workspaceId], references: [id])
+  settingsId  String            @unique
   workspaceId String
-  owner       User            @relation(fields: [ownerId], references: [id])
   ownerId     String
-  chat        Chat?           @relation(fields: [chatId], references: [id])
-  chatId      String?         @unique
-  users  ProjectsOnUsers[]
-  tasks  Task[]
-  spaces Space[]
+  chatId      String?           @unique
+  chat        Chat?             @relation(fields: [chatId], references: [id])
+  owner       User              @relation(fields: [ownerId], references: [id])
+  settings    ProjectSettings   @relation(fields: [settingsId], references: [id])
+  workspace   Workspace         @relation(fields: [workspaceId], references: [id])
+  users       ProjectsOnUsers[]
+  spaces      Space[]
+  tasks       Task[]
 }
 
 model ProjectSettings {
@@ -125,8 +119,8 @@ model ProjectSettings {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   localId   String
-  project   Project?
   projectId String
+  project   Project?
 }
 
 model Workspace {
@@ -134,10 +128,10 @@ model Workspace {
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
   title      String
-  settings   WorkspaceSettings @relation(fields: [settingsId], references: [id])
   settingsId String            @unique
-  user       User              @relation(fields: [userId], references: [id])
   userId     String            @unique
+  settings   WorkspaceSettings @relation(fields: [settingsId], references: [id])
+  user       User              @relation(fields: [userId], references: [id])
   projects   Project[]
 }
 
@@ -146,28 +140,28 @@ model WorkspaceSettings {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   localId     String
-  workspace   Workspace?
   workspaceId String
+  workspace   Workspace?
 }
 
 model ProjectsOnUsers {
-  project    Project  @relation(fields: [projectId], references: [id])
   projectId  String
-  user       User     @relation(fields: [userId], references: [id])
   userId     String
   assignedAt DateTime @default(now())
   assignedBy String
+  project    Project  @relation(fields: [projectId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 
   @@id([projectId, userId])
 }
 
 model UserAssignedTasks {
-  task       Task     @relation(fields: [taskId], references: [id])
   taskId     String
-  user       User     @relation(fields: [userId], references: [id])
   userId     String
   assignedAt DateTime @default(now())
   assignedBy String
+  task       Task     @relation(fields: [taskId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 
   @@id([taskId, userId])
 }
@@ -179,13 +173,13 @@ model Message {
   content     String
   contentType String    @default("string")
   type        String    @default("message")
-  sender      User?     @relation(fields: [senderId], references: [id])
   senderId    String?
   parentId    String?
-  parent      Message?  @relation("SubMessages", fields: [parentId], references: [id])
-  subMessages Message[] @relation("SubMessages")
-  chat        Chat      @relation(fields: [chatId], references: [id])
   chatId      String
+  chat        Chat      @relation(fields: [chatId], references: [id])
+  parent      Message?  @relation("SubMessages", fields: [parentId], references: [id])
+  sender      User?     @relation(fields: [senderId], references: [id])
+  subMessages Message[] @relation("SubMessages")
 }
 
 model Chat {
@@ -193,10 +187,10 @@ model Chat {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   messages  Message[]
-  Task      Task?
-  Space     Space?
-  User      User?
   Project   Project?
+  Space     Space?
+  Task      Task?
+  User      User?
 }
 
 enum Role {

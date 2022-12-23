@@ -26,8 +26,8 @@ export type User = {
   lastname: string | null
   username: string
   active: boolean
-  role: Role
   chatId: string | null
+  role: Role
 }
 
 /**
@@ -1117,25 +1117,23 @@ export namespace Prisma {
 
 
   export type UserCountOutputType = {
-    ownedProjects: number
     comments: number
-    workspaces: number
-    createdTasks: number
-    followedBy: number
-    following: number
+    ownedProjects: number
     projects: number
+    createdTasks: number
     assignedTasks: number
+    User_B: number
+    User_A: number
   }
 
   export type UserCountOutputTypeSelect = {
-    ownedProjects?: boolean
     comments?: boolean
-    workspaces?: boolean
-    createdTasks?: boolean
-    followedBy?: boolean
-    following?: boolean
+    ownedProjects?: boolean
     projects?: boolean
+    createdTasks?: boolean
     assignedTasks?: boolean
+    User_B?: boolean
+    User_A?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<
@@ -1281,14 +1279,14 @@ export namespace Prisma {
 
   export type ProjectCountOutputType = {
     users: number
-    tasks: number
     spaces: number
+    tasks: number
   }
 
   export type ProjectCountOutputTypeSelect = {
     users?: boolean
-    tasks?: boolean
     spaces?: boolean
+    tasks?: boolean
   }
 
   export type ProjectCountOutputTypeGetPayload<
@@ -1499,8 +1497,8 @@ export namespace Prisma {
     lastname: string | null
     username: string | null
     active: boolean | null
-    role: Role | null
     chatId: string | null
+    role: Role | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1513,8 +1511,8 @@ export namespace Prisma {
     lastname: string | null
     username: string | null
     active: boolean | null
-    role: Role | null
     chatId: string | null
+    role: Role | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1527,8 +1525,8 @@ export namespace Prisma {
     lastname: number
     username: number
     active: number
-    role: number
     chatId: number
+    role: number
     _all: number
   }
 
@@ -1543,8 +1541,8 @@ export namespace Prisma {
     lastname?: true
     username?: true
     active?: true
-    role?: true
     chatId?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1557,8 +1555,8 @@ export namespace Prisma {
     lastname?: true
     username?: true
     active?: true
-    role?: true
     chatId?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1571,8 +1569,8 @@ export namespace Prisma {
     lastname?: true
     username?: true
     active?: true
-    role?: true
     chatId?: true
+    role?: true
     _all?: true
   }
 
@@ -1664,8 +1662,8 @@ export namespace Prisma {
     lastname: string | null
     username: string
     active: boolean
-    role: Role
     chatId: string | null
+    role: Role
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1695,30 +1693,30 @@ export namespace Prisma {
     lastname?: boolean
     username?: boolean
     active?: boolean
-    role?: boolean
-    ownedProjects?: boolean | ProjectFindManyArgs
-    comments?: boolean | MessageFindManyArgs
-    workspaces?: boolean | WorkspaceFindManyArgs
-    createdTasks?: boolean | TaskFindManyArgs
-    followedBy?: boolean | UserFindManyArgs
-    following?: boolean | UserFindManyArgs
-    projects?: boolean | ProjectsOnUsersFindManyArgs
-    assignedTasks?: boolean | UserAssignedTasksFindManyArgs
-    chat?: boolean | ChatArgs
     chatId?: boolean
+    role?: boolean
+    chat?: boolean | ChatArgs
+    comments?: boolean | MessageFindManyArgs
+    ownedProjects?: boolean | ProjectFindManyArgs
+    projects?: boolean | ProjectsOnUsersFindManyArgs
+    createdTasks?: boolean | TaskFindManyArgs
+    assignedTasks?: boolean | UserAssignedTasksFindManyArgs
+    workspaces?: boolean | WorkspaceArgs
+    User_B?: boolean | UserFindManyArgs
+    User_A?: boolean | UserFindManyArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
   export type UserInclude = {
-    ownedProjects?: boolean | ProjectFindManyArgs
-    comments?: boolean | MessageFindManyArgs
-    workspaces?: boolean | WorkspaceFindManyArgs
-    createdTasks?: boolean | TaskFindManyArgs
-    followedBy?: boolean | UserFindManyArgs
-    following?: boolean | UserFindManyArgs
-    projects?: boolean | ProjectsOnUsersFindManyArgs
-    assignedTasks?: boolean | UserAssignedTasksFindManyArgs
     chat?: boolean | ChatArgs
+    comments?: boolean | MessageFindManyArgs
+    ownedProjects?: boolean | ProjectFindManyArgs
+    projects?: boolean | ProjectsOnUsersFindManyArgs
+    createdTasks?: boolean | TaskFindManyArgs
+    assignedTasks?: boolean | UserAssignedTasksFindManyArgs
+    workspaces?: boolean | WorkspaceArgs
+    User_B?: boolean | UserFindManyArgs
+    User_A?: boolean | UserFindManyArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -1733,29 +1731,29 @@ export namespace Prisma {
     ?'include' extends U
     ? User  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'ownedProjects' ? Array < ProjectGetPayload<S['include'][P]>>  :
-        P extends 'comments' ? Array < MessageGetPayload<S['include'][P]>>  :
-        P extends 'workspaces' ? Array < WorkspaceGetPayload<S['include'][P]>>  :
-        P extends 'createdTasks' ? Array < TaskGetPayload<S['include'][P]>>  :
-        P extends 'followedBy' ? Array < UserGetPayload<S['include'][P]>>  :
-        P extends 'following' ? Array < UserGetPayload<S['include'][P]>>  :
-        P extends 'projects' ? Array < ProjectsOnUsersGetPayload<S['include'][P]>>  :
-        P extends 'assignedTasks' ? Array < UserAssignedTasksGetPayload<S['include'][P]>>  :
         P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
+        P extends 'comments' ? Array < MessageGetPayload<S['include'][P]>>  :
+        P extends 'ownedProjects' ? Array < ProjectGetPayload<S['include'][P]>>  :
+        P extends 'projects' ? Array < ProjectsOnUsersGetPayload<S['include'][P]>>  :
+        P extends 'createdTasks' ? Array < TaskGetPayload<S['include'][P]>>  :
+        P extends 'assignedTasks' ? Array < UserAssignedTasksGetPayload<S['include'][P]>>  :
+        P extends 'workspaces' ? WorkspaceGetPayload<S['include'][P]> | null :
+        P extends 'User_B' ? Array < UserGetPayload<S['include'][P]>>  :
+        P extends 'User_A' ? Array < UserGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'ownedProjects' ? Array < ProjectGetPayload<S['select'][P]>>  :
-        P extends 'comments' ? Array < MessageGetPayload<S['select'][P]>>  :
-        P extends 'workspaces' ? Array < WorkspaceGetPayload<S['select'][P]>>  :
-        P extends 'createdTasks' ? Array < TaskGetPayload<S['select'][P]>>  :
-        P extends 'followedBy' ? Array < UserGetPayload<S['select'][P]>>  :
-        P extends 'following' ? Array < UserGetPayload<S['select'][P]>>  :
-        P extends 'projects' ? Array < ProjectsOnUsersGetPayload<S['select'][P]>>  :
-        P extends 'assignedTasks' ? Array < UserAssignedTasksGetPayload<S['select'][P]>>  :
         P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
+        P extends 'comments' ? Array < MessageGetPayload<S['select'][P]>>  :
+        P extends 'ownedProjects' ? Array < ProjectGetPayload<S['select'][P]>>  :
+        P extends 'projects' ? Array < ProjectsOnUsersGetPayload<S['select'][P]>>  :
+        P extends 'createdTasks' ? Array < TaskGetPayload<S['select'][P]>>  :
+        P extends 'assignedTasks' ? Array < UserAssignedTasksGetPayload<S['select'][P]>>  :
+        P extends 'workspaces' ? WorkspaceGetPayload<S['select'][P]> | null :
+        P extends 'User_B' ? Array < UserGetPayload<S['select'][P]>>  :
+        P extends 'User_A' ? Array < UserGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof User ? User[P] : never
   } 
     : User
@@ -2130,23 +2128,23 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    ownedProjects<T extends ProjectFindManyArgs = {}>(args?: Subset<T, ProjectFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Project>>, PrismaPromise<Array<ProjectGetPayload<T>>>>;
+    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
 
     comments<T extends MessageFindManyArgs = {}>(args?: Subset<T, MessageFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Message>>, PrismaPromise<Array<MessageGetPayload<T>>>>;
 
-    workspaces<T extends WorkspaceFindManyArgs = {}>(args?: Subset<T, WorkspaceFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Workspace>>, PrismaPromise<Array<WorkspaceGetPayload<T>>>>;
-
-    createdTasks<T extends TaskFindManyArgs = {}>(args?: Subset<T, TaskFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Task>>, PrismaPromise<Array<TaskGetPayload<T>>>>;
-
-    followedBy<T extends UserFindManyArgs = {}>(args?: Subset<T, UserFindManyArgs>): CheckSelect<T, PrismaPromise<Array<User>>, PrismaPromise<Array<UserGetPayload<T>>>>;
-
-    following<T extends UserFindManyArgs = {}>(args?: Subset<T, UserFindManyArgs>): CheckSelect<T, PrismaPromise<Array<User>>, PrismaPromise<Array<UserGetPayload<T>>>>;
+    ownedProjects<T extends ProjectFindManyArgs = {}>(args?: Subset<T, ProjectFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Project>>, PrismaPromise<Array<ProjectGetPayload<T>>>>;
 
     projects<T extends ProjectsOnUsersFindManyArgs = {}>(args?: Subset<T, ProjectsOnUsersFindManyArgs>): CheckSelect<T, PrismaPromise<Array<ProjectsOnUsers>>, PrismaPromise<Array<ProjectsOnUsersGetPayload<T>>>>;
 
+    createdTasks<T extends TaskFindManyArgs = {}>(args?: Subset<T, TaskFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Task>>, PrismaPromise<Array<TaskGetPayload<T>>>>;
+
     assignedTasks<T extends UserAssignedTasksFindManyArgs = {}>(args?: Subset<T, UserAssignedTasksFindManyArgs>): CheckSelect<T, PrismaPromise<Array<UserAssignedTasks>>, PrismaPromise<Array<UserAssignedTasksGetPayload<T>>>>;
 
-    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
+    workspaces<T extends WorkspaceArgs = {}>(args?: Subset<T, WorkspaceArgs>): CheckSelect<T, Prisma__WorkspaceClient<Workspace | null >, Prisma__WorkspaceClient<WorkspaceGetPayload<T> | null >>;
+
+    User_B<T extends UserFindManyArgs = {}>(args?: Subset<T, UserFindManyArgs>): CheckSelect<T, PrismaPromise<Array<User>>, PrismaPromise<Array<UserGetPayload<T>>>>;
+
+    User_A<T extends UserFindManyArgs = {}>(args?: Subset<T, UserFindManyArgs>): CheckSelect<T, PrismaPromise<Array<User>>, PrismaPromise<Array<UserGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -2697,28 +2695,28 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    project?: boolean | ProjectArgs
     projectId?: boolean
-    creator?: boolean | UserArgs
     creatorId?: boolean
     parentId?: boolean
-    parent?: boolean | TaskArgs
-    subTasks?: boolean | TaskFindManyArgs
-    assignes?: boolean | UserAssignedTasksFindManyArgs
     status?: boolean
     details?: boolean
-    chat?: boolean | ChatArgs
     chatId?: boolean
+    chat?: boolean | ChatArgs
+    creator?: boolean | UserArgs
+    parent?: boolean | TaskArgs
+    project?: boolean | ProjectArgs
+    subTasks?: boolean | TaskFindManyArgs
+    assignes?: boolean | UserAssignedTasksFindManyArgs
     _count?: boolean | TaskCountOutputTypeArgs
   }
 
   export type TaskInclude = {
-    project?: boolean | ProjectArgs
+    chat?: boolean | ChatArgs
     creator?: boolean | UserArgs
     parent?: boolean | TaskArgs
+    project?: boolean | ProjectArgs
     subTasks?: boolean | TaskFindManyArgs
     assignes?: boolean | UserAssignedTasksFindManyArgs
-    chat?: boolean | ChatArgs
     _count?: boolean | TaskCountOutputTypeArgs
   }
 
@@ -2733,23 +2731,23 @@ export namespace Prisma {
     ?'include' extends U
     ? Task  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'project' ? ProjectGetPayload<S['include'][P]> | null :
+        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
         P extends 'creator' ? UserGetPayload<S['include'][P]> | null :
         P extends 'parent' ? TaskGetPayload<S['include'][P]> | null :
+        P extends 'project' ? ProjectGetPayload<S['include'][P]> | null :
         P extends 'subTasks' ? Array < TaskGetPayload<S['include'][P]>>  :
         P extends 'assignes' ? Array < UserAssignedTasksGetPayload<S['include'][P]>>  :
-        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
         P extends '_count' ? TaskCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'project' ? ProjectGetPayload<S['select'][P]> | null :
+        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
         P extends 'creator' ? UserGetPayload<S['select'][P]> | null :
         P extends 'parent' ? TaskGetPayload<S['select'][P]> | null :
+        P extends 'project' ? ProjectGetPayload<S['select'][P]> | null :
         P extends 'subTasks' ? Array < TaskGetPayload<S['select'][P]>>  :
         P extends 'assignes' ? Array < UserAssignedTasksGetPayload<S['select'][P]>>  :
-        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
         P extends '_count' ? TaskCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Task ? Task[P] : never
   } 
     : Task
@@ -3124,17 +3122,17 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    project<T extends ProjectArgs = {}>(args?: Subset<T, ProjectArgs>): CheckSelect<T, Prisma__ProjectClient<Project | null >, Prisma__ProjectClient<ProjectGetPayload<T> | null >>;
+    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
 
     creator<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
     parent<T extends TaskArgs = {}>(args?: Subset<T, TaskArgs>): CheckSelect<T, Prisma__TaskClient<Task | null >, Prisma__TaskClient<TaskGetPayload<T> | null >>;
 
+    project<T extends ProjectArgs = {}>(args?: Subset<T, ProjectArgs>): CheckSelect<T, Prisma__ProjectClient<Project | null >, Prisma__ProjectClient<ProjectGetPayload<T> | null >>;
+
     subTasks<T extends TaskFindManyArgs = {}>(args?: Subset<T, TaskFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Task>>, PrismaPromise<Array<TaskGetPayload<T>>>>;
 
     assignes<T extends UserAssignedTasksFindManyArgs = {}>(args?: Subset<T, UserAssignedTasksFindManyArgs>): CheckSelect<T, PrismaPromise<Array<UserAssignedTasks>>, PrismaPromise<Array<UserAssignedTasksGetPayload<T>>>>;
-
-    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -3685,28 +3683,28 @@ export namespace Prisma {
     id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    view?: boolean | SpaceViewArgs
     viewId?: boolean
-    project?: boolean | ProjectArgs
     projectId?: boolean
-    settings?: boolean | SpaceSettingsArgs
     settingsId?: boolean
     spaceType?: boolean
     parentId?: boolean
-    parent?: boolean | SpaceArgs
-    subspaces?: boolean | SpaceFindManyArgs
-    chat?: boolean | ChatArgs
     chatId?: boolean
+    chat?: boolean | ChatArgs
+    parent?: boolean | SpaceArgs
+    project?: boolean | ProjectArgs
+    settings?: boolean | SpaceSettingsArgs
+    view?: boolean | SpaceViewArgs
+    subspaces?: boolean | SpaceFindManyArgs
     _count?: boolean | SpaceCountOutputTypeArgs
   }
 
   export type SpaceInclude = {
-    view?: boolean | SpaceViewArgs
+    chat?: boolean | ChatArgs
+    parent?: boolean | SpaceArgs
     project?: boolean | ProjectArgs
     settings?: boolean | SpaceSettingsArgs
-    parent?: boolean | SpaceArgs
+    view?: boolean | SpaceViewArgs
     subspaces?: boolean | SpaceFindManyArgs
-    chat?: boolean | ChatArgs
     _count?: boolean | SpaceCountOutputTypeArgs
   }
 
@@ -3721,23 +3719,23 @@ export namespace Prisma {
     ?'include' extends U
     ? Space  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'view' ? SpaceViewGetPayload<S['include'][P]> :
+        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
+        P extends 'parent' ? SpaceGetPayload<S['include'][P]> | null :
         P extends 'project' ? ProjectGetPayload<S['include'][P]> :
         P extends 'settings' ? SpaceSettingsGetPayload<S['include'][P]> :
-        P extends 'parent' ? SpaceGetPayload<S['include'][P]> | null :
+        P extends 'view' ? SpaceViewGetPayload<S['include'][P]> :
         P extends 'subspaces' ? Array < SpaceGetPayload<S['include'][P]>>  :
-        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
         P extends '_count' ? SpaceCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'view' ? SpaceViewGetPayload<S['select'][P]> :
+        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
+        P extends 'parent' ? SpaceGetPayload<S['select'][P]> | null :
         P extends 'project' ? ProjectGetPayload<S['select'][P]> :
         P extends 'settings' ? SpaceSettingsGetPayload<S['select'][P]> :
-        P extends 'parent' ? SpaceGetPayload<S['select'][P]> | null :
+        P extends 'view' ? SpaceViewGetPayload<S['select'][P]> :
         P extends 'subspaces' ? Array < SpaceGetPayload<S['select'][P]>>  :
-        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
         P extends '_count' ? SpaceCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Space ? Space[P] : never
   } 
     : Space
@@ -4112,17 +4110,17 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    view<T extends SpaceViewArgs = {}>(args?: Subset<T, SpaceViewArgs>): CheckSelect<T, Prisma__SpaceViewClient<SpaceView | null >, Prisma__SpaceViewClient<SpaceViewGetPayload<T> | null >>;
+    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
+
+    parent<T extends SpaceArgs = {}>(args?: Subset<T, SpaceArgs>): CheckSelect<T, Prisma__SpaceClient<Space | null >, Prisma__SpaceClient<SpaceGetPayload<T> | null >>;
 
     project<T extends ProjectArgs = {}>(args?: Subset<T, ProjectArgs>): CheckSelect<T, Prisma__ProjectClient<Project | null >, Prisma__ProjectClient<ProjectGetPayload<T> | null >>;
 
     settings<T extends SpaceSettingsArgs = {}>(args?: Subset<T, SpaceSettingsArgs>): CheckSelect<T, Prisma__SpaceSettingsClient<SpaceSettings | null >, Prisma__SpaceSettingsClient<SpaceSettingsGetPayload<T> | null >>;
 
-    parent<T extends SpaceArgs = {}>(args?: Subset<T, SpaceArgs>): CheckSelect<T, Prisma__SpaceClient<Space | null >, Prisma__SpaceClient<SpaceGetPayload<T> | null >>;
+    view<T extends SpaceViewArgs = {}>(args?: Subset<T, SpaceViewArgs>): CheckSelect<T, Prisma__SpaceViewClient<SpaceView | null >, Prisma__SpaceViewClient<SpaceViewGetPayload<T> | null >>;
 
     subspaces<T extends SpaceFindManyArgs = {}>(args?: Subset<T, SpaceFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Space>>, PrismaPromise<Array<SpaceGetPayload<T>>>>;
-
-    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -4646,8 +4644,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     localId?: boolean
-    space?: boolean | SpaceArgs
     spaceId?: boolean
+    space?: boolean | SpaceArgs
   }
 
   export type SpaceViewInclude = {
@@ -5568,8 +5566,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     localId?: boolean
-    space?: boolean | SpaceArgs
     spaceId?: boolean
+    space?: boolean | SpaceArgs
   }
 
   export type SpaceSettingsInclude = {
@@ -6519,28 +6517,28 @@ export namespace Prisma {
     updatedAt?: boolean
     title?: boolean
     description?: boolean
-    settings?: boolean | ProjectSettingsArgs
     settingsId?: boolean
-    workspace?: boolean | WorkspaceArgs
     workspaceId?: boolean
-    owner?: boolean | UserArgs
     ownerId?: boolean
-    chat?: boolean | ChatArgs
     chatId?: boolean
+    chat?: boolean | ChatArgs
+    owner?: boolean | UserArgs
+    settings?: boolean | ProjectSettingsArgs
+    workspace?: boolean | WorkspaceArgs
     users?: boolean | ProjectsOnUsersFindManyArgs
-    tasks?: boolean | TaskFindManyArgs
     spaces?: boolean | SpaceFindManyArgs
+    tasks?: boolean | TaskFindManyArgs
     _count?: boolean | ProjectCountOutputTypeArgs
   }
 
   export type ProjectInclude = {
+    chat?: boolean | ChatArgs
+    owner?: boolean | UserArgs
     settings?: boolean | ProjectSettingsArgs
     workspace?: boolean | WorkspaceArgs
-    owner?: boolean | UserArgs
-    chat?: boolean | ChatArgs
     users?: boolean | ProjectsOnUsersFindManyArgs
-    tasks?: boolean | TaskFindManyArgs
     spaces?: boolean | SpaceFindManyArgs
+    tasks?: boolean | TaskFindManyArgs
     _count?: boolean | ProjectCountOutputTypeArgs
   }
 
@@ -6555,25 +6553,25 @@ export namespace Prisma {
     ?'include' extends U
     ? Project  & {
     [P in TrueKeys<S['include']>]:
+        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
+        P extends 'owner' ? UserGetPayload<S['include'][P]> :
         P extends 'settings' ? ProjectSettingsGetPayload<S['include'][P]> :
         P extends 'workspace' ? WorkspaceGetPayload<S['include'][P]> :
-        P extends 'owner' ? UserGetPayload<S['include'][P]> :
-        P extends 'chat' ? ChatGetPayload<S['include'][P]> | null :
         P extends 'users' ? Array < ProjectsOnUsersGetPayload<S['include'][P]>>  :
-        P extends 'tasks' ? Array < TaskGetPayload<S['include'][P]>>  :
         P extends 'spaces' ? Array < SpaceGetPayload<S['include'][P]>>  :
+        P extends 'tasks' ? Array < TaskGetPayload<S['include'][P]>>  :
         P extends '_count' ? ProjectCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
+        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
+        P extends 'owner' ? UserGetPayload<S['select'][P]> :
         P extends 'settings' ? ProjectSettingsGetPayload<S['select'][P]> :
         P extends 'workspace' ? WorkspaceGetPayload<S['select'][P]> :
-        P extends 'owner' ? UserGetPayload<S['select'][P]> :
-        P extends 'chat' ? ChatGetPayload<S['select'][P]> | null :
         P extends 'users' ? Array < ProjectsOnUsersGetPayload<S['select'][P]>>  :
-        P extends 'tasks' ? Array < TaskGetPayload<S['select'][P]>>  :
         P extends 'spaces' ? Array < SpaceGetPayload<S['select'][P]>>  :
+        P extends 'tasks' ? Array < TaskGetPayload<S['select'][P]>>  :
         P extends '_count' ? ProjectCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Project ? Project[P] : never
   } 
     : Project
@@ -6948,19 +6946,19 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
+
+    owner<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
+
     settings<T extends ProjectSettingsArgs = {}>(args?: Subset<T, ProjectSettingsArgs>): CheckSelect<T, Prisma__ProjectSettingsClient<ProjectSettings | null >, Prisma__ProjectSettingsClient<ProjectSettingsGetPayload<T> | null >>;
 
     workspace<T extends WorkspaceArgs = {}>(args?: Subset<T, WorkspaceArgs>): CheckSelect<T, Prisma__WorkspaceClient<Workspace | null >, Prisma__WorkspaceClient<WorkspaceGetPayload<T> | null >>;
 
-    owner<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
-
-    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
-
     users<T extends ProjectsOnUsersFindManyArgs = {}>(args?: Subset<T, ProjectsOnUsersFindManyArgs>): CheckSelect<T, PrismaPromise<Array<ProjectsOnUsers>>, PrismaPromise<Array<ProjectsOnUsersGetPayload<T>>>>;
 
-    tasks<T extends TaskFindManyArgs = {}>(args?: Subset<T, TaskFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Task>>, PrismaPromise<Array<TaskGetPayload<T>>>>;
-
     spaces<T extends SpaceFindManyArgs = {}>(args?: Subset<T, SpaceFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Space>>, PrismaPromise<Array<SpaceGetPayload<T>>>>;
+
+    tasks<T extends TaskFindManyArgs = {}>(args?: Subset<T, TaskFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Task>>, PrismaPromise<Array<TaskGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -7484,8 +7482,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     localId?: boolean
-    project?: boolean | ProjectArgs
     projectId?: boolean
+    project?: boolean | ProjectArgs
   }
 
   export type ProjectSettingsInclude = {
@@ -8413,10 +8411,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     title?: boolean
-    settings?: boolean | WorkspaceSettingsArgs
     settingsId?: boolean
-    user?: boolean | UserArgs
     userId?: boolean
+    settings?: boolean | WorkspaceSettingsArgs
+    user?: boolean | UserArgs
     projects?: boolean | ProjectFindManyArgs
     _count?: boolean | WorkspaceCountOutputTypeArgs
   }
@@ -9352,8 +9350,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     localId?: boolean
-    workspace?: boolean | WorkspaceArgs
     workspaceId?: boolean
+    workspace?: boolean | WorkspaceArgs
   }
 
   export type WorkspaceSettingsInclude = {
@@ -10263,12 +10261,12 @@ export namespace Prisma {
 
 
   export type ProjectsOnUsersSelect = {
-    project?: boolean | ProjectArgs
     projectId?: boolean
-    user?: boolean | UserArgs
     userId?: boolean
     assignedAt?: boolean
     assignedBy?: boolean
+    project?: boolean | ProjectArgs
+    user?: boolean | UserArgs
   }
 
   export type ProjectsOnUsersInclude = {
@@ -11183,12 +11181,12 @@ export namespace Prisma {
 
 
   export type UserAssignedTasksSelect = {
-    task?: boolean | TaskArgs
     taskId?: boolean
-    user?: boolean | UserArgs
     userId?: boolean
     assignedAt?: boolean
     assignedBy?: boolean
+    task?: boolean | TaskArgs
+    user?: boolean | UserArgs
   }
 
   export type UserAssignedTasksInclude = {
@@ -12144,21 +12142,21 @@ export namespace Prisma {
     content?: boolean
     contentType?: boolean
     type?: boolean
-    sender?: boolean | UserArgs
     senderId?: boolean
     parentId?: boolean
-    parent?: boolean | MessageArgs
-    subMessages?: boolean | MessageFindManyArgs
-    chat?: boolean | ChatArgs
     chatId?: boolean
+    chat?: boolean | ChatArgs
+    parent?: boolean | MessageArgs
+    sender?: boolean | UserArgs
+    subMessages?: boolean | MessageFindManyArgs
     _count?: boolean | MessageCountOutputTypeArgs
   }
 
   export type MessageInclude = {
-    sender?: boolean | UserArgs
-    parent?: boolean | MessageArgs
-    subMessages?: boolean | MessageFindManyArgs
     chat?: boolean | ChatArgs
+    parent?: boolean | MessageArgs
+    sender?: boolean | UserArgs
+    subMessages?: boolean | MessageFindManyArgs
     _count?: boolean | MessageCountOutputTypeArgs
   }
 
@@ -12173,19 +12171,19 @@ export namespace Prisma {
     ?'include' extends U
     ? Message  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'sender' ? UserGetPayload<S['include'][P]> | null :
-        P extends 'parent' ? MessageGetPayload<S['include'][P]> | null :
-        P extends 'subMessages' ? Array < MessageGetPayload<S['include'][P]>>  :
         P extends 'chat' ? ChatGetPayload<S['include'][P]> :
+        P extends 'parent' ? MessageGetPayload<S['include'][P]> | null :
+        P extends 'sender' ? UserGetPayload<S['include'][P]> | null :
+        P extends 'subMessages' ? Array < MessageGetPayload<S['include'][P]>>  :
         P extends '_count' ? MessageCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'sender' ? UserGetPayload<S['select'][P]> | null :
-        P extends 'parent' ? MessageGetPayload<S['select'][P]> | null :
-        P extends 'subMessages' ? Array < MessageGetPayload<S['select'][P]>>  :
         P extends 'chat' ? ChatGetPayload<S['select'][P]> :
+        P extends 'parent' ? MessageGetPayload<S['select'][P]> | null :
+        P extends 'sender' ? UserGetPayload<S['select'][P]> | null :
+        P extends 'subMessages' ? Array < MessageGetPayload<S['select'][P]>>  :
         P extends '_count' ? MessageCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Message ? Message[P] : never
   } 
     : Message
@@ -12560,13 +12558,13 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    sender<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
+    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
 
     parent<T extends MessageArgs = {}>(args?: Subset<T, MessageArgs>): CheckSelect<T, Prisma__MessageClient<Message | null >, Prisma__MessageClient<MessageGetPayload<T> | null >>;
 
-    subMessages<T extends MessageFindManyArgs = {}>(args?: Subset<T, MessageFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Message>>, PrismaPromise<Array<MessageGetPayload<T>>>>;
+    sender<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
-    chat<T extends ChatArgs = {}>(args?: Subset<T, ChatArgs>): CheckSelect<T, Prisma__ChatClient<Chat | null >, Prisma__ChatClient<ChatGetPayload<T> | null >>;
+    subMessages<T extends MessageFindManyArgs = {}>(args?: Subset<T, MessageFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Message>>, PrismaPromise<Array<MessageGetPayload<T>>>>;
 
     private get _document();
     /**
@@ -13076,19 +13074,19 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     messages?: boolean | MessageFindManyArgs
-    Task?: boolean | TaskArgs
-    Space?: boolean | SpaceArgs
-    User?: boolean | UserArgs
     Project?: boolean | ProjectArgs
+    Space?: boolean | SpaceArgs
+    Task?: boolean | TaskArgs
+    User?: boolean | UserArgs
     _count?: boolean | ChatCountOutputTypeArgs
   }
 
   export type ChatInclude = {
     messages?: boolean | MessageFindManyArgs
-    Task?: boolean | TaskArgs
-    Space?: boolean | SpaceArgs
-    User?: boolean | UserArgs
     Project?: boolean | ProjectArgs
+    Space?: boolean | SpaceArgs
+    Task?: boolean | TaskArgs
+    User?: boolean | UserArgs
     _count?: boolean | ChatCountOutputTypeArgs
   }
 
@@ -13104,20 +13102,20 @@ export namespace Prisma {
     ? Chat  & {
     [P in TrueKeys<S['include']>]:
         P extends 'messages' ? Array < MessageGetPayload<S['include'][P]>>  :
-        P extends 'Task' ? TaskGetPayload<S['include'][P]> | null :
-        P extends 'Space' ? SpaceGetPayload<S['include'][P]> | null :
-        P extends 'User' ? UserGetPayload<S['include'][P]> | null :
         P extends 'Project' ? ProjectGetPayload<S['include'][P]> | null :
+        P extends 'Space' ? SpaceGetPayload<S['include'][P]> | null :
+        P extends 'Task' ? TaskGetPayload<S['include'][P]> | null :
+        P extends 'User' ? UserGetPayload<S['include'][P]> | null :
         P extends '_count' ? ChatCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
         P extends 'messages' ? Array < MessageGetPayload<S['select'][P]>>  :
-        P extends 'Task' ? TaskGetPayload<S['select'][P]> | null :
-        P extends 'Space' ? SpaceGetPayload<S['select'][P]> | null :
-        P extends 'User' ? UserGetPayload<S['select'][P]> | null :
         P extends 'Project' ? ProjectGetPayload<S['select'][P]> | null :
+        P extends 'Space' ? SpaceGetPayload<S['select'][P]> | null :
+        P extends 'Task' ? TaskGetPayload<S['select'][P]> | null :
+        P extends 'User' ? UserGetPayload<S['select'][P]> | null :
         P extends '_count' ? ChatCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof Chat ? Chat[P] : never
   } 
     : Chat
@@ -13494,13 +13492,13 @@ export namespace Prisma {
 
     messages<T extends MessageFindManyArgs = {}>(args?: Subset<T, MessageFindManyArgs>): CheckSelect<T, PrismaPromise<Array<Message>>, PrismaPromise<Array<MessageGetPayload<T>>>>;
 
-    Task<T extends TaskArgs = {}>(args?: Subset<T, TaskArgs>): CheckSelect<T, Prisma__TaskClient<Task | null >, Prisma__TaskClient<TaskGetPayload<T> | null >>;
+    Project<T extends ProjectArgs = {}>(args?: Subset<T, ProjectArgs>): CheckSelect<T, Prisma__ProjectClient<Project | null >, Prisma__ProjectClient<ProjectGetPayload<T> | null >>;
 
     Space<T extends SpaceArgs = {}>(args?: Subset<T, SpaceArgs>): CheckSelect<T, Prisma__SpaceClient<Space | null >, Prisma__SpaceClient<SpaceGetPayload<T> | null >>;
 
-    User<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
+    Task<T extends TaskArgs = {}>(args?: Subset<T, TaskArgs>): CheckSelect<T, Prisma__TaskClient<Task | null >, Prisma__TaskClient<TaskGetPayload<T> | null >>;
 
-    Project<T extends ProjectArgs = {}>(args?: Subset<T, ProjectArgs>): CheckSelect<T, Prisma__ProjectClient<Project | null >, Prisma__ProjectClient<ProjectGetPayload<T> | null >>;
+    User<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null >, Prisma__UserClient<UserGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -13871,8 +13869,8 @@ export namespace Prisma {
     lastname: 'lastname',
     username: 'username',
     active: 'active',
-    role: 'role',
-    chatId: 'chatId'
+    chatId: 'chatId',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -14057,17 +14055,17 @@ export namespace Prisma {
     lastname?: StringNullableFilter | string | null
     username?: StringFilter | string
     active?: BoolFilter | boolean
-    role?: EnumRoleFilter | Role
-    ownedProjects?: ProjectListRelationFilter
-    comments?: MessageListRelationFilter
-    workspaces?: WorkspaceListRelationFilter
-    createdTasks?: TaskListRelationFilter
-    followedBy?: UserListRelationFilter
-    following?: UserListRelationFilter
-    projects?: ProjectsOnUsersListRelationFilter
-    assignedTasks?: UserAssignedTasksListRelationFilter
-    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
     chatId?: StringNullableFilter | string | null
+    role?: EnumRoleFilter | Role
+    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
+    comments?: MessageListRelationFilter
+    ownedProjects?: ProjectListRelationFilter
+    projects?: ProjectsOnUsersListRelationFilter
+    createdTasks?: TaskListRelationFilter
+    assignedTasks?: UserAssignedTasksListRelationFilter
+    workspaces?: XOR<WorkspaceRelationFilter, WorkspaceWhereInput> | null
+    User_B?: UserListRelationFilter
+    User_A?: UserListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14080,17 +14078,17 @@ export namespace Prisma {
     lastname?: SortOrder
     username?: SortOrder
     active?: SortOrder
-    role?: SortOrder
-    ownedProjects?: ProjectOrderByRelationAggregateInput
-    comments?: MessageOrderByRelationAggregateInput
-    workspaces?: WorkspaceOrderByRelationAggregateInput
-    createdTasks?: TaskOrderByRelationAggregateInput
-    followedBy?: UserOrderByRelationAggregateInput
-    following?: UserOrderByRelationAggregateInput
-    projects?: ProjectsOnUsersOrderByRelationAggregateInput
-    assignedTasks?: UserAssignedTasksOrderByRelationAggregateInput
-    chat?: ChatOrderByWithRelationInput
     chatId?: SortOrder
+    role?: SortOrder
+    chat?: ChatOrderByWithRelationInput
+    comments?: MessageOrderByRelationAggregateInput
+    ownedProjects?: ProjectOrderByRelationAggregateInput
+    projects?: ProjectsOnUsersOrderByRelationAggregateInput
+    createdTasks?: TaskOrderByRelationAggregateInput
+    assignedTasks?: UserAssignedTasksOrderByRelationAggregateInput
+    workspaces?: WorkspaceOrderByWithRelationInput
+    User_B?: UserOrderByRelationAggregateInput
+    User_A?: UserOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
@@ -14109,8 +14107,8 @@ export namespace Prisma {
     lastname?: SortOrder
     username?: SortOrder
     active?: SortOrder
-    role?: SortOrder
     chatId?: SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -14129,8 +14127,8 @@ export namespace Prisma {
     lastname?: StringNullableWithAggregatesFilter | string | null
     username?: StringWithAggregatesFilter | string
     active?: BoolWithAggregatesFilter | boolean
-    role?: EnumRoleWithAggregatesFilter | Role
     chatId?: StringNullableWithAggregatesFilter | string | null
+    role?: EnumRoleWithAggregatesFilter | Role
   }
 
   export type TaskWhereInput = {
@@ -14140,36 +14138,36 @@ export namespace Prisma {
     id?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
-    project?: XOR<ProjectRelationFilter, ProjectWhereInput> | null
     projectId?: StringNullableFilter | string | null
-    creator?: XOR<UserRelationFilter, UserWhereInput> | null
     creatorId?: StringNullableFilter | string | null
     parentId?: StringNullableFilter | string | null
-    parent?: XOR<TaskRelationFilter, TaskWhereInput> | null
-    subTasks?: TaskListRelationFilter
-    assignes?: UserAssignedTasksListRelationFilter
     status?: StringFilter | string
     details?: StringFilter | string
-    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
     chatId?: StringNullableFilter | string | null
+    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
+    creator?: XOR<UserRelationFilter, UserWhereInput> | null
+    parent?: XOR<TaskRelationFilter, TaskWhereInput> | null
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput> | null
+    subTasks?: TaskListRelationFilter
+    assignes?: UserAssignedTasksListRelationFilter
   }
 
   export type TaskOrderByWithRelationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    project?: ProjectOrderByWithRelationInput
     projectId?: SortOrder
-    creator?: UserOrderByWithRelationInput
     creatorId?: SortOrder
     parentId?: SortOrder
-    parent?: TaskOrderByWithRelationInput
-    subTasks?: TaskOrderByRelationAggregateInput
-    assignes?: UserAssignedTasksOrderByRelationAggregateInput
     status?: SortOrder
     details?: SortOrder
-    chat?: ChatOrderByWithRelationInput
     chatId?: SortOrder
+    chat?: ChatOrderByWithRelationInput
+    creator?: UserOrderByWithRelationInput
+    parent?: TaskOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
+    subTasks?: TaskOrderByRelationAggregateInput
+    assignes?: UserAssignedTasksOrderByRelationAggregateInput
   }
 
   export type TaskWhereUniqueInput = {
@@ -14214,36 +14212,36 @@ export namespace Prisma {
     id?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
-    view?: XOR<SpaceViewRelationFilter, SpaceViewWhereInput>
     viewId?: StringFilter | string
-    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
     projectId?: StringFilter | string
-    settings?: XOR<SpaceSettingsRelationFilter, SpaceSettingsWhereInput>
     settingsId?: StringFilter | string
     spaceType?: StringFilter | string
     parentId?: StringNullableFilter | string | null
-    parent?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
-    subspaces?: SpaceListRelationFilter
-    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
     chatId?: StringNullableFilter | string | null
+    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
+    parent?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
+    settings?: XOR<SpaceSettingsRelationFilter, SpaceSettingsWhereInput>
+    view?: XOR<SpaceViewRelationFilter, SpaceViewWhereInput>
+    subspaces?: SpaceListRelationFilter
   }
 
   export type SpaceOrderByWithRelationInput = {
     id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    view?: SpaceViewOrderByWithRelationInput
     viewId?: SortOrder
-    project?: ProjectOrderByWithRelationInput
     projectId?: SortOrder
-    settings?: SpaceSettingsOrderByWithRelationInput
     settingsId?: SortOrder
     spaceType?: SortOrder
     parentId?: SortOrder
-    parent?: SpaceOrderByWithRelationInput
-    subspaces?: SpaceOrderByRelationAggregateInput
-    chat?: ChatOrderByWithRelationInput
     chatId?: SortOrder
+    chat?: ChatOrderByWithRelationInput
+    parent?: SpaceOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
+    settings?: SpaceSettingsOrderByWithRelationInput
+    view?: SpaceViewOrderByWithRelationInput
+    subspaces?: SpaceOrderByRelationAggregateInput
   }
 
   export type SpaceWhereUniqueInput = {
@@ -14291,8 +14289,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     localId?: StringFilter | string
-    space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
     spaceId?: StringFilter | string
+    space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
   }
 
   export type SpaceViewOrderByWithRelationInput = {
@@ -14300,8 +14298,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     localId?: SortOrder
-    space?: SpaceOrderByWithRelationInput
     spaceId?: SortOrder
+    space?: SpaceOrderByWithRelationInput
   }
 
   export type SpaceViewWhereUniqueInput = {
@@ -14338,8 +14336,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     localId?: StringFilter | string
-    space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
     spaceId?: StringFilter | string
+    space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
   }
 
   export type SpaceSettingsOrderByWithRelationInput = {
@@ -14347,8 +14345,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     localId?: SortOrder
-    space?: SpaceOrderByWithRelationInput
     spaceId?: SortOrder
+    space?: SpaceOrderByWithRelationInput
   }
 
   export type SpaceSettingsWhereUniqueInput = {
@@ -14386,17 +14384,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter | Date | string
     title?: StringFilter | string
     description?: StringNullableFilter | string | null
-    settings?: XOR<ProjectSettingsRelationFilter, ProjectSettingsWhereInput>
     settingsId?: StringFilter | string
-    workspace?: XOR<WorkspaceRelationFilter, WorkspaceWhereInput>
     workspaceId?: StringFilter | string
-    owner?: XOR<UserRelationFilter, UserWhereInput>
     ownerId?: StringFilter | string
-    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
     chatId?: StringNullableFilter | string | null
+    chat?: XOR<ChatRelationFilter, ChatWhereInput> | null
+    owner?: XOR<UserRelationFilter, UserWhereInput>
+    settings?: XOR<ProjectSettingsRelationFilter, ProjectSettingsWhereInput>
+    workspace?: XOR<WorkspaceRelationFilter, WorkspaceWhereInput>
     users?: ProjectsOnUsersListRelationFilter
-    tasks?: TaskListRelationFilter
     spaces?: SpaceListRelationFilter
+    tasks?: TaskListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -14405,17 +14403,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    settings?: ProjectSettingsOrderByWithRelationInput
     settingsId?: SortOrder
-    workspace?: WorkspaceOrderByWithRelationInput
     workspaceId?: SortOrder
-    owner?: UserOrderByWithRelationInput
     ownerId?: SortOrder
-    chat?: ChatOrderByWithRelationInput
     chatId?: SortOrder
+    chat?: ChatOrderByWithRelationInput
+    owner?: UserOrderByWithRelationInput
+    settings?: ProjectSettingsOrderByWithRelationInput
+    workspace?: WorkspaceOrderByWithRelationInput
     users?: ProjectsOnUsersOrderByRelationAggregateInput
-    tasks?: TaskOrderByRelationAggregateInput
     spaces?: SpaceOrderByRelationAggregateInput
+    tasks?: TaskOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = {
@@ -14462,8 +14460,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     localId?: StringFilter | string
-    project?: XOR<ProjectRelationFilter, ProjectWhereInput> | null
     projectId?: StringFilter | string
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput> | null
   }
 
   export type ProjectSettingsOrderByWithRelationInput = {
@@ -14471,8 +14469,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     localId?: SortOrder
-    project?: ProjectOrderByWithRelationInput
     projectId?: SortOrder
+    project?: ProjectOrderByWithRelationInput
   }
 
   export type ProjectSettingsWhereUniqueInput = {
@@ -14509,10 +14507,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     title?: StringFilter | string
-    settings?: XOR<WorkspaceSettingsRelationFilter, WorkspaceSettingsWhereInput>
     settingsId?: StringFilter | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: StringFilter | string
+    settings?: XOR<WorkspaceSettingsRelationFilter, WorkspaceSettingsWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
     projects?: ProjectListRelationFilter
   }
 
@@ -14521,10 +14519,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     title?: SortOrder
-    settings?: WorkspaceSettingsOrderByWithRelationInput
     settingsId?: SortOrder
-    user?: UserOrderByWithRelationInput
     userId?: SortOrder
+    settings?: WorkspaceSettingsOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     projects?: ProjectOrderByRelationAggregateInput
   }
 
@@ -14566,8 +14564,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     localId?: StringFilter | string
-    workspace?: XOR<WorkspaceRelationFilter, WorkspaceWhereInput> | null
     workspaceId?: StringFilter | string
+    workspace?: XOR<WorkspaceRelationFilter, WorkspaceWhereInput> | null
   }
 
   export type WorkspaceSettingsOrderByWithRelationInput = {
@@ -14575,8 +14573,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     localId?: SortOrder
-    workspace?: WorkspaceOrderByWithRelationInput
     workspaceId?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
   }
 
   export type WorkspaceSettingsWhereUniqueInput = {
@@ -14609,21 +14607,21 @@ export namespace Prisma {
     AND?: Enumerable<ProjectsOnUsersWhereInput>
     OR?: Enumerable<ProjectsOnUsersWhereInput>
     NOT?: Enumerable<ProjectsOnUsersWhereInput>
-    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
     projectId?: StringFilter | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: StringFilter | string
     assignedAt?: DateTimeFilter | Date | string
     assignedBy?: StringFilter | string
+    project?: XOR<ProjectRelationFilter, ProjectWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type ProjectsOnUsersOrderByWithRelationInput = {
-    project?: ProjectOrderByWithRelationInput
     projectId?: SortOrder
-    user?: UserOrderByWithRelationInput
     userId?: SortOrder
     assignedAt?: SortOrder
     assignedBy?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ProjectsOnUsersWhereUniqueInput = {
@@ -14654,21 +14652,21 @@ export namespace Prisma {
     AND?: Enumerable<UserAssignedTasksWhereInput>
     OR?: Enumerable<UserAssignedTasksWhereInput>
     NOT?: Enumerable<UserAssignedTasksWhereInput>
-    task?: XOR<TaskRelationFilter, TaskWhereInput>
     taskId?: StringFilter | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     userId?: StringFilter | string
     assignedAt?: DateTimeFilter | Date | string
     assignedBy?: StringFilter | string
+    task?: XOR<TaskRelationFilter, TaskWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type UserAssignedTasksOrderByWithRelationInput = {
-    task?: TaskOrderByWithRelationInput
     taskId?: SortOrder
-    user?: UserOrderByWithRelationInput
     userId?: SortOrder
     assignedAt?: SortOrder
     assignedBy?: SortOrder
+    task?: TaskOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type UserAssignedTasksWhereUniqueInput = {
@@ -14705,13 +14703,13 @@ export namespace Prisma {
     content?: StringFilter | string
     contentType?: StringFilter | string
     type?: StringFilter | string
-    sender?: XOR<UserRelationFilter, UserWhereInput> | null
     senderId?: StringNullableFilter | string | null
     parentId?: StringNullableFilter | string | null
-    parent?: XOR<MessageRelationFilter, MessageWhereInput> | null
-    subMessages?: MessageListRelationFilter
-    chat?: XOR<ChatRelationFilter, ChatWhereInput>
     chatId?: StringFilter | string
+    chat?: XOR<ChatRelationFilter, ChatWhereInput>
+    parent?: XOR<MessageRelationFilter, MessageWhereInput> | null
+    sender?: XOR<UserRelationFilter, UserWhereInput> | null
+    subMessages?: MessageListRelationFilter
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -14721,13 +14719,13 @@ export namespace Prisma {
     content?: SortOrder
     contentType?: SortOrder
     type?: SortOrder
-    sender?: UserOrderByWithRelationInput
     senderId?: SortOrder
     parentId?: SortOrder
-    parent?: MessageOrderByWithRelationInput
-    subMessages?: MessageOrderByRelationAggregateInput
-    chat?: ChatOrderByWithRelationInput
     chatId?: SortOrder
+    chat?: ChatOrderByWithRelationInput
+    parent?: MessageOrderByWithRelationInput
+    sender?: UserOrderByWithRelationInput
+    subMessages?: MessageOrderByRelationAggregateInput
   }
 
   export type MessageWhereUniqueInput = {
@@ -14772,10 +14770,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     messages?: MessageListRelationFilter
-    Task?: XOR<TaskRelationFilter, TaskWhereInput> | null
-    Space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
-    User?: XOR<UserRelationFilter, UserWhereInput> | null
     Project?: XOR<ProjectRelationFilter, ProjectWhereInput> | null
+    Space?: XOR<SpaceRelationFilter, SpaceWhereInput> | null
+    Task?: XOR<TaskRelationFilter, TaskWhereInput> | null
+    User?: XOR<UserRelationFilter, UserWhereInput> | null
   }
 
   export type ChatOrderByWithRelationInput = {
@@ -14783,10 +14781,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     messages?: MessageOrderByRelationAggregateInput
-    Task?: TaskOrderByWithRelationInput
-    Space?: SpaceOrderByWithRelationInput
-    User?: UserOrderByWithRelationInput
     Project?: ProjectOrderByWithRelationInput
+    Space?: SpaceOrderByWithRelationInput
+    Task?: TaskOrderByWithRelationInput
+    User?: UserOrderByWithRelationInput
   }
 
   export type ChatWhereUniqueInput = {
@@ -14822,15 +14820,15 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
     chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -14843,16 +14841,16 @@ export namespace Prisma {
     lastname?: string | null
     username: string
     active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
     chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUpdateInput = {
@@ -14866,15 +14864,15 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
     chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14887,16 +14885,16 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -14909,8 +14907,8 @@ export namespace Prisma {
     lastname?: string | null
     username: string
     active: boolean
-    role: Role
     chatId?: string | null
+    role: Role
   }
 
   export type UserUpdateManyMutationInput = {
@@ -14936,22 +14934,22 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
   export type TaskCreateInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    creator?: UserCreateNestedOneWithoutCreatedTasksInput
-    parent?: TaskCreateNestedOneWithoutSubTasksInput
-    subTasks?: TaskCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
     status?: string
     details: string
     chat?: ChatCreateNestedOneWithoutTaskInput
+    creator?: UserCreateNestedOneWithoutCreatedTasksInput
+    parent?: TaskCreateNestedOneWithoutSubTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    subTasks?: TaskCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateInput = {
@@ -14961,25 +14959,25 @@ export namespace Prisma {
     projectId?: string | null
     creatorId?: string | null
     parentId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
     status?: string
     details: string
     chatId?: string | null
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chat?: ChatUpdateOneWithoutTaskNestedInput
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateInput = {
@@ -14989,11 +14987,11 @@ export namespace Prisma {
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskCreateManyInput = {
@@ -15032,13 +15030,13 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
+    spaceType: string
+    chat?: ChatCreateNestedOneWithoutSpaceInput
+    parent?: SpaceCreateNestedOneWithoutSubspacesInput
     project: ProjectCreateNestedOneWithoutSpacesInput
     settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
-    spaceType: string
-    parent?: SpaceCreateNestedOneWithoutSubspacesInput
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
     subspaces?: SpaceCreateNestedManyWithoutParentInput
-    chat?: ChatCreateNestedOneWithoutSpaceInput
   }
 
   export type SpaceUncheckedCreateInput = {
@@ -15050,21 +15048,21 @@ export namespace Prisma {
     settingsId: string
     spaceType: string
     parentId?: string | null
-    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
     chatId?: string | null
+    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type SpaceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
+    spaceType?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutSpaceNestedInput
+    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
     project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
     settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
-    spaceType?: StringFieldUpdateOperationsInput | string
-    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
     subspaces?: SpaceUpdateManyWithoutParentNestedInput
-    chat?: ChatUpdateOneWithoutSpaceNestedInput
   }
 
   export type SpaceUncheckedUpdateInput = {
@@ -15076,8 +15074,8 @@ export namespace Prisma {
     settingsId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceCreateManyInput = {
@@ -15116,8 +15114,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    space?: SpaceCreateNestedOneWithoutViewInput
     spaceId: string
+    space?: SpaceCreateNestedOneWithoutViewInput
   }
 
   export type SpaceViewUncheckedCreateInput = {
@@ -15125,8 +15123,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    space?: SpaceUncheckedCreateNestedOneWithoutViewInput
     spaceId: string
+    space?: SpaceUncheckedCreateNestedOneWithoutViewInput
   }
 
   export type SpaceViewUpdateInput = {
@@ -15134,8 +15132,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    space?: SpaceUpdateOneWithoutViewNestedInput
     spaceId?: StringFieldUpdateOperationsInput | string
+    space?: SpaceUpdateOneWithoutViewNestedInput
   }
 
   export type SpaceViewUncheckedUpdateInput = {
@@ -15143,8 +15141,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    space?: SpaceUncheckedUpdateOneWithoutViewNestedInput
     spaceId?: StringFieldUpdateOperationsInput | string
+    space?: SpaceUncheckedUpdateOneWithoutViewNestedInput
   }
 
   export type SpaceViewCreateManyInput = {
@@ -15176,8 +15174,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    space?: SpaceCreateNestedOneWithoutSettingsInput
     spaceId: string
+    space?: SpaceCreateNestedOneWithoutSettingsInput
   }
 
   export type SpaceSettingsUncheckedCreateInput = {
@@ -15185,8 +15183,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    space?: SpaceUncheckedCreateNestedOneWithoutSettingsInput
     spaceId: string
+    space?: SpaceUncheckedCreateNestedOneWithoutSettingsInput
   }
 
   export type SpaceSettingsUpdateInput = {
@@ -15194,8 +15192,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    space?: SpaceUpdateOneWithoutSettingsNestedInput
     spaceId?: StringFieldUpdateOperationsInput | string
+    space?: SpaceUpdateOneWithoutSettingsNestedInput
   }
 
   export type SpaceSettingsUncheckedUpdateInput = {
@@ -15203,8 +15201,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    space?: SpaceUncheckedUpdateOneWithoutSettingsNestedInput
     spaceId?: StringFieldUpdateOperationsInput | string
+    space?: SpaceUncheckedUpdateOneWithoutSettingsNestedInput
   }
 
   export type SpaceSettingsCreateManyInput = {
@@ -15237,13 +15235,13 @@ export namespace Prisma {
     updatedAt?: Date | string
     title: string
     description?: string | null
+    chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
-    chat?: ChatCreateNestedOneWithoutProjectInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -15257,8 +15255,8 @@ export namespace Prisma {
     ownerId: string
     chatId?: string | null
     users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
     spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -15267,13 +15265,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
     settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
     workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
-    chat?: ChatUpdateOneWithoutProjectNestedInput
     users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -15287,8 +15285,8 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -15328,8 +15326,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    project?: ProjectCreateNestedOneWithoutSettingsInput
     projectId: string
+    project?: ProjectCreateNestedOneWithoutSettingsInput
   }
 
   export type ProjectSettingsUncheckedCreateInput = {
@@ -15337,8 +15335,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    project?: ProjectUncheckedCreateNestedOneWithoutSettingsInput
     projectId: string
+    project?: ProjectUncheckedCreateNestedOneWithoutSettingsInput
   }
 
   export type ProjectSettingsUpdateInput = {
@@ -15346,8 +15344,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    project?: ProjectUpdateOneWithoutSettingsNestedInput
     projectId?: StringFieldUpdateOperationsInput | string
+    project?: ProjectUpdateOneWithoutSettingsNestedInput
   }
 
   export type ProjectSettingsUncheckedUpdateInput = {
@@ -15355,8 +15353,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    project?: ProjectUncheckedUpdateOneWithoutSettingsNestedInput
     projectId?: StringFieldUpdateOperationsInput | string
+    project?: ProjectUncheckedUpdateOneWithoutSettingsNestedInput
   }
 
   export type ProjectSettingsCreateManyInput = {
@@ -15453,8 +15451,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    workspace?: WorkspaceCreateNestedOneWithoutSettingsInput
     workspaceId: string
+    workspace?: WorkspaceCreateNestedOneWithoutSettingsInput
   }
 
   export type WorkspaceSettingsUncheckedCreateInput = {
@@ -15462,8 +15460,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     localId: string
-    workspace?: WorkspaceUncheckedCreateNestedOneWithoutSettingsInput
     workspaceId: string
+    workspace?: WorkspaceUncheckedCreateNestedOneWithoutSettingsInput
   }
 
   export type WorkspaceSettingsUpdateInput = {
@@ -15471,8 +15469,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    workspace?: WorkspaceUpdateOneWithoutSettingsNestedInput
     workspaceId?: StringFieldUpdateOperationsInput | string
+    workspace?: WorkspaceUpdateOneWithoutSettingsNestedInput
   }
 
   export type WorkspaceSettingsUncheckedUpdateInput = {
@@ -15480,8 +15478,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     localId?: StringFieldUpdateOperationsInput | string
-    workspace?: WorkspaceUncheckedUpdateOneWithoutSettingsNestedInput
     workspaceId?: StringFieldUpdateOperationsInput | string
+    workspace?: WorkspaceUncheckedUpdateOneWithoutSettingsNestedInput
   }
 
   export type WorkspaceSettingsCreateManyInput = {
@@ -15509,10 +15507,10 @@ export namespace Prisma {
   }
 
   export type ProjectsOnUsersCreateInput = {
-    project: ProjectCreateNestedOneWithoutUsersInput
-    user: UserCreateNestedOneWithoutProjectsInput
     assignedAt?: Date | string
     assignedBy: string
+    project: ProjectCreateNestedOneWithoutUsersInput
+    user: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectsOnUsersUncheckedCreateInput = {
@@ -15523,10 +15521,10 @@ export namespace Prisma {
   }
 
   export type ProjectsOnUsersUpdateInput = {
-    project?: ProjectUpdateOneRequiredWithoutUsersNestedInput
-    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    project?: ProjectUpdateOneRequiredWithoutUsersNestedInput
+    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
   }
 
   export type ProjectsOnUsersUncheckedUpdateInput = {
@@ -15556,10 +15554,10 @@ export namespace Prisma {
   }
 
   export type UserAssignedTasksCreateInput = {
-    task: TaskCreateNestedOneWithoutAssignesInput
-    user: UserCreateNestedOneWithoutAssignedTasksInput
     assignedAt?: Date | string
     assignedBy: string
+    task: TaskCreateNestedOneWithoutAssignesInput
+    user: UserCreateNestedOneWithoutAssignedTasksInput
   }
 
   export type UserAssignedTasksUncheckedCreateInput = {
@@ -15570,10 +15568,10 @@ export namespace Prisma {
   }
 
   export type UserAssignedTasksUpdateInput = {
-    task?: TaskUpdateOneRequiredWithoutAssignesNestedInput
-    user?: UserUpdateOneRequiredWithoutAssignedTasksNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    task?: TaskUpdateOneRequiredWithoutAssignesNestedInput
+    user?: UserUpdateOneRequiredWithoutAssignedTasksNestedInput
   }
 
   export type UserAssignedTasksUncheckedUpdateInput = {
@@ -15609,10 +15607,10 @@ export namespace Prisma {
     content: string
     contentType?: string
     type?: string
-    sender?: UserCreateNestedOneWithoutCommentsInput
-    parent?: MessageCreateNestedOneWithoutSubMessagesInput
-    subMessages?: MessageCreateNestedManyWithoutParentInput
     chat: ChatCreateNestedOneWithoutMessagesInput
+    parent?: MessageCreateNestedOneWithoutSubMessagesInput
+    sender?: UserCreateNestedOneWithoutCommentsInput
+    subMessages?: MessageCreateNestedManyWithoutParentInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -15624,8 +15622,8 @@ export namespace Prisma {
     type?: string
     senderId?: string | null
     parentId?: string | null
-    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
     chatId: string
+    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type MessageUpdateInput = {
@@ -15635,10 +15633,10 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    sender?: UserUpdateOneWithoutCommentsNestedInput
-    parent?: MessageUpdateOneWithoutSubMessagesNestedInput
-    subMessages?: MessageUpdateManyWithoutParentNestedInput
     chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
+    parent?: MessageUpdateOneWithoutSubMessagesNestedInput
+    sender?: UserUpdateOneWithoutCommentsNestedInput
+    subMessages?: MessageUpdateManyWithoutParentNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -15650,8 +15648,8 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     senderId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
     chatId?: StringFieldUpdateOperationsInput | string
+    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type MessageCreateManyInput = {
@@ -15692,10 +15690,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageCreateNestedManyWithoutChatInput
-    Task?: TaskCreateNestedOneWithoutChatInput
-    Space?: SpaceCreateNestedOneWithoutChatInput
-    User?: UserCreateNestedOneWithoutChatInput
     Project?: ProjectCreateNestedOneWithoutChatInput
+    Space?: SpaceCreateNestedOneWithoutChatInput
+    Task?: TaskCreateNestedOneWithoutChatInput
+    User?: UserCreateNestedOneWithoutChatInput
   }
 
   export type ChatUncheckedCreateInput = {
@@ -15703,10 +15701,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutChatInput
-    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
-    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
-    User?: UserUncheckedCreateNestedOneWithoutChatInput
     Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
+    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
+    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
+    User?: UserUncheckedCreateNestedOneWithoutChatInput
   }
 
   export type ChatUpdateInput = {
@@ -15714,10 +15712,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUpdateManyWithoutChatNestedInput
-    Task?: TaskUpdateOneWithoutChatNestedInput
-    Space?: SpaceUpdateOneWithoutChatNestedInput
-    User?: UserUpdateOneWithoutChatNestedInput
     Project?: ProjectUpdateOneWithoutChatNestedInput
+    Space?: SpaceUpdateOneWithoutChatNestedInput
+    Task?: TaskUpdateOneWithoutChatNestedInput
+    User?: UserUpdateOneWithoutChatNestedInput
   }
 
   export type ChatUncheckedUpdateInput = {
@@ -15725,10 +15723,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
-    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
-    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
-    User?: UserUncheckedUpdateOneWithoutChatNestedInput
     Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
+    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
+    User?: UserUncheckedUpdateOneWithoutChatNestedInput
   }
 
   export type ChatCreateManyInput = {
@@ -15802,10 +15800,9 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter | Role
   }
 
-  export type ProjectListRelationFilter = {
-    every?: ProjectWhereInput
-    some?: ProjectWhereInput
-    none?: ProjectWhereInput
+  export type ChatRelationFilter = {
+    is?: ChatWhereInput | null
+    isNot?: ChatWhereInput | null
   }
 
   export type MessageListRelationFilter = {
@@ -15814,22 +15811,10 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
-  export type WorkspaceListRelationFilter = {
-    every?: WorkspaceWhereInput
-    some?: WorkspaceWhereInput
-    none?: WorkspaceWhereInput
-  }
-
-  export type TaskListRelationFilter = {
-    every?: TaskWhereInput
-    some?: TaskWhereInput
-    none?: TaskWhereInput
-  }
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
+  export type ProjectListRelationFilter = {
+    every?: ProjectWhereInput
+    some?: ProjectWhereInput
+    none?: ProjectWhereInput
   }
 
   export type ProjectsOnUsersListRelationFilter = {
@@ -15838,34 +15823,34 @@ export namespace Prisma {
     none?: ProjectsOnUsersWhereInput
   }
 
+  export type TaskListRelationFilter = {
+    every?: TaskWhereInput
+    some?: TaskWhereInput
+    none?: TaskWhereInput
+  }
+
   export type UserAssignedTasksListRelationFilter = {
     every?: UserAssignedTasksWhereInput
     some?: UserAssignedTasksWhereInput
     none?: UserAssignedTasksWhereInput
   }
 
-  export type ChatRelationFilter = {
-    is?: ChatWhereInput | null
-    isNot?: ChatWhereInput | null
+  export type WorkspaceRelationFilter = {
+    is?: WorkspaceWhereInput | null
+    isNot?: WorkspaceWhereInput | null
   }
 
-  export type ProjectOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
   }
 
   export type MessageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type WorkspaceOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TaskOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UserOrderByRelationAggregateInput = {
+  export type ProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15873,7 +15858,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type TaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserAssignedTasksOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15887,8 +15880,8 @@ export namespace Prisma {
     lastname?: SortOrder
     username?: SortOrder
     active?: SortOrder
-    role?: SortOrder
     chatId?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -15901,8 +15894,8 @@ export namespace Prisma {
     lastname?: SortOrder
     username?: SortOrder
     active?: SortOrder
-    role?: SortOrder
     chatId?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -15915,8 +15908,8 @@ export namespace Prisma {
     lastname?: SortOrder
     username?: SortOrder
     active?: SortOrder
-    role?: SortOrder
     chatId?: SortOrder
+    role?: SortOrder
   }
 
   export type StringWithAggregatesFilter = {
@@ -15987,19 +15980,19 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter
   }
 
-  export type ProjectRelationFilter = {
-    is?: ProjectWhereInput | null
-    isNot?: ProjectWhereInput | null
-  }
-
   export type UserRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type TaskRelationFilter = {
     is?: TaskWhereInput | null
     isNot?: TaskWhereInput | null
+  }
+
+  export type ProjectRelationFilter = {
+    is?: ProjectWhereInput
+    isNot?: ProjectWhereInput
   }
 
   export type TaskCountOrderByAggregateInput = {
@@ -16038,9 +16031,9 @@ export namespace Prisma {
     chatId?: SortOrder
   }
 
-  export type SpaceViewRelationFilter = {
-    is?: SpaceViewWhereInput
-    isNot?: SpaceViewWhereInput
+  export type SpaceRelationFilter = {
+    is?: SpaceWhereInput | null
+    isNot?: SpaceWhereInput | null
   }
 
   export type SpaceSettingsRelationFilter = {
@@ -16048,9 +16041,9 @@ export namespace Prisma {
     isNot?: SpaceSettingsWhereInput
   }
 
-  export type SpaceRelationFilter = {
-    is?: SpaceWhereInput | null
-    isNot?: SpaceWhereInput | null
+  export type SpaceViewRelationFilter = {
+    is?: SpaceViewWhereInput
+    isNot?: SpaceViewWhereInput
   }
 
   export type SpaceListRelationFilter = {
@@ -16150,11 +16143,6 @@ export namespace Prisma {
   export type ProjectSettingsRelationFilter = {
     is?: ProjectSettingsWhereInput
     isNot?: ProjectSettingsWhereInput
-  }
-
-  export type WorkspaceRelationFilter = {
-    is?: WorkspaceWhereInput | null
-    isNot?: WorkspaceWhereInput | null
   }
 
   export type ProjectCountOrderByAggregateInput = {
@@ -16384,11 +16372,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type ProjectCreateNestedManyWithoutOwnerInput = {
-    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
-    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
-    createMany?: ProjectCreateManyOwnerInputEnvelope
-    connect?: Enumerable<ProjectWhereUniqueInput>
+  export type ChatCreateNestedOneWithoutUserInput = {
+    create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutUserInput
+    connect?: ChatWhereUniqueInput
   }
 
   export type MessageCreateNestedManyWithoutSenderInput = {
@@ -16398,30 +16385,11 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type WorkspaceCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<WorkspaceCreateWithoutUserInput>, Enumerable<WorkspaceUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<WorkspaceCreateOrConnectWithoutUserInput>
-    createMany?: WorkspaceCreateManyUserInputEnvelope
-    connect?: Enumerable<WorkspaceWhereUniqueInput>
-  }
-
-  export type TaskCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
-    createMany?: TaskCreateManyCreatorInputEnvelope
-    connect?: Enumerable<TaskWhereUniqueInput>
-  }
-
-  export type UserCreateNestedManyWithoutFollowingInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowingInput>, Enumerable<UserUncheckedCreateWithoutFollowingInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowingInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-  }
-
-  export type UserCreateNestedManyWithoutFollowedByInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowedByInput>, Enumerable<UserUncheckedCreateWithoutFollowedByInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowedByInput>
-    connect?: Enumerable<UserWhereUniqueInput>
+  export type ProjectCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
+    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
+    createMany?: ProjectCreateManyOwnerInputEnvelope
+    connect?: Enumerable<ProjectWhereUniqueInput>
   }
 
   export type ProjectsOnUsersCreateNestedManyWithoutUserInput = {
@@ -16431,6 +16399,13 @@ export namespace Prisma {
     connect?: Enumerable<ProjectsOnUsersWhereUniqueInput>
   }
 
+  export type TaskCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
+    createMany?: TaskCreateManyCreatorInputEnvelope
+    connect?: Enumerable<TaskWhereUniqueInput>
+  }
+
   export type UserAssignedTasksCreateNestedManyWithoutUserInput = {
     create?: XOR<Enumerable<UserAssignedTasksCreateWithoutUserInput>, Enumerable<UserAssignedTasksUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<UserAssignedTasksCreateOrConnectWithoutUserInput>
@@ -16438,17 +16413,22 @@ export namespace Prisma {
     connect?: Enumerable<UserAssignedTasksWhereUniqueInput>
   }
 
-  export type ChatCreateNestedOneWithoutUserInput = {
-    create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutUserInput
-    connect?: ChatWhereUniqueInput
+  export type WorkspaceCreateNestedOneWithoutUserInput = {
+    create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput
+    connect?: WorkspaceWhereUniqueInput
   }
 
-  export type ProjectUncheckedCreateNestedManyWithoutOwnerInput = {
-    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
-    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
-    createMany?: ProjectCreateManyOwnerInputEnvelope
-    connect?: Enumerable<ProjectWhereUniqueInput>
+  export type UserCreateNestedManyWithoutUser_AInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_AInput>, Enumerable<UserUncheckedCreateWithoutUser_AInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_AInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+  }
+
+  export type UserCreateNestedManyWithoutUser_BInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_BInput>, Enumerable<UserUncheckedCreateWithoutUser_BInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_BInput>
+    connect?: Enumerable<UserWhereUniqueInput>
   }
 
   export type MessageUncheckedCreateNestedManyWithoutSenderInput = {
@@ -16458,30 +16438,11 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type WorkspaceUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<Enumerable<WorkspaceCreateWithoutUserInput>, Enumerable<WorkspaceUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<WorkspaceCreateOrConnectWithoutUserInput>
-    createMany?: WorkspaceCreateManyUserInputEnvelope
-    connect?: Enumerable<WorkspaceWhereUniqueInput>
-  }
-
-  export type TaskUncheckedCreateNestedManyWithoutCreatorInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
-    createMany?: TaskCreateManyCreatorInputEnvelope
-    connect?: Enumerable<TaskWhereUniqueInput>
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutFollowingInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowingInput>, Enumerable<UserUncheckedCreateWithoutFollowingInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowingInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutFollowedByInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowedByInput>, Enumerable<UserUncheckedCreateWithoutFollowedByInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowedByInput>
-    connect?: Enumerable<UserWhereUniqueInput>
+  export type ProjectUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
+    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
+    createMany?: ProjectCreateManyOwnerInputEnvelope
+    connect?: Enumerable<ProjectWhereUniqueInput>
   }
 
   export type ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput = {
@@ -16491,11 +16452,36 @@ export namespace Prisma {
     connect?: Enumerable<ProjectsOnUsersWhereUniqueInput>
   }
 
+  export type TaskUncheckedCreateNestedManyWithoutCreatorInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
+    createMany?: TaskCreateManyCreatorInputEnvelope
+    connect?: Enumerable<TaskWhereUniqueInput>
+  }
+
   export type UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<Enumerable<UserAssignedTasksCreateWithoutUserInput>, Enumerable<UserAssignedTasksUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<UserAssignedTasksCreateOrConnectWithoutUserInput>
     createMany?: UserAssignedTasksCreateManyUserInputEnvelope
     connect?: Enumerable<UserAssignedTasksWhereUniqueInput>
+  }
+
+  export type WorkspaceUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutUser_AInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_AInput>, Enumerable<UserUncheckedCreateWithoutUser_AInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_AInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutUser_BInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_BInput>, Enumerable<UserUncheckedCreateWithoutUser_BInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_BInput>
+    connect?: Enumerable<UserWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16518,18 +16504,14 @@ export namespace Prisma {
     set?: Role
   }
 
-  export type ProjectUpdateManyWithoutOwnerNestedInput = {
-    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
-    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
-    upsert?: Enumerable<ProjectUpsertWithWhereUniqueWithoutOwnerInput>
-    createMany?: ProjectCreateManyOwnerInputEnvelope
-    set?: Enumerable<ProjectWhereUniqueInput>
-    disconnect?: Enumerable<ProjectWhereUniqueInput>
-    delete?: Enumerable<ProjectWhereUniqueInput>
-    connect?: Enumerable<ProjectWhereUniqueInput>
-    update?: Enumerable<ProjectUpdateWithWhereUniqueWithoutOwnerInput>
-    updateMany?: Enumerable<ProjectUpdateManyWithWhereWithoutOwnerInput>
-    deleteMany?: Enumerable<ProjectScalarWhereInput>
+  export type ChatUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutUserInput
+    upsert?: ChatUpsertWithoutUserInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: ChatWhereUniqueInput
+    update?: XOR<ChatUpdateWithoutUserInput, ChatUncheckedUpdateWithoutUserInput>
   }
 
   export type MessageUpdateManyWithoutSenderNestedInput = {
@@ -16546,58 +16528,18 @@ export namespace Prisma {
     deleteMany?: Enumerable<MessageScalarWhereInput>
   }
 
-  export type WorkspaceUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<WorkspaceCreateWithoutUserInput>, Enumerable<WorkspaceUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<WorkspaceCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<WorkspaceUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: WorkspaceCreateManyUserInputEnvelope
-    set?: Enumerable<WorkspaceWhereUniqueInput>
-    disconnect?: Enumerable<WorkspaceWhereUniqueInput>
-    delete?: Enumerable<WorkspaceWhereUniqueInput>
-    connect?: Enumerable<WorkspaceWhereUniqueInput>
-    update?: Enumerable<WorkspaceUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<WorkspaceUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<WorkspaceScalarWhereInput>
-  }
-
-  export type TaskUpdateManyWithoutCreatorNestedInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
-    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutCreatorInput>
-    createMany?: TaskCreateManyCreatorInputEnvelope
-    set?: Enumerable<TaskWhereUniqueInput>
-    disconnect?: Enumerable<TaskWhereUniqueInput>
-    delete?: Enumerable<TaskWhereUniqueInput>
-    connect?: Enumerable<TaskWhereUniqueInput>
-    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutCreatorInput>
-    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutCreatorInput>
-    deleteMany?: Enumerable<TaskScalarWhereInput>
-  }
-
-  export type UserUpdateManyWithoutFollowingNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowingInput>, Enumerable<UserUncheckedCreateWithoutFollowingInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowingInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutFollowingInput>
-    set?: Enumerable<UserWhereUniqueInput>
-    disconnect?: Enumerable<UserWhereUniqueInput>
-    delete?: Enumerable<UserWhereUniqueInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutFollowingInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutFollowingInput>
-    deleteMany?: Enumerable<UserScalarWhereInput>
-  }
-
-  export type UserUpdateManyWithoutFollowedByNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowedByInput>, Enumerable<UserUncheckedCreateWithoutFollowedByInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowedByInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutFollowedByInput>
-    set?: Enumerable<UserWhereUniqueInput>
-    disconnect?: Enumerable<UserWhereUniqueInput>
-    delete?: Enumerable<UserWhereUniqueInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutFollowedByInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutFollowedByInput>
-    deleteMany?: Enumerable<UserScalarWhereInput>
+  export type ProjectUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
+    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
+    upsert?: Enumerable<ProjectUpsertWithWhereUniqueWithoutOwnerInput>
+    createMany?: ProjectCreateManyOwnerInputEnvelope
+    set?: Enumerable<ProjectWhereUniqueInput>
+    disconnect?: Enumerable<ProjectWhereUniqueInput>
+    delete?: Enumerable<ProjectWhereUniqueInput>
+    connect?: Enumerable<ProjectWhereUniqueInput>
+    update?: Enumerable<ProjectUpdateWithWhereUniqueWithoutOwnerInput>
+    updateMany?: Enumerable<ProjectUpdateManyWithWhereWithoutOwnerInput>
+    deleteMany?: Enumerable<ProjectScalarWhereInput>
   }
 
   export type ProjectsOnUsersUpdateManyWithoutUserNestedInput = {
@@ -16614,6 +16556,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<ProjectsOnUsersScalarWhereInput>
   }
 
+  export type TaskUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
+    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutCreatorInput>
+    createMany?: TaskCreateManyCreatorInputEnvelope
+    set?: Enumerable<TaskWhereUniqueInput>
+    disconnect?: Enumerable<TaskWhereUniqueInput>
+    delete?: Enumerable<TaskWhereUniqueInput>
+    connect?: Enumerable<TaskWhereUniqueInput>
+    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutCreatorInput>
+    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutCreatorInput>
+    deleteMany?: Enumerable<TaskScalarWhereInput>
+  }
+
   export type UserAssignedTasksUpdateManyWithoutUserNestedInput = {
     create?: XOR<Enumerable<UserAssignedTasksCreateWithoutUserInput>, Enumerable<UserAssignedTasksUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<UserAssignedTasksCreateOrConnectWithoutUserInput>
@@ -16628,28 +16584,40 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserAssignedTasksScalarWhereInput>
   }
 
-  export type ChatUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutUserInput
-    upsert?: ChatUpsertWithoutUserInput
+  export type WorkspaceUpdateOneWithoutUserNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput
+    upsert?: WorkspaceUpsertWithoutUserInput
     disconnect?: boolean
     delete?: boolean
-    connect?: ChatWhereUniqueInput
-    update?: XOR<ChatUpdateWithoutUserInput, ChatUncheckedUpdateWithoutUserInput>
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<WorkspaceUpdateWithoutUserInput, WorkspaceUncheckedUpdateWithoutUserInput>
   }
 
-  export type ProjectUncheckedUpdateManyWithoutOwnerNestedInput = {
-    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
-    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
-    upsert?: Enumerable<ProjectUpsertWithWhereUniqueWithoutOwnerInput>
-    createMany?: ProjectCreateManyOwnerInputEnvelope
-    set?: Enumerable<ProjectWhereUniqueInput>
-    disconnect?: Enumerable<ProjectWhereUniqueInput>
-    delete?: Enumerable<ProjectWhereUniqueInput>
-    connect?: Enumerable<ProjectWhereUniqueInput>
-    update?: Enumerable<ProjectUpdateWithWhereUniqueWithoutOwnerInput>
-    updateMany?: Enumerable<ProjectUpdateManyWithWhereWithoutOwnerInput>
-    deleteMany?: Enumerable<ProjectScalarWhereInput>
+  export type UserUpdateManyWithoutUser_ANestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_AInput>, Enumerable<UserUncheckedCreateWithoutUser_AInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_AInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutUser_AInput>
+    set?: Enumerable<UserWhereUniqueInput>
+    disconnect?: Enumerable<UserWhereUniqueInput>
+    delete?: Enumerable<UserWhereUniqueInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutUser_AInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutUser_AInput>
+    deleteMany?: Enumerable<UserScalarWhereInput>
+  }
+
+  export type UserUpdateManyWithoutUser_BNestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_BInput>, Enumerable<UserUncheckedCreateWithoutUser_BInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_BInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutUser_BInput>
+    set?: Enumerable<UserWhereUniqueInput>
+    disconnect?: Enumerable<UserWhereUniqueInput>
+    delete?: Enumerable<UserWhereUniqueInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutUser_BInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutUser_BInput>
+    deleteMany?: Enumerable<UserScalarWhereInput>
   }
 
   export type MessageUncheckedUpdateManyWithoutSenderNestedInput = {
@@ -16666,58 +16634,18 @@ export namespace Prisma {
     deleteMany?: Enumerable<MessageScalarWhereInput>
   }
 
-  export type WorkspaceUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<Enumerable<WorkspaceCreateWithoutUserInput>, Enumerable<WorkspaceUncheckedCreateWithoutUserInput>>
-    connectOrCreate?: Enumerable<WorkspaceCreateOrConnectWithoutUserInput>
-    upsert?: Enumerable<WorkspaceUpsertWithWhereUniqueWithoutUserInput>
-    createMany?: WorkspaceCreateManyUserInputEnvelope
-    set?: Enumerable<WorkspaceWhereUniqueInput>
-    disconnect?: Enumerable<WorkspaceWhereUniqueInput>
-    delete?: Enumerable<WorkspaceWhereUniqueInput>
-    connect?: Enumerable<WorkspaceWhereUniqueInput>
-    update?: Enumerable<WorkspaceUpdateWithWhereUniqueWithoutUserInput>
-    updateMany?: Enumerable<WorkspaceUpdateManyWithWhereWithoutUserInput>
-    deleteMany?: Enumerable<WorkspaceScalarWhereInput>
-  }
-
-  export type TaskUncheckedUpdateManyWithoutCreatorNestedInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
-    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutCreatorInput>
-    createMany?: TaskCreateManyCreatorInputEnvelope
-    set?: Enumerable<TaskWhereUniqueInput>
-    disconnect?: Enumerable<TaskWhereUniqueInput>
-    delete?: Enumerable<TaskWhereUniqueInput>
-    connect?: Enumerable<TaskWhereUniqueInput>
-    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutCreatorInput>
-    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutCreatorInput>
-    deleteMany?: Enumerable<TaskScalarWhereInput>
-  }
-
-  export type UserUncheckedUpdateManyWithoutFollowingNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowingInput>, Enumerable<UserUncheckedCreateWithoutFollowingInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowingInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutFollowingInput>
-    set?: Enumerable<UserWhereUniqueInput>
-    disconnect?: Enumerable<UserWhereUniqueInput>
-    delete?: Enumerable<UserWhereUniqueInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutFollowingInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutFollowingInput>
-    deleteMany?: Enumerable<UserScalarWhereInput>
-  }
-
-  export type UserUncheckedUpdateManyWithoutFollowedByNestedInput = {
-    create?: XOR<Enumerable<UserCreateWithoutFollowedByInput>, Enumerable<UserUncheckedCreateWithoutFollowedByInput>>
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutFollowedByInput>
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutFollowedByInput>
-    set?: Enumerable<UserWhereUniqueInput>
-    disconnect?: Enumerable<UserWhereUniqueInput>
-    delete?: Enumerable<UserWhereUniqueInput>
-    connect?: Enumerable<UserWhereUniqueInput>
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutFollowedByInput>
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutFollowedByInput>
-    deleteMany?: Enumerable<UserScalarWhereInput>
+  export type ProjectUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<Enumerable<ProjectCreateWithoutOwnerInput>, Enumerable<ProjectUncheckedCreateWithoutOwnerInput>>
+    connectOrCreate?: Enumerable<ProjectCreateOrConnectWithoutOwnerInput>
+    upsert?: Enumerable<ProjectUpsertWithWhereUniqueWithoutOwnerInput>
+    createMany?: ProjectCreateManyOwnerInputEnvelope
+    set?: Enumerable<ProjectWhereUniqueInput>
+    disconnect?: Enumerable<ProjectWhereUniqueInput>
+    delete?: Enumerable<ProjectWhereUniqueInput>
+    connect?: Enumerable<ProjectWhereUniqueInput>
+    update?: Enumerable<ProjectUpdateWithWhereUniqueWithoutOwnerInput>
+    updateMany?: Enumerable<ProjectUpdateManyWithWhereWithoutOwnerInput>
+    deleteMany?: Enumerable<ProjectScalarWhereInput>
   }
 
   export type ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput = {
@@ -16734,6 +16662,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<ProjectsOnUsersScalarWhereInput>
   }
 
+  export type TaskUncheckedUpdateManyWithoutCreatorNestedInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutCreatorInput>, Enumerable<TaskUncheckedCreateWithoutCreatorInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutCreatorInput>
+    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutCreatorInput>
+    createMany?: TaskCreateManyCreatorInputEnvelope
+    set?: Enumerable<TaskWhereUniqueInput>
+    disconnect?: Enumerable<TaskWhereUniqueInput>
+    delete?: Enumerable<TaskWhereUniqueInput>
+    connect?: Enumerable<TaskWhereUniqueInput>
+    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutCreatorInput>
+    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutCreatorInput>
+    deleteMany?: Enumerable<TaskScalarWhereInput>
+  }
+
   export type UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<Enumerable<UserAssignedTasksCreateWithoutUserInput>, Enumerable<UserAssignedTasksUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<UserAssignedTasksCreateOrConnectWithoutUserInput>
@@ -16748,10 +16690,46 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserAssignedTasksScalarWhereInput>
   }
 
-  export type ProjectCreateNestedOneWithoutTasksInput = {
-    create?: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutTasksInput
-    connect?: ProjectWhereUniqueInput
+  export type WorkspaceUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput
+    upsert?: WorkspaceUpsertWithoutUserInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<WorkspaceUpdateWithoutUserInput, WorkspaceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserUncheckedUpdateManyWithoutUser_ANestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_AInput>, Enumerable<UserUncheckedCreateWithoutUser_AInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_AInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutUser_AInput>
+    set?: Enumerable<UserWhereUniqueInput>
+    disconnect?: Enumerable<UserWhereUniqueInput>
+    delete?: Enumerable<UserWhereUniqueInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutUser_AInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutUser_AInput>
+    deleteMany?: Enumerable<UserScalarWhereInput>
+  }
+
+  export type UserUncheckedUpdateManyWithoutUser_BNestedInput = {
+    create?: XOR<Enumerable<UserCreateWithoutUser_BInput>, Enumerable<UserUncheckedCreateWithoutUser_BInput>>
+    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutUser_BInput>
+    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutUser_BInput>
+    set?: Enumerable<UserWhereUniqueInput>
+    disconnect?: Enumerable<UserWhereUniqueInput>
+    delete?: Enumerable<UserWhereUniqueInput>
+    connect?: Enumerable<UserWhereUniqueInput>
+    update?: Enumerable<UserUpdateWithWhereUniqueWithoutUser_BInput>
+    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutUser_BInput>
+    deleteMany?: Enumerable<UserScalarWhereInput>
+  }
+
+  export type ChatCreateNestedOneWithoutTaskInput = {
+    create?: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutTaskInput
+    connect?: ChatWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutCreatedTasksInput = {
@@ -16764,6 +16742,12 @@ export namespace Prisma {
     create?: XOR<TaskCreateWithoutSubTasksInput, TaskUncheckedCreateWithoutSubTasksInput>
     connectOrCreate?: TaskCreateOrConnectWithoutSubTasksInput
     connect?: TaskWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutTasksInput = {
+    create?: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutTasksInput
+    connect?: ProjectWhereUniqueInput
   }
 
   export type TaskCreateNestedManyWithoutParentInput = {
@@ -16780,12 +16764,6 @@ export namespace Prisma {
     connect?: Enumerable<UserAssignedTasksWhereUniqueInput>
   }
 
-  export type ChatCreateNestedOneWithoutTaskInput = {
-    create?: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutTaskInput
-    connect?: ChatWhereUniqueInput
-  }
-
   export type TaskUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<Enumerable<TaskCreateWithoutParentInput>, Enumerable<TaskUncheckedCreateWithoutParentInput>>
     connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutParentInput>
@@ -16800,14 +16778,14 @@ export namespace Prisma {
     connect?: Enumerable<UserAssignedTasksWhereUniqueInput>
   }
 
-  export type ProjectUpdateOneWithoutTasksNestedInput = {
-    create?: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutTasksInput
-    upsert?: ProjectUpsertWithoutTasksInput
+  export type ChatUpdateOneWithoutTaskNestedInput = {
+    create?: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutTaskInput
+    upsert?: ChatUpsertWithoutTaskInput
     disconnect?: boolean
     delete?: boolean
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<ProjectUpdateWithoutTasksInput, ProjectUncheckedUpdateWithoutTasksInput>
+    connect?: ChatWhereUniqueInput
+    update?: XOR<ChatUpdateWithoutTaskInput, ChatUncheckedUpdateWithoutTaskInput>
   }
 
   export type UserUpdateOneWithoutCreatedTasksNestedInput = {
@@ -16828,6 +16806,16 @@ export namespace Prisma {
     delete?: boolean
     connect?: TaskWhereUniqueInput
     update?: XOR<TaskUpdateWithoutSubTasksInput, TaskUncheckedUpdateWithoutSubTasksInput>
+  }
+
+  export type ProjectUpdateOneWithoutTasksNestedInput = {
+    create?: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutTasksInput
+    upsert?: ProjectUpsertWithoutTasksInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<ProjectUpdateWithoutTasksInput, ProjectUncheckedUpdateWithoutTasksInput>
   }
 
   export type TaskUpdateManyWithoutParentNestedInput = {
@@ -16858,16 +16846,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserAssignedTasksScalarWhereInput>
   }
 
-  export type ChatUpdateOneWithoutTaskNestedInput = {
-    create?: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutTaskInput
-    upsert?: ChatUpsertWithoutTaskInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: ChatWhereUniqueInput
-    update?: XOR<ChatUpdateWithoutTaskInput, ChatUncheckedUpdateWithoutTaskInput>
-  }
-
   export type TaskUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<Enumerable<TaskCreateWithoutParentInput>, Enumerable<TaskUncheckedCreateWithoutParentInput>>
     connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutParentInput>
@@ -16896,10 +16874,16 @@ export namespace Prisma {
     deleteMany?: Enumerable<UserAssignedTasksScalarWhereInput>
   }
 
-  export type SpaceViewCreateNestedOneWithoutSpaceInput = {
-    create?: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
-    connectOrCreate?: SpaceViewCreateOrConnectWithoutSpaceInput
-    connect?: SpaceViewWhereUniqueInput
+  export type ChatCreateNestedOneWithoutSpaceInput = {
+    create?: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutSpaceInput
+    connect?: ChatWhereUniqueInput
+  }
+
+  export type SpaceCreateNestedOneWithoutSubspacesInput = {
+    create?: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
+    connectOrCreate?: SpaceCreateOrConnectWithoutSubspacesInput
+    connect?: SpaceWhereUniqueInput
   }
 
   export type ProjectCreateNestedOneWithoutSpacesInput = {
@@ -16914,10 +16898,10 @@ export namespace Prisma {
     connect?: SpaceSettingsWhereUniqueInput
   }
 
-  export type SpaceCreateNestedOneWithoutSubspacesInput = {
-    create?: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
-    connectOrCreate?: SpaceCreateOrConnectWithoutSubspacesInput
-    connect?: SpaceWhereUniqueInput
+  export type SpaceViewCreateNestedOneWithoutSpaceInput = {
+    create?: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
+    connectOrCreate?: SpaceViewCreateOrConnectWithoutSpaceInput
+    connect?: SpaceViewWhereUniqueInput
   }
 
   export type SpaceCreateNestedManyWithoutParentInput = {
@@ -16927,12 +16911,6 @@ export namespace Prisma {
     connect?: Enumerable<SpaceWhereUniqueInput>
   }
 
-  export type ChatCreateNestedOneWithoutSpaceInput = {
-    create?: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutSpaceInput
-    connect?: ChatWhereUniqueInput
-  }
-
   export type SpaceUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<Enumerable<SpaceCreateWithoutParentInput>, Enumerable<SpaceUncheckedCreateWithoutParentInput>>
     connectOrCreate?: Enumerable<SpaceCreateOrConnectWithoutParentInput>
@@ -16940,12 +16918,24 @@ export namespace Prisma {
     connect?: Enumerable<SpaceWhereUniqueInput>
   }
 
-  export type SpaceViewUpdateOneRequiredWithoutSpaceNestedInput = {
-    create?: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
-    connectOrCreate?: SpaceViewCreateOrConnectWithoutSpaceInput
-    upsert?: SpaceViewUpsertWithoutSpaceInput
-    connect?: SpaceViewWhereUniqueInput
-    update?: XOR<SpaceViewUpdateWithoutSpaceInput, SpaceViewUncheckedUpdateWithoutSpaceInput>
+  export type ChatUpdateOneWithoutSpaceNestedInput = {
+    create?: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutSpaceInput
+    upsert?: ChatUpsertWithoutSpaceInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: ChatWhereUniqueInput
+    update?: XOR<ChatUpdateWithoutSpaceInput, ChatUncheckedUpdateWithoutSpaceInput>
+  }
+
+  export type SpaceUpdateOneWithoutSubspacesNestedInput = {
+    create?: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
+    connectOrCreate?: SpaceCreateOrConnectWithoutSubspacesInput
+    upsert?: SpaceUpsertWithoutSubspacesInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: SpaceWhereUniqueInput
+    update?: XOR<SpaceUpdateWithoutSubspacesInput, SpaceUncheckedUpdateWithoutSubspacesInput>
   }
 
   export type ProjectUpdateOneRequiredWithoutSpacesNestedInput = {
@@ -16964,14 +16954,12 @@ export namespace Prisma {
     update?: XOR<SpaceSettingsUpdateWithoutSpaceInput, SpaceSettingsUncheckedUpdateWithoutSpaceInput>
   }
 
-  export type SpaceUpdateOneWithoutSubspacesNestedInput = {
-    create?: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
-    connectOrCreate?: SpaceCreateOrConnectWithoutSubspacesInput
-    upsert?: SpaceUpsertWithoutSubspacesInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: SpaceWhereUniqueInput
-    update?: XOR<SpaceUpdateWithoutSubspacesInput, SpaceUncheckedUpdateWithoutSubspacesInput>
+  export type SpaceViewUpdateOneRequiredWithoutSpaceNestedInput = {
+    create?: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
+    connectOrCreate?: SpaceViewCreateOrConnectWithoutSpaceInput
+    upsert?: SpaceViewUpsertWithoutSpaceInput
+    connect?: SpaceViewWhereUniqueInput
+    update?: XOR<SpaceViewUpdateWithoutSpaceInput, SpaceViewUncheckedUpdateWithoutSpaceInput>
   }
 
   export type SpaceUpdateManyWithoutParentNestedInput = {
@@ -16986,16 +16974,6 @@ export namespace Prisma {
     update?: Enumerable<SpaceUpdateWithWhereUniqueWithoutParentInput>
     updateMany?: Enumerable<SpaceUpdateManyWithWhereWithoutParentInput>
     deleteMany?: Enumerable<SpaceScalarWhereInput>
-  }
-
-  export type ChatUpdateOneWithoutSpaceNestedInput = {
-    create?: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutSpaceInput
-    upsert?: ChatUpsertWithoutSpaceInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: ChatWhereUniqueInput
-    update?: XOR<ChatUpdateWithoutSpaceInput, ChatUncheckedUpdateWithoutSpaceInput>
   }
 
   export type SpaceUncheckedUpdateManyWithoutParentNestedInput = {
@@ -17076,6 +17054,18 @@ export namespace Prisma {
     update?: XOR<SpaceUpdateWithoutSettingsInput, SpaceUncheckedUpdateWithoutSettingsInput>
   }
 
+  export type ChatCreateNestedOneWithoutProjectInput = {
+    create?: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutProjectInput
+    connect?: ChatWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOwnedProjectsInput = {
+    create?: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedProjectsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ProjectSettingsCreateNestedOneWithoutProjectInput = {
     create?: XOR<ProjectSettingsCreateWithoutProjectInput, ProjectSettingsUncheckedCreateWithoutProjectInput>
     connectOrCreate?: ProjectSettingsCreateOrConnectWithoutProjectInput
@@ -17088,30 +17078,11 @@ export namespace Prisma {
     connect?: WorkspaceWhereUniqueInput
   }
 
-  export type UserCreateNestedOneWithoutOwnedProjectsInput = {
-    create?: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOwnedProjectsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type ChatCreateNestedOneWithoutProjectInput = {
-    create?: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutProjectInput
-    connect?: ChatWhereUniqueInput
-  }
-
   export type ProjectsOnUsersCreateNestedManyWithoutProjectInput = {
     create?: XOR<Enumerable<ProjectsOnUsersCreateWithoutProjectInput>, Enumerable<ProjectsOnUsersUncheckedCreateWithoutProjectInput>>
     connectOrCreate?: Enumerable<ProjectsOnUsersCreateOrConnectWithoutProjectInput>
     createMany?: ProjectsOnUsersCreateManyProjectInputEnvelope
     connect?: Enumerable<ProjectsOnUsersWhereUniqueInput>
-  }
-
-  export type TaskCreateNestedManyWithoutProjectInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
-    createMany?: TaskCreateManyProjectInputEnvelope
-    connect?: Enumerable<TaskWhereUniqueInput>
   }
 
   export type SpaceCreateNestedManyWithoutProjectInput = {
@@ -17121,11 +17092,25 @@ export namespace Prisma {
     connect?: Enumerable<SpaceWhereUniqueInput>
   }
 
+  export type TaskCreateNestedManyWithoutProjectInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
+    createMany?: TaskCreateManyProjectInputEnvelope
+    connect?: Enumerable<TaskWhereUniqueInput>
+  }
+
   export type ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<Enumerable<ProjectsOnUsersCreateWithoutProjectInput>, Enumerable<ProjectsOnUsersUncheckedCreateWithoutProjectInput>>
     connectOrCreate?: Enumerable<ProjectsOnUsersCreateOrConnectWithoutProjectInput>
     createMany?: ProjectsOnUsersCreateManyProjectInputEnvelope
     connect?: Enumerable<ProjectsOnUsersWhereUniqueInput>
+  }
+
+  export type SpaceUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<Enumerable<SpaceCreateWithoutProjectInput>, Enumerable<SpaceUncheckedCreateWithoutProjectInput>>
+    connectOrCreate?: Enumerable<SpaceCreateOrConnectWithoutProjectInput>
+    createMany?: SpaceCreateManyProjectInputEnvelope
+    connect?: Enumerable<SpaceWhereUniqueInput>
   }
 
   export type TaskUncheckedCreateNestedManyWithoutProjectInput = {
@@ -17135,11 +17120,22 @@ export namespace Prisma {
     connect?: Enumerable<TaskWhereUniqueInput>
   }
 
-  export type SpaceUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<Enumerable<SpaceCreateWithoutProjectInput>, Enumerable<SpaceUncheckedCreateWithoutProjectInput>>
-    connectOrCreate?: Enumerable<SpaceCreateOrConnectWithoutProjectInput>
-    createMany?: SpaceCreateManyProjectInputEnvelope
-    connect?: Enumerable<SpaceWhereUniqueInput>
+  export type ChatUpdateOneWithoutProjectNestedInput = {
+    create?: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutProjectInput
+    upsert?: ChatUpsertWithoutProjectInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: ChatWhereUniqueInput
+    update?: XOR<ChatUpdateWithoutProjectInput, ChatUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutOwnedProjectsNestedInput = {
+    create?: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedProjectsInput
+    upsert?: UserUpsertWithoutOwnedProjectsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutOwnedProjectsInput, UserUncheckedUpdateWithoutOwnedProjectsInput>
   }
 
   export type ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput = {
@@ -17158,24 +17154,6 @@ export namespace Prisma {
     update?: XOR<WorkspaceUpdateWithoutProjectsInput, WorkspaceUncheckedUpdateWithoutProjectsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutOwnedProjectsNestedInput = {
-    create?: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOwnedProjectsInput
-    upsert?: UserUpsertWithoutOwnedProjectsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutOwnedProjectsInput, UserUncheckedUpdateWithoutOwnedProjectsInput>
-  }
-
-  export type ChatUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutProjectInput
-    upsert?: ChatUpsertWithoutProjectInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: ChatWhereUniqueInput
-    update?: XOR<ChatUpdateWithoutProjectInput, ChatUncheckedUpdateWithoutProjectInput>
-  }
-
   export type ProjectsOnUsersUpdateManyWithoutProjectNestedInput = {
     create?: XOR<Enumerable<ProjectsOnUsersCreateWithoutProjectInput>, Enumerable<ProjectsOnUsersUncheckedCreateWithoutProjectInput>>
     connectOrCreate?: Enumerable<ProjectsOnUsersCreateOrConnectWithoutProjectInput>
@@ -17188,20 +17166,6 @@ export namespace Prisma {
     update?: Enumerable<ProjectsOnUsersUpdateWithWhereUniqueWithoutProjectInput>
     updateMany?: Enumerable<ProjectsOnUsersUpdateManyWithWhereWithoutProjectInput>
     deleteMany?: Enumerable<ProjectsOnUsersScalarWhereInput>
-  }
-
-  export type TaskUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
-    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutProjectInput>
-    createMany?: TaskCreateManyProjectInputEnvelope
-    set?: Enumerable<TaskWhereUniqueInput>
-    disconnect?: Enumerable<TaskWhereUniqueInput>
-    delete?: Enumerable<TaskWhereUniqueInput>
-    connect?: Enumerable<TaskWhereUniqueInput>
-    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutProjectInput>
-    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutProjectInput>
-    deleteMany?: Enumerable<TaskScalarWhereInput>
   }
 
   export type SpaceUpdateManyWithoutProjectNestedInput = {
@@ -17218,6 +17182,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<SpaceScalarWhereInput>
   }
 
+  export type TaskUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
+    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutProjectInput>
+    createMany?: TaskCreateManyProjectInputEnvelope
+    set?: Enumerable<TaskWhereUniqueInput>
+    disconnect?: Enumerable<TaskWhereUniqueInput>
+    delete?: Enumerable<TaskWhereUniqueInput>
+    connect?: Enumerable<TaskWhereUniqueInput>
+    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutProjectInput>
+    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutProjectInput>
+    deleteMany?: Enumerable<TaskScalarWhereInput>
+  }
+
   export type ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<Enumerable<ProjectsOnUsersCreateWithoutProjectInput>, Enumerable<ProjectsOnUsersUncheckedCreateWithoutProjectInput>>
     connectOrCreate?: Enumerable<ProjectsOnUsersCreateOrConnectWithoutProjectInput>
@@ -17232,20 +17210,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<ProjectsOnUsersScalarWhereInput>
   }
 
-  export type TaskUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
-    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
-    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutProjectInput>
-    createMany?: TaskCreateManyProjectInputEnvelope
-    set?: Enumerable<TaskWhereUniqueInput>
-    disconnect?: Enumerable<TaskWhereUniqueInput>
-    delete?: Enumerable<TaskWhereUniqueInput>
-    connect?: Enumerable<TaskWhereUniqueInput>
-    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutProjectInput>
-    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutProjectInput>
-    deleteMany?: Enumerable<TaskScalarWhereInput>
-  }
-
   export type SpaceUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<Enumerable<SpaceCreateWithoutProjectInput>, Enumerable<SpaceUncheckedCreateWithoutProjectInput>>
     connectOrCreate?: Enumerable<SpaceCreateOrConnectWithoutProjectInput>
@@ -17258,6 +17222,20 @@ export namespace Prisma {
     update?: Enumerable<SpaceUpdateWithWhereUniqueWithoutProjectInput>
     updateMany?: Enumerable<SpaceUpdateManyWithWhereWithoutProjectInput>
     deleteMany?: Enumerable<SpaceScalarWhereInput>
+  }
+
+  export type TaskUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<Enumerable<TaskCreateWithoutProjectInput>, Enumerable<TaskUncheckedCreateWithoutProjectInput>>
+    connectOrCreate?: Enumerable<TaskCreateOrConnectWithoutProjectInput>
+    upsert?: Enumerable<TaskUpsertWithWhereUniqueWithoutProjectInput>
+    createMany?: TaskCreateManyProjectInputEnvelope
+    set?: Enumerable<TaskWhereUniqueInput>
+    disconnect?: Enumerable<TaskWhereUniqueInput>
+    delete?: Enumerable<TaskWhereUniqueInput>
+    connect?: Enumerable<TaskWhereUniqueInput>
+    update?: Enumerable<TaskUpdateWithWhereUniqueWithoutProjectInput>
+    updateMany?: Enumerable<TaskUpdateManyWithWhereWithoutProjectInput>
+    deleteMany?: Enumerable<TaskScalarWhereInput>
   }
 
   export type ProjectCreateNestedOneWithoutSettingsInput = {
@@ -17450,16 +17428,22 @@ export namespace Prisma {
     update?: XOR<UserUpdateWithoutAssignedTasksInput, UserUncheckedUpdateWithoutAssignedTasksInput>
   }
 
-  export type UserCreateNestedOneWithoutCommentsInput = {
-    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
-    connect?: UserWhereUniqueInput
+  export type ChatCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutMessagesInput
+    connect?: ChatWhereUniqueInput
   }
 
   export type MessageCreateNestedOneWithoutSubMessagesInput = {
     create?: XOR<MessageCreateWithoutSubMessagesInput, MessageUncheckedCreateWithoutSubMessagesInput>
     connectOrCreate?: MessageCreateOrConnectWithoutSubMessagesInput
     connect?: MessageWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type MessageCreateNestedManyWithoutParentInput = {
@@ -17469,12 +17453,6 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type ChatCreateNestedOneWithoutMessagesInput = {
-    create?: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutMessagesInput
-    connect?: ChatWhereUniqueInput
-  }
-
   export type MessageUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<Enumerable<MessageCreateWithoutParentInput>, Enumerable<MessageUncheckedCreateWithoutParentInput>>
     connectOrCreate?: Enumerable<MessageCreateOrConnectWithoutParentInput>
@@ -17482,14 +17460,12 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type UserUpdateOneWithoutCommentsNestedInput = {
-    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
-    upsert?: UserUpsertWithoutCommentsInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
+  export type ChatUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ChatCreateOrConnectWithoutMessagesInput
+    upsert?: ChatUpsertWithoutMessagesInput
+    connect?: ChatWhereUniqueInput
+    update?: XOR<ChatUpdateWithoutMessagesInput, ChatUncheckedUpdateWithoutMessagesInput>
   }
 
   export type MessageUpdateOneWithoutSubMessagesNestedInput = {
@@ -17500,6 +17476,16 @@ export namespace Prisma {
     delete?: boolean
     connect?: MessageWhereUniqueInput
     update?: XOR<MessageUpdateWithoutSubMessagesInput, MessageUncheckedUpdateWithoutSubMessagesInput>
+  }
+
+  export type UserUpdateOneWithoutCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
+    upsert?: UserUpsertWithoutCommentsInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<UserUpdateWithoutCommentsInput, UserUncheckedUpdateWithoutCommentsInput>
   }
 
   export type MessageUpdateManyWithoutParentNestedInput = {
@@ -17514,14 +17500,6 @@ export namespace Prisma {
     update?: Enumerable<MessageUpdateWithWhereUniqueWithoutParentInput>
     updateMany?: Enumerable<MessageUpdateManyWithWhereWithoutParentInput>
     deleteMany?: Enumerable<MessageScalarWhereInput>
-  }
-
-  export type ChatUpdateOneRequiredWithoutMessagesNestedInput = {
-    create?: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: ChatCreateOrConnectWithoutMessagesInput
-    upsert?: ChatUpsertWithoutMessagesInput
-    connect?: ChatWhereUniqueInput
-    update?: XOR<ChatUpdateWithoutMessagesInput, ChatUncheckedUpdateWithoutMessagesInput>
   }
 
   export type MessageUncheckedUpdateManyWithoutParentNestedInput = {
@@ -17545,10 +17523,10 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type TaskCreateNestedOneWithoutChatInput = {
-    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
-    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
-    connect?: TaskWhereUniqueInput
+  export type ProjectCreateNestedOneWithoutChatInput = {
+    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
+    connect?: ProjectWhereUniqueInput
   }
 
   export type SpaceCreateNestedOneWithoutChatInput = {
@@ -17557,16 +17535,16 @@ export namespace Prisma {
     connect?: SpaceWhereUniqueInput
   }
 
+  export type TaskCreateNestedOneWithoutChatInput = {
+    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
+    connect?: TaskWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutChatInput = {
     create?: XOR<UserCreateWithoutChatInput, UserUncheckedCreateWithoutChatInput>
     connectOrCreate?: UserCreateOrConnectWithoutChatInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type ProjectCreateNestedOneWithoutChatInput = {
-    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
-    connect?: ProjectWhereUniqueInput
   }
 
   export type MessageUncheckedCreateNestedManyWithoutChatInput = {
@@ -17576,10 +17554,10 @@ export namespace Prisma {
     connect?: Enumerable<MessageWhereUniqueInput>
   }
 
-  export type TaskUncheckedCreateNestedOneWithoutChatInput = {
-    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
-    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
-    connect?: TaskWhereUniqueInput
+  export type ProjectUncheckedCreateNestedOneWithoutChatInput = {
+    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
+    connect?: ProjectWhereUniqueInput
   }
 
   export type SpaceUncheckedCreateNestedOneWithoutChatInput = {
@@ -17588,16 +17566,16 @@ export namespace Prisma {
     connect?: SpaceWhereUniqueInput
   }
 
+  export type TaskUncheckedCreateNestedOneWithoutChatInput = {
+    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
+    connect?: TaskWhereUniqueInput
+  }
+
   export type UserUncheckedCreateNestedOneWithoutChatInput = {
     create?: XOR<UserCreateWithoutChatInput, UserUncheckedCreateWithoutChatInput>
     connectOrCreate?: UserCreateOrConnectWithoutChatInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type ProjectUncheckedCreateNestedOneWithoutChatInput = {
-    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
-    connect?: ProjectWhereUniqueInput
   }
 
   export type MessageUpdateManyWithoutChatNestedInput = {
@@ -17614,14 +17592,14 @@ export namespace Prisma {
     deleteMany?: Enumerable<MessageScalarWhereInput>
   }
 
-  export type TaskUpdateOneWithoutChatNestedInput = {
-    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
-    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
-    upsert?: TaskUpsertWithoutChatInput
+  export type ProjectUpdateOneWithoutChatNestedInput = {
+    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
+    upsert?: ProjectUpsertWithoutChatInput
     disconnect?: boolean
     delete?: boolean
-    connect?: TaskWhereUniqueInput
-    update?: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
   }
 
   export type SpaceUpdateOneWithoutChatNestedInput = {
@@ -17634,6 +17612,16 @@ export namespace Prisma {
     update?: XOR<SpaceUpdateWithoutChatInput, SpaceUncheckedUpdateWithoutChatInput>
   }
 
+  export type TaskUpdateOneWithoutChatNestedInput = {
+    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
+    upsert?: TaskUpsertWithoutChatInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: TaskWhereUniqueInput
+    update?: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
+  }
+
   export type UserUpdateOneWithoutChatNestedInput = {
     create?: XOR<UserCreateWithoutChatInput, UserUncheckedCreateWithoutChatInput>
     connectOrCreate?: UserCreateOrConnectWithoutChatInput
@@ -17642,16 +17630,6 @@ export namespace Prisma {
     delete?: boolean
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutChatInput, UserUncheckedUpdateWithoutChatInput>
-  }
-
-  export type ProjectUpdateOneWithoutChatNestedInput = {
-    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
-    upsert?: ProjectUpsertWithoutChatInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
   }
 
   export type MessageUncheckedUpdateManyWithoutChatNestedInput = {
@@ -17668,14 +17646,14 @@ export namespace Prisma {
     deleteMany?: Enumerable<MessageScalarWhereInput>
   }
 
-  export type TaskUncheckedUpdateOneWithoutChatNestedInput = {
-    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
-    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
-    upsert?: TaskUpsertWithoutChatInput
+  export type ProjectUncheckedUpdateOneWithoutChatNestedInput = {
+    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
+    upsert?: ProjectUpsertWithoutChatInput
     disconnect?: boolean
     delete?: boolean
-    connect?: TaskWhereUniqueInput
-    update?: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
   }
 
   export type SpaceUncheckedUpdateOneWithoutChatNestedInput = {
@@ -17688,6 +17666,16 @@ export namespace Prisma {
     update?: XOR<SpaceUpdateWithoutChatInput, SpaceUncheckedUpdateWithoutChatInput>
   }
 
+  export type TaskUncheckedUpdateOneWithoutChatNestedInput = {
+    create?: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+    connectOrCreate?: TaskCreateOrConnectWithoutChatInput
+    upsert?: TaskUpsertWithoutChatInput
+    disconnect?: boolean
+    delete?: boolean
+    connect?: TaskWhereUniqueInput
+    update?: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
+  }
+
   export type UserUncheckedUpdateOneWithoutChatNestedInput = {
     create?: XOR<UserCreateWithoutChatInput, UserUncheckedCreateWithoutChatInput>
     connectOrCreate?: UserCreateOrConnectWithoutChatInput
@@ -17696,16 +17684,6 @@ export namespace Prisma {
     delete?: boolean
     connect?: UserWhereUniqueInput
     update?: XOR<UserUpdateWithoutChatInput, UserUncheckedUpdateWithoutChatInput>
-  }
-
-  export type ProjectUncheckedUpdateOneWithoutChatNestedInput = {
-    create?: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutChatInput
-    upsert?: ProjectUpsertWithoutChatInput
-    disconnect?: boolean
-    delete?: boolean
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
   }
 
   export type NestedStringFilter = {
@@ -17847,18 +17825,77 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter
   }
 
+  export type ChatCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutChatInput
+    Project?: ProjectCreateNestedOneWithoutChatInput
+    Space?: SpaceCreateNestedOneWithoutChatInput
+    Task?: TaskCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatUncheckedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
+    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
+    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
+    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatCreateOrConnectWithoutUserInput = {
+    where: ChatWhereUniqueInput
+    create: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
+  }
+
+  export type MessageCreateWithoutSenderInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    content: string
+    contentType?: string
+    type?: string
+    chat: ChatCreateNestedOneWithoutMessagesInput
+    parent?: MessageCreateNestedOneWithoutSubMessagesInput
+    subMessages?: MessageCreateNestedManyWithoutParentInput
+  }
+
+  export type MessageUncheckedCreateWithoutSenderInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    content: string
+    contentType?: string
+    type?: string
+    parentId?: string | null
+    chatId: string
+    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type MessageCreateOrConnectWithoutSenderInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput>
+  }
+
+  export type MessageCreateManySenderInputEnvelope = {
+    data: Enumerable<MessageCreateManySenderInput>
+    skipDuplicates?: boolean
+  }
+
   export type ProjectCreateWithoutOwnerInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     title: string
     description?: string | null
+    chat?: ChatCreateNestedOneWithoutProjectInput
     settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    chat?: ChatCreateNestedOneWithoutProjectInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutOwnerInput = {
@@ -17871,8 +17908,8 @@ export namespace Prisma {
     workspaceId: string
     chatId?: string | null
     users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
     spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutOwnerInput = {
@@ -17885,37 +17922,83 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MessageCreateWithoutSenderInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    content: string
-    contentType?: string
-    type?: string
-    parent?: MessageCreateNestedOneWithoutSubMessagesInput
-    subMessages?: MessageCreateNestedManyWithoutParentInput
-    chat: ChatCreateNestedOneWithoutMessagesInput
+  export type ProjectsOnUsersCreateWithoutUserInput = {
+    assignedAt?: Date | string
+    assignedBy: string
+    project: ProjectCreateNestedOneWithoutUsersInput
   }
 
-  export type MessageUncheckedCreateWithoutSenderInput = {
+  export type ProjectsOnUsersUncheckedCreateWithoutUserInput = {
+    projectId: string
+    assignedAt?: Date | string
+    assignedBy: string
+  }
+
+  export type ProjectsOnUsersCreateOrConnectWithoutUserInput = {
+    where: ProjectsOnUsersWhereUniqueInput
+    create: XOR<ProjectsOnUsersCreateWithoutUserInput, ProjectsOnUsersUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectsOnUsersCreateManyUserInputEnvelope = {
+    data: Enumerable<ProjectsOnUsersCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
+  export type TaskCreateWithoutCreatorInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    content: string
-    contentType?: string
-    type?: string
+    status?: string
+    details: string
+    chat?: ChatCreateNestedOneWithoutTaskInput
+    parent?: TaskCreateNestedOneWithoutSubTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    subTasks?: TaskCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskUncheckedCreateWithoutCreatorInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projectId?: string | null
     parentId?: string | null
-    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
-    chatId: string
+    status?: string
+    details: string
+    chatId?: string | null
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
   }
 
-  export type MessageCreateOrConnectWithoutSenderInput = {
-    where: MessageWhereUniqueInput
-    create: XOR<MessageCreateWithoutSenderInput, MessageUncheckedCreateWithoutSenderInput>
+  export type TaskCreateOrConnectWithoutCreatorInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutCreatorInput, TaskUncheckedCreateWithoutCreatorInput>
   }
 
-  export type MessageCreateManySenderInputEnvelope = {
-    data: Enumerable<MessageCreateManySenderInput>
+  export type TaskCreateManyCreatorInputEnvelope = {
+    data: Enumerable<TaskCreateManyCreatorInput>
+    skipDuplicates?: boolean
+  }
+
+  export type UserAssignedTasksCreateWithoutUserInput = {
+    assignedAt?: Date | string
+    assignedBy: string
+    task: TaskCreateNestedOneWithoutAssignesInput
+  }
+
+  export type UserAssignedTasksUncheckedCreateWithoutUserInput = {
+    taskId: string
+    assignedAt?: Date | string
+    assignedBy: string
+  }
+
+  export type UserAssignedTasksCreateOrConnectWithoutUserInput = {
+    where: UserAssignedTasksWhereUniqueInput
+    create: XOR<UserAssignedTasksCreateWithoutUserInput, UserAssignedTasksUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAssignedTasksCreateManyUserInputEnvelope = {
+    data: Enumerable<UserAssignedTasksCreateManyUserInput>
     skipDuplicates?: boolean
   }
 
@@ -17942,48 +18025,7 @@ export namespace Prisma {
     create: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
   }
 
-  export type WorkspaceCreateManyUserInputEnvelope = {
-    data: Enumerable<WorkspaceCreateManyUserInput>
-    skipDuplicates?: boolean
-  }
-
-  export type TaskCreateWithoutCreatorInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    parent?: TaskCreateNestedOneWithoutSubTasksInput
-    subTasks?: TaskCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
-    chat?: ChatCreateNestedOneWithoutTaskInput
-  }
-
-  export type TaskUncheckedCreateWithoutCreatorInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    projectId?: string | null
-    parentId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
-    chatId?: string | null
-  }
-
-  export type TaskCreateOrConnectWithoutCreatorInput = {
-    where: TaskWhereUniqueInput
-    create: XOR<TaskCreateWithoutCreatorInput, TaskUncheckedCreateWithoutCreatorInput>
-  }
-
-  export type TaskCreateManyCreatorInputEnvelope = {
-    data: Enumerable<TaskCreateManyCreatorInput>
-    skipDuplicates?: boolean
-  }
-
-  export type UserCreateWithoutFollowingInput = {
+  export type UserCreateWithoutUser_AInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17994,64 +18036,43 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
     chat?: ChatCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutFollowingInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
-    chatId?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutFollowingInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutFollowingInput, UserUncheckedCreateWithoutFollowingInput>
-  }
-
-  export type UserCreateWithoutFollowedByInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
     comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
     projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
-    chat?: ChatCreateNestedOneWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
   }
 
-  export type UserUncheckedCreateWithoutFollowedByInput = {
+  export type UserUncheckedCreateWithoutUser_AInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+  }
+
+  export type UserCreateOrConnectWithoutUser_AInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser_AInput, UserUncheckedCreateWithoutUser_AInput>
+  }
+
+  export type UserCreateWithoutUser_BInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18062,119 +18083,65 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserUncheckedCreateWithoutUser_BInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
     chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
-  export type UserCreateOrConnectWithoutFollowedByInput = {
+  export type UserCreateOrConnectWithoutUser_BInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutFollowedByInput, UserUncheckedCreateWithoutFollowedByInput>
+    create: XOR<UserCreateWithoutUser_BInput, UserUncheckedCreateWithoutUser_BInput>
   }
 
-  export type ProjectsOnUsersCreateWithoutUserInput = {
-    project: ProjectCreateNestedOneWithoutUsersInput
-    assignedAt?: Date | string
-    assignedBy: string
-  }
-
-  export type ProjectsOnUsersUncheckedCreateWithoutUserInput = {
-    projectId: string
-    assignedAt?: Date | string
-    assignedBy: string
-  }
-
-  export type ProjectsOnUsersCreateOrConnectWithoutUserInput = {
-    where: ProjectsOnUsersWhereUniqueInput
-    create: XOR<ProjectsOnUsersCreateWithoutUserInput, ProjectsOnUsersUncheckedCreateWithoutUserInput>
-  }
-
-  export type ProjectsOnUsersCreateManyUserInputEnvelope = {
-    data: Enumerable<ProjectsOnUsersCreateManyUserInput>
-    skipDuplicates?: boolean
-  }
-
-  export type UserAssignedTasksCreateWithoutUserInput = {
-    task: TaskCreateNestedOneWithoutAssignesInput
-    assignedAt?: Date | string
-    assignedBy: string
-  }
-
-  export type UserAssignedTasksUncheckedCreateWithoutUserInput = {
-    taskId: string
-    assignedAt?: Date | string
-    assignedBy: string
-  }
-
-  export type UserAssignedTasksCreateOrConnectWithoutUserInput = {
-    where: UserAssignedTasksWhereUniqueInput
-    create: XOR<UserAssignedTasksCreateWithoutUserInput, UserAssignedTasksUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserAssignedTasksCreateManyUserInputEnvelope = {
-    data: Enumerable<UserAssignedTasksCreateManyUserInput>
-    skipDuplicates?: boolean
-  }
-
-  export type ChatCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageCreateNestedManyWithoutChatInput
-    Task?: TaskCreateNestedOneWithoutChatInput
-    Space?: SpaceCreateNestedOneWithoutChatInput
-    Project?: ProjectCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatUncheckedCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
-    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
-    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
-    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatCreateOrConnectWithoutUserInput = {
-    where: ChatWhereUniqueInput
+  export type ChatUpsertWithoutUserInput = {
+    update: XOR<ChatUpdateWithoutUserInput, ChatUncheckedUpdateWithoutUserInput>
     create: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
   }
 
-  export type ProjectUpsertWithWhereUniqueWithoutOwnerInput = {
-    where: ProjectWhereUniqueInput
-    update: XOR<ProjectUpdateWithoutOwnerInput, ProjectUncheckedUpdateWithoutOwnerInput>
-    create: XOR<ProjectCreateWithoutOwnerInput, ProjectUncheckedCreateWithoutOwnerInput>
+  export type ChatUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUpdateManyWithoutChatNestedInput
+    Project?: ProjectUpdateOneWithoutChatNestedInput
+    Space?: SpaceUpdateOneWithoutChatNestedInput
+    Task?: TaskUpdateOneWithoutChatNestedInput
   }
 
-  export type ProjectUpdateWithWhereUniqueWithoutOwnerInput = {
-    where: ProjectWhereUniqueInput
-    data: XOR<ProjectUpdateWithoutOwnerInput, ProjectUncheckedUpdateWithoutOwnerInput>
-  }
-
-  export type ProjectUpdateManyWithWhereWithoutOwnerInput = {
-    where: ProjectScalarWhereInput
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutOwnedProjectsInput>
-  }
-
-  export type ProjectScalarWhereInput = {
-    AND?: Enumerable<ProjectScalarWhereInput>
-    OR?: Enumerable<ProjectScalarWhereInput>
-    NOT?: Enumerable<ProjectScalarWhereInput>
-    id?: StringFilter | string
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-    title?: StringFilter | string
-    description?: StringNullableFilter | string | null
-    settingsId?: StringFilter | string
-    workspaceId?: StringFilter | string
-    ownerId?: StringFilter | string
-    chatId?: StringNullableFilter | string | null
+  export type ChatUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
+    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
+    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutSenderInput = {
@@ -18208,32 +18175,61 @@ export namespace Prisma {
     chatId?: StringFilter | string
   }
 
-  export type WorkspaceUpsertWithWhereUniqueWithoutUserInput = {
-    where: WorkspaceWhereUniqueInput
-    update: XOR<WorkspaceUpdateWithoutUserInput, WorkspaceUncheckedUpdateWithoutUserInput>
-    create: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
+  export type ProjectUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: ProjectWhereUniqueInput
+    update: XOR<ProjectUpdateWithoutOwnerInput, ProjectUncheckedUpdateWithoutOwnerInput>
+    create: XOR<ProjectCreateWithoutOwnerInput, ProjectUncheckedCreateWithoutOwnerInput>
   }
 
-  export type WorkspaceUpdateWithWhereUniqueWithoutUserInput = {
-    where: WorkspaceWhereUniqueInput
-    data: XOR<WorkspaceUpdateWithoutUserInput, WorkspaceUncheckedUpdateWithoutUserInput>
+  export type ProjectUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: ProjectWhereUniqueInput
+    data: XOR<ProjectUpdateWithoutOwnerInput, ProjectUncheckedUpdateWithoutOwnerInput>
   }
 
-  export type WorkspaceUpdateManyWithWhereWithoutUserInput = {
-    where: WorkspaceScalarWhereInput
-    data: XOR<WorkspaceUpdateManyMutationInput, WorkspaceUncheckedUpdateManyWithoutWorkspacesInput>
+  export type ProjectUpdateManyWithWhereWithoutOwnerInput = {
+    where: ProjectScalarWhereInput
+    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutOwnedProjectsInput>
   }
 
-  export type WorkspaceScalarWhereInput = {
-    AND?: Enumerable<WorkspaceScalarWhereInput>
-    OR?: Enumerable<WorkspaceScalarWhereInput>
-    NOT?: Enumerable<WorkspaceScalarWhereInput>
+  export type ProjectScalarWhereInput = {
+    AND?: Enumerable<ProjectScalarWhereInput>
+    OR?: Enumerable<ProjectScalarWhereInput>
+    NOT?: Enumerable<ProjectScalarWhereInput>
     id?: StringFilter | string
     createdAt?: DateTimeFilter | Date | string
     updatedAt?: DateTimeFilter | Date | string
     title?: StringFilter | string
+    description?: StringNullableFilter | string | null
     settingsId?: StringFilter | string
+    workspaceId?: StringFilter | string
+    ownerId?: StringFilter | string
+    chatId?: StringNullableFilter | string | null
+  }
+
+  export type ProjectsOnUsersUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProjectsOnUsersWhereUniqueInput
+    update: XOR<ProjectsOnUsersUpdateWithoutUserInput, ProjectsOnUsersUncheckedUpdateWithoutUserInput>
+    create: XOR<ProjectsOnUsersCreateWithoutUserInput, ProjectsOnUsersUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProjectsOnUsersUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProjectsOnUsersWhereUniqueInput
+    data: XOR<ProjectsOnUsersUpdateWithoutUserInput, ProjectsOnUsersUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProjectsOnUsersUpdateManyWithWhereWithoutUserInput = {
+    where: ProjectsOnUsersScalarWhereInput
+    data: XOR<ProjectsOnUsersUpdateManyMutationInput, ProjectsOnUsersUncheckedUpdateManyWithoutProjectsInput>
+  }
+
+  export type ProjectsOnUsersScalarWhereInput = {
+    AND?: Enumerable<ProjectsOnUsersScalarWhereInput>
+    OR?: Enumerable<ProjectsOnUsersScalarWhereInput>
+    NOT?: Enumerable<ProjectsOnUsersScalarWhereInput>
+    projectId?: StringFilter | string
     userId?: StringFilter | string
+    assignedAt?: DateTimeFilter | Date | string
+    assignedBy?: StringFilter | string
   }
 
   export type TaskUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -18267,81 +18263,6 @@ export namespace Prisma {
     chatId?: StringNullableFilter | string | null
   }
 
-  export type UserUpsertWithWhereUniqueWithoutFollowingInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutFollowingInput, UserUncheckedUpdateWithoutFollowingInput>
-    create: XOR<UserCreateWithoutFollowingInput, UserUncheckedCreateWithoutFollowingInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutFollowingInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutFollowingInput, UserUncheckedUpdateWithoutFollowingInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutFollowingInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutFollowedByInput>
-  }
-
-  export type UserScalarWhereInput = {
-    AND?: Enumerable<UserScalarWhereInput>
-    OR?: Enumerable<UserScalarWhereInput>
-    NOT?: Enumerable<UserScalarWhereInput>
-    id?: StringFilter | string
-    createdAt?: DateTimeFilter | Date | string
-    updatedAt?: DateTimeFilter | Date | string
-    email?: StringFilter | string
-    password?: StringFilter | string
-    firstname?: StringNullableFilter | string | null
-    lastname?: StringNullableFilter | string | null
-    username?: StringFilter | string
-    active?: BoolFilter | boolean
-    role?: EnumRoleFilter | Role
-    chatId?: StringNullableFilter | string | null
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutFollowedByInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutFollowedByInput, UserUncheckedUpdateWithoutFollowedByInput>
-    create: XOR<UserCreateWithoutFollowedByInput, UserUncheckedCreateWithoutFollowedByInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutFollowedByInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutFollowedByInput, UserUncheckedUpdateWithoutFollowedByInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutFollowedByInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutFollowingInput>
-  }
-
-  export type ProjectsOnUsersUpsertWithWhereUniqueWithoutUserInput = {
-    where: ProjectsOnUsersWhereUniqueInput
-    update: XOR<ProjectsOnUsersUpdateWithoutUserInput, ProjectsOnUsersUncheckedUpdateWithoutUserInput>
-    create: XOR<ProjectsOnUsersCreateWithoutUserInput, ProjectsOnUsersUncheckedCreateWithoutUserInput>
-  }
-
-  export type ProjectsOnUsersUpdateWithWhereUniqueWithoutUserInput = {
-    where: ProjectsOnUsersWhereUniqueInput
-    data: XOR<ProjectsOnUsersUpdateWithoutUserInput, ProjectsOnUsersUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ProjectsOnUsersUpdateManyWithWhereWithoutUserInput = {
-    where: ProjectsOnUsersScalarWhereInput
-    data: XOR<ProjectsOnUsersUpdateManyMutationInput, ProjectsOnUsersUncheckedUpdateManyWithoutProjectsInput>
-  }
-
-  export type ProjectsOnUsersScalarWhereInput = {
-    AND?: Enumerable<ProjectsOnUsersScalarWhereInput>
-    OR?: Enumerable<ProjectsOnUsersScalarWhereInput>
-    NOT?: Enumerable<ProjectsOnUsersScalarWhereInput>
-    projectId?: StringFilter | string
-    userId?: StringFilter | string
-    assignedAt?: DateTimeFilter | Date | string
-    assignedBy?: StringFilter | string
-  }
-
   export type UserAssignedTasksUpsertWithWhereUniqueWithoutUserInput = {
     where: UserAssignedTasksWhereUniqueInput
     update: XOR<UserAssignedTasksUpdateWithoutUserInput, UserAssignedTasksUncheckedUpdateWithoutUserInput>
@@ -18368,29 +18289,179 @@ export namespace Prisma {
     assignedBy?: StringFilter | string
   }
 
-  export type ChatUpsertWithoutUserInput = {
-    update: XOR<ChatUpdateWithoutUserInput, ChatUncheckedUpdateWithoutUserInput>
-    create: XOR<ChatCreateWithoutUserInput, ChatUncheckedCreateWithoutUserInput>
+  export type WorkspaceUpsertWithoutUserInput = {
+    update: XOR<WorkspaceUpdateWithoutUserInput, WorkspaceUncheckedUpdateWithoutUserInput>
+    create: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput>
   }
 
-  export type ChatUpdateWithoutUserInput = {
+  export type WorkspaceUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUpdateManyWithoutChatNestedInput
-    Task?: TaskUpdateOneWithoutChatNestedInput
-    Space?: SpaceUpdateOneWithoutChatNestedInput
-    Project?: ProjectUpdateOneWithoutChatNestedInput
+    title?: StringFieldUpdateOperationsInput | string
+    settings?: WorkspaceSettingsUpdateOneRequiredWithoutWorkspaceNestedInput
+    projects?: ProjectUpdateManyWithoutWorkspaceNestedInput
   }
 
-  export type ChatUncheckedUpdateWithoutUserInput = {
+  export type WorkspaceUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
-    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
-    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
-    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    title?: StringFieldUpdateOperationsInput | string
+    settingsId?: StringFieldUpdateOperationsInput | string
+    projects?: ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutUser_AInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutUser_AInput, UserUncheckedUpdateWithoutUser_AInput>
+    create: XOR<UserCreateWithoutUser_AInput, UserUncheckedCreateWithoutUser_AInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutUser_AInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutUser_AInput, UserUncheckedUpdateWithoutUser_AInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutUser_AInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutUser_BInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: Enumerable<UserScalarWhereInput>
+    OR?: Enumerable<UserScalarWhereInput>
+    NOT?: Enumerable<UserScalarWhereInput>
+    id?: StringFilter | string
+    createdAt?: DateTimeFilter | Date | string
+    updatedAt?: DateTimeFilter | Date | string
+    email?: StringFilter | string
+    password?: StringFilter | string
+    firstname?: StringNullableFilter | string | null
+    lastname?: StringNullableFilter | string | null
+    username?: StringFilter | string
+    active?: BoolFilter | boolean
+    chatId?: StringNullableFilter | string | null
+    role?: EnumRoleFilter | Role
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutUser_BInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutUser_BInput, UserUncheckedUpdateWithoutUser_BInput>
+    create: XOR<UserCreateWithoutUser_BInput, UserUncheckedCreateWithoutUser_BInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutUser_BInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutUser_BInput, UserUncheckedUpdateWithoutUser_BInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutUser_BInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutUser_AInput>
+  }
+
+  export type ChatCreateWithoutTaskInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutChatInput
+    Project?: ProjectCreateNestedOneWithoutChatInput
+    Space?: SpaceCreateNestedOneWithoutChatInput
+    User?: UserCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatUncheckedCreateWithoutTaskInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
+    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
+    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
+    User?: UserUncheckedCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatCreateOrConnectWithoutTaskInput = {
+    where: ChatWhereUniqueInput
+    create: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
+  }
+
+  export type UserCreateWithoutCreatedTasksInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    role: Role
+    chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedTasksInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedTasksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
+  }
+
+  export type TaskCreateWithoutSubTasksInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    status?: string
+    details: string
+    chat?: ChatCreateNestedOneWithoutTaskInput
+    creator?: UserCreateNestedOneWithoutCreatedTasksInput
+    parent?: TaskCreateNestedOneWithoutSubTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskUncheckedCreateWithoutSubTasksInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projectId?: string | null
+    creatorId?: string | null
+    parentId?: string | null
+    status?: string
+    details: string
+    chatId?: string | null
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskCreateOrConnectWithoutSubTasksInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutSubTasksInput, TaskUncheckedCreateWithoutSubTasksInput>
   }
 
   export type ProjectCreateWithoutTasksInput = {
@@ -18399,10 +18470,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     title: string
     description?: string | null
+    chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
-    chat?: ChatCreateNestedOneWithoutProjectInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
   }
@@ -18426,95 +18497,17 @@ export namespace Prisma {
     create: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
   }
 
-  export type UserCreateWithoutCreatedTasksInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
-    chat?: ChatCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutCreatedTasksInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
-    chatId?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutCreatedTasksInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
-  }
-
-  export type TaskCreateWithoutSubTasksInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    creator?: UserCreateNestedOneWithoutCreatedTasksInput
-    parent?: TaskCreateNestedOneWithoutSubTasksInput
-    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
-    chat?: ChatCreateNestedOneWithoutTaskInput
-  }
-
-  export type TaskUncheckedCreateWithoutSubTasksInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    projectId?: string | null
-    creatorId?: string | null
-    parentId?: string | null
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
-    chatId?: string | null
-  }
-
-  export type TaskCreateOrConnectWithoutSubTasksInput = {
-    where: TaskWhereUniqueInput
-    create: XOR<TaskCreateWithoutSubTasksInput, TaskUncheckedCreateWithoutSubTasksInput>
-  }
-
   export type TaskCreateWithoutParentInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    creator?: UserCreateNestedOneWithoutCreatedTasksInput
-    subTasks?: TaskCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
     status?: string
     details: string
     chat?: ChatCreateNestedOneWithoutTaskInput
+    creator?: UserCreateNestedOneWithoutCreatedTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    subTasks?: TaskCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutParentInput = {
@@ -18523,11 +18516,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     projectId?: string | null
     creatorId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
     status?: string
     details: string
     chatId?: string | null
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutParentInput = {
@@ -18541,9 +18534,9 @@ export namespace Prisma {
   }
 
   export type UserAssignedTasksCreateWithoutTaskInput = {
-    user: UserCreateNestedOneWithoutAssignedTasksInput
     assignedAt?: Date | string
     assignedBy: string
+    user: UserCreateNestedOneWithoutAssignedTasksInput
   }
 
   export type UserAssignedTasksUncheckedCreateWithoutTaskInput = {
@@ -18562,62 +18555,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChatCreateWithoutTaskInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageCreateNestedManyWithoutChatInput
-    Space?: SpaceCreateNestedOneWithoutChatInput
-    User?: UserCreateNestedOneWithoutChatInput
-    Project?: ProjectCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatUncheckedCreateWithoutTaskInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
-    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
-    User?: UserUncheckedCreateNestedOneWithoutChatInput
-    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatCreateOrConnectWithoutTaskInput = {
-    where: ChatWhereUniqueInput
+  export type ChatUpsertWithoutTaskInput = {
+    update: XOR<ChatUpdateWithoutTaskInput, ChatUncheckedUpdateWithoutTaskInput>
     create: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
   }
 
-  export type ProjectUpsertWithoutTasksInput = {
-    update: XOR<ProjectUpdateWithoutTasksInput, ProjectUncheckedUpdateWithoutTasksInput>
-    create: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
-  }
-
-  export type ProjectUpdateWithoutTasksInput = {
+  export type ChatUpdateWithoutTaskInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
-    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
-    chat?: ChatUpdateOneWithoutProjectNestedInput
-    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    messages?: MessageUpdateManyWithoutChatNestedInput
+    Project?: ProjectUpdateOneWithoutChatNestedInput
+    Space?: SpaceUpdateOneWithoutChatNestedInput
+    User?: UserUpdateOneWithoutChatNestedInput
   }
 
-  export type ProjectUncheckedUpdateWithoutTasksInput = {
+  export type ChatUncheckedUpdateWithoutTaskInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settingsId?: StringFieldUpdateOperationsInput | string
-    workspaceId?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
+    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
+    User?: UserUncheckedUpdateOneWithoutChatNestedInput
   }
 
   export type UserUpsertWithoutCreatedTasksInput = {
@@ -18636,14 +18596,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    chat?: ChatUpdateOneWithoutUserNestedInput
     comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
     projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
     assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
-    chat?: ChatUpdateOneWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -18656,15 +18616,15 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
     assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type TaskUpsertWithoutSubTasksInput = {
@@ -18676,13 +18636,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chat?: ChatUpdateOneWithoutTaskNestedInput
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutSubTasksInput = {
@@ -18692,10 +18652,43 @@ export namespace Prisma {
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type ProjectUpsertWithoutTasksInput = {
+    update: XOR<ProjectUpdateWithoutTasksInput, ProjectUncheckedUpdateWithoutTasksInput>
+    create: XOR<ProjectCreateWithoutTasksInput, ProjectUncheckedCreateWithoutTasksInput>
+  }
+
+  export type ProjectUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
+    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
+    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
+    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    settingsId?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type TaskUpsertWithWhereUniqueWithoutParentInput = {
@@ -18730,50 +18723,58 @@ export namespace Prisma {
     data: XOR<UserAssignedTasksUpdateManyMutationInput, UserAssignedTasksUncheckedUpdateManyWithoutAssignesInput>
   }
 
-  export type ChatUpsertWithoutTaskInput = {
-    update: XOR<ChatUpdateWithoutTaskInput, ChatUncheckedUpdateWithoutTaskInput>
-    create: XOR<ChatCreateWithoutTaskInput, ChatUncheckedCreateWithoutTaskInput>
-  }
-
-  export type ChatUpdateWithoutTaskInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUpdateManyWithoutChatNestedInput
-    Space?: SpaceUpdateOneWithoutChatNestedInput
-    User?: UserUpdateOneWithoutChatNestedInput
-    Project?: ProjectUpdateOneWithoutChatNestedInput
-  }
-
-  export type ChatUncheckedUpdateWithoutTaskInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
-    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
-    User?: UserUncheckedUpdateOneWithoutChatNestedInput
-    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
-  }
-
-  export type SpaceViewCreateWithoutSpaceInput = {
+  export type ChatCreateWithoutSpaceInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    localId: string
-    spaceId: string
+    messages?: MessageCreateNestedManyWithoutChatInput
+    Project?: ProjectCreateNestedOneWithoutChatInput
+    Task?: TaskCreateNestedOneWithoutChatInput
+    User?: UserCreateNestedOneWithoutChatInput
   }
 
-  export type SpaceViewUncheckedCreateWithoutSpaceInput = {
+  export type ChatUncheckedCreateWithoutSpaceInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    localId: string
-    spaceId: string
+    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
+    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
+    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
+    User?: UserUncheckedCreateNestedOneWithoutChatInput
   }
 
-  export type SpaceViewCreateOrConnectWithoutSpaceInput = {
-    where: SpaceViewWhereUniqueInput
-    create: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
+  export type ChatCreateOrConnectWithoutSpaceInput = {
+    where: ChatWhereUniqueInput
+    create: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
+  }
+
+  export type SpaceCreateWithoutSubspacesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spaceType: string
+    chat?: ChatCreateNestedOneWithoutSpaceInput
+    parent?: SpaceCreateNestedOneWithoutSubspacesInput
+    project: ProjectCreateNestedOneWithoutSpacesInput
+    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
+  }
+
+  export type SpaceUncheckedCreateWithoutSubspacesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    viewId: string
+    projectId: string
+    settingsId: string
+    spaceType: string
+    parentId?: string | null
+    chatId?: string | null
+  }
+
+  export type SpaceCreateOrConnectWithoutSubspacesInput = {
+    where: SpaceWhereUniqueInput
+    create: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
   }
 
   export type ProjectCreateWithoutSpacesInput = {
@@ -18782,10 +18783,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     title: string
     description?: string | null
+    chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
-    chat?: ChatCreateNestedOneWithoutProjectInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
     tasks?: TaskCreateNestedManyWithoutProjectInput
   }
@@ -18830,45 +18831,37 @@ export namespace Prisma {
     create: XOR<SpaceSettingsCreateWithoutSpaceInput, SpaceSettingsUncheckedCreateWithoutSpaceInput>
   }
 
-  export type SpaceCreateWithoutSubspacesInput = {
+  export type SpaceViewCreateWithoutSpaceInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
-    project: ProjectCreateNestedOneWithoutSpacesInput
-    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
-    spaceType: string
-    parent?: SpaceCreateNestedOneWithoutSubspacesInput
-    chat?: ChatCreateNestedOneWithoutSpaceInput
+    localId: string
+    spaceId: string
   }
 
-  export type SpaceUncheckedCreateWithoutSubspacesInput = {
+  export type SpaceViewUncheckedCreateWithoutSpaceInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    viewId: string
-    projectId: string
-    settingsId: string
-    spaceType: string
-    parentId?: string | null
-    chatId?: string | null
+    localId: string
+    spaceId: string
   }
 
-  export type SpaceCreateOrConnectWithoutSubspacesInput = {
-    where: SpaceWhereUniqueInput
-    create: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
+  export type SpaceViewCreateOrConnectWithoutSpaceInput = {
+    where: SpaceViewWhereUniqueInput
+    create: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
   }
 
   export type SpaceCreateWithoutParentInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
+    spaceType: string
+    chat?: ChatCreateNestedOneWithoutSpaceInput
     project: ProjectCreateNestedOneWithoutSpacesInput
     settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
-    spaceType: string
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
     subspaces?: SpaceCreateNestedManyWithoutParentInput
-    chat?: ChatCreateNestedOneWithoutSpaceInput
   }
 
   export type SpaceUncheckedCreateWithoutParentInput = {
@@ -18879,8 +18872,8 @@ export namespace Prisma {
     projectId: string
     settingsId: string
     spaceType: string
-    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
     chatId?: string | null
+    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type SpaceCreateOrConnectWithoutParentInput = {
@@ -18893,50 +18886,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChatCreateWithoutSpaceInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageCreateNestedManyWithoutChatInput
-    Task?: TaskCreateNestedOneWithoutChatInput
-    User?: UserCreateNestedOneWithoutChatInput
-    Project?: ProjectCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatUncheckedCreateWithoutSpaceInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
-    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
-    User?: UserUncheckedCreateNestedOneWithoutChatInput
-    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatCreateOrConnectWithoutSpaceInput = {
-    where: ChatWhereUniqueInput
+  export type ChatUpsertWithoutSpaceInput = {
+    update: XOR<ChatUpdateWithoutSpaceInput, ChatUncheckedUpdateWithoutSpaceInput>
     create: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
   }
 
-  export type SpaceViewUpsertWithoutSpaceInput = {
-    update: XOR<SpaceViewUpdateWithoutSpaceInput, SpaceViewUncheckedUpdateWithoutSpaceInput>
-    create: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
-  }
-
-  export type SpaceViewUpdateWithoutSpaceInput = {
+  export type ChatUpdateWithoutSpaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    localId?: StringFieldUpdateOperationsInput | string
-    spaceId?: StringFieldUpdateOperationsInput | string
+    messages?: MessageUpdateManyWithoutChatNestedInput
+    Project?: ProjectUpdateOneWithoutChatNestedInput
+    Task?: TaskUpdateOneWithoutChatNestedInput
+    User?: UserUpdateOneWithoutChatNestedInput
   }
 
-  export type SpaceViewUncheckedUpdateWithoutSpaceInput = {
+  export type ChatUncheckedUpdateWithoutSpaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    localId?: StringFieldUpdateOperationsInput | string
-    spaceId?: StringFieldUpdateOperationsInput | string
+    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
+    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
+    User?: UserUncheckedUpdateOneWithoutChatNestedInput
+  }
+
+  export type SpaceUpsertWithoutSubspacesInput = {
+    update: XOR<SpaceUpdateWithoutSubspacesInput, SpaceUncheckedUpdateWithoutSubspacesInput>
+    create: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
+  }
+
+  export type SpaceUpdateWithoutSubspacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spaceType?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutSpaceNestedInput
+    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
+    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
+  }
+
+  export type SpaceUncheckedUpdateWithoutSubspacesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    viewId?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    settingsId?: StringFieldUpdateOperationsInput | string
+    spaceType?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectUpsertWithoutSpacesInput = {
@@ -18950,10 +18951,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
     settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
     workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
-    chat?: ChatUpdateOneWithoutProjectNestedInput
     users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
     tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
@@ -18993,33 +18994,25 @@ export namespace Prisma {
     spaceId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SpaceUpsertWithoutSubspacesInput = {
-    update: XOR<SpaceUpdateWithoutSubspacesInput, SpaceUncheckedUpdateWithoutSubspacesInput>
-    create: XOR<SpaceCreateWithoutSubspacesInput, SpaceUncheckedCreateWithoutSubspacesInput>
+  export type SpaceViewUpsertWithoutSpaceInput = {
+    update: XOR<SpaceViewUpdateWithoutSpaceInput, SpaceViewUncheckedUpdateWithoutSpaceInput>
+    create: XOR<SpaceViewCreateWithoutSpaceInput, SpaceViewUncheckedCreateWithoutSpaceInput>
   }
 
-  export type SpaceUpdateWithoutSubspacesInput = {
+  export type SpaceViewUpdateWithoutSpaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
-    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
-    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
-    spaceType?: StringFieldUpdateOperationsInput | string
-    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
-    chat?: ChatUpdateOneWithoutSpaceNestedInput
+    localId?: StringFieldUpdateOperationsInput | string
+    spaceId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SpaceUncheckedUpdateWithoutSubspacesInput = {
+  export type SpaceViewUncheckedUpdateWithoutSpaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    viewId?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    settingsId?: StringFieldUpdateOperationsInput | string
-    spaceType?: StringFieldUpdateOperationsInput | string
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    localId?: StringFieldUpdateOperationsInput | string
+    spaceId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SpaceUpsertWithWhereUniqueWithoutParentInput = {
@@ -19053,41 +19046,16 @@ export namespace Prisma {
     chatId?: StringNullableFilter | string | null
   }
 
-  export type ChatUpsertWithoutSpaceInput = {
-    update: XOR<ChatUpdateWithoutSpaceInput, ChatUncheckedUpdateWithoutSpaceInput>
-    create: XOR<ChatCreateWithoutSpaceInput, ChatUncheckedCreateWithoutSpaceInput>
-  }
-
-  export type ChatUpdateWithoutSpaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUpdateManyWithoutChatNestedInput
-    Task?: TaskUpdateOneWithoutChatNestedInput
-    User?: UserUpdateOneWithoutChatNestedInput
-    Project?: ProjectUpdateOneWithoutChatNestedInput
-  }
-
-  export type ChatUncheckedUpdateWithoutSpaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
-    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
-    User?: UserUncheckedUpdateOneWithoutChatNestedInput
-    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
-  }
-
   export type SpaceCreateWithoutViewInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    spaceType: string
+    chat?: ChatCreateNestedOneWithoutSpaceInput
+    parent?: SpaceCreateNestedOneWithoutSubspacesInput
     project: ProjectCreateNestedOneWithoutSpacesInput
     settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
-    spaceType: string
-    parent?: SpaceCreateNestedOneWithoutSubspacesInput
     subspaces?: SpaceCreateNestedManyWithoutParentInput
-    chat?: ChatCreateNestedOneWithoutSpaceInput
   }
 
   export type SpaceUncheckedCreateWithoutViewInput = {
@@ -19098,8 +19066,8 @@ export namespace Prisma {
     settingsId: string
     spaceType: string
     parentId?: string | null
-    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
     chatId?: string | null
+    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type SpaceCreateOrConnectWithoutViewInput = {
@@ -19116,12 +19084,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    spaceType?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutSpaceNestedInput
+    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
     project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
     settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
-    spaceType?: StringFieldUpdateOperationsInput | string
-    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
     subspaces?: SpaceUpdateManyWithoutParentNestedInput
-    chat?: ChatUpdateOneWithoutSpaceNestedInput
   }
 
   export type SpaceUncheckedUpdateWithoutViewInput = {
@@ -19132,20 +19100,20 @@ export namespace Prisma {
     settingsId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceCreateWithoutSettingsInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
-    project: ProjectCreateNestedOneWithoutSpacesInput
     spaceType: string
-    parent?: SpaceCreateNestedOneWithoutSubspacesInput
-    subspaces?: SpaceCreateNestedManyWithoutParentInput
     chat?: ChatCreateNestedOneWithoutSpaceInput
+    parent?: SpaceCreateNestedOneWithoutSubspacesInput
+    project: ProjectCreateNestedOneWithoutSpacesInput
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
+    subspaces?: SpaceCreateNestedManyWithoutParentInput
   }
 
   export type SpaceUncheckedCreateWithoutSettingsInput = {
@@ -19156,8 +19124,8 @@ export namespace Prisma {
     projectId: string
     spaceType: string
     parentId?: string | null
-    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
     chatId?: string | null
+    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type SpaceCreateOrConnectWithoutSettingsInput = {
@@ -19174,12 +19142,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
-    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
     spaceType?: StringFieldUpdateOperationsInput | string
-    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
-    subspaces?: SpaceUpdateManyWithoutParentNestedInput
     chat?: ChatUpdateOneWithoutSpaceNestedInput
+    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
+    subspaces?: SpaceUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceUncheckedUpdateWithoutSettingsInput = {
@@ -19190,8 +19158,80 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type ChatCreateWithoutProjectInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutChatInput
+    Space?: SpaceCreateNestedOneWithoutChatInput
+    Task?: TaskCreateNestedOneWithoutChatInput
+    User?: UserCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatUncheckedCreateWithoutProjectInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
+    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
+    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
+    User?: UserUncheckedCreateNestedOneWithoutChatInput
+  }
+
+  export type ChatCreateOrConnectWithoutProjectInput = {
+    where: ChatWhereUniqueInput
+    create: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
+  }
+
+  export type UserCreateWithoutOwnedProjectsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    role: Role
+    chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserUncheckedCreateWithoutOwnedProjectsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserCreateOrConnectWithoutOwnedProjectsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
   }
 
   export type ProjectSettingsCreateWithoutProjectInput = {
@@ -19238,82 +19278,10 @@ export namespace Prisma {
     create: XOR<WorkspaceCreateWithoutProjectsInput, WorkspaceUncheckedCreateWithoutProjectsInput>
   }
 
-  export type UserCreateWithoutOwnedProjectsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
-    chat?: ChatCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutOwnedProjectsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
-    chatId?: string | null
-  }
-
-  export type UserCreateOrConnectWithoutOwnedProjectsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
-  }
-
-  export type ChatCreateWithoutProjectInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageCreateNestedManyWithoutChatInput
-    Task?: TaskCreateNestedOneWithoutChatInput
-    Space?: SpaceCreateNestedOneWithoutChatInput
-    User?: UserCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatUncheckedCreateWithoutProjectInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutChatInput
-    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
-    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
-    User?: UserUncheckedCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatCreateOrConnectWithoutProjectInput = {
-    where: ChatWhereUniqueInput
-    create: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
-  }
-
   export type ProjectsOnUsersCreateWithoutProjectInput = {
-    user: UserCreateNestedOneWithoutProjectsInput
     assignedAt?: Date | string
     assignedBy: string
+    user: UserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectsOnUsersUncheckedCreateWithoutProjectInput = {
@@ -19332,17 +19300,51 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SpaceCreateWithoutProjectInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    spaceType: string
+    chat?: ChatCreateNestedOneWithoutSpaceInput
+    parent?: SpaceCreateNestedOneWithoutSubspacesInput
+    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
+    subspaces?: SpaceCreateNestedManyWithoutParentInput
+  }
+
+  export type SpaceUncheckedCreateWithoutProjectInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    viewId: string
+    settingsId: string
+    spaceType: string
+    parentId?: string | null
+    chatId?: string | null
+    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type SpaceCreateOrConnectWithoutProjectInput = {
+    where: SpaceWhereUniqueInput
+    create: XOR<SpaceCreateWithoutProjectInput, SpaceUncheckedCreateWithoutProjectInput>
+  }
+
+  export type SpaceCreateManyProjectInputEnvelope = {
+    data: Enumerable<SpaceCreateManyProjectInput>
+    skipDuplicates?: boolean
+  }
+
   export type TaskCreateWithoutProjectInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: string
+    details: string
+    chat?: ChatCreateNestedOneWithoutTaskInput
     creator?: UserCreateNestedOneWithoutCreatedTasksInput
     parent?: TaskCreateNestedOneWithoutSubTasksInput
     subTasks?: TaskCreateNestedManyWithoutParentInput
     assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
-    chat?: ChatCreateNestedOneWithoutTaskInput
   }
 
   export type TaskUncheckedCreateWithoutProjectInput = {
@@ -19351,11 +19353,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     creatorId?: string | null
     parentId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
     status?: string
     details: string
     chatId?: string | null
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
   }
 
   export type TaskCreateOrConnectWithoutProjectInput = {
@@ -19368,38 +19370,76 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SpaceCreateWithoutProjectInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
-    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
-    spaceType: string
-    parent?: SpaceCreateNestedOneWithoutSubspacesInput
-    subspaces?: SpaceCreateNestedManyWithoutParentInput
-    chat?: ChatCreateNestedOneWithoutSpaceInput
+  export type ChatUpsertWithoutProjectInput = {
+    update: XOR<ChatUpdateWithoutProjectInput, ChatUncheckedUpdateWithoutProjectInput>
+    create: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
   }
 
-  export type SpaceUncheckedCreateWithoutProjectInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    viewId: string
-    settingsId: string
-    spaceType: string
-    parentId?: string | null
-    subspaces?: SpaceUncheckedCreateNestedManyWithoutParentInput
-    chatId?: string | null
+  export type ChatUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUpdateManyWithoutChatNestedInput
+    Space?: SpaceUpdateOneWithoutChatNestedInput
+    Task?: TaskUpdateOneWithoutChatNestedInput
+    User?: UserUpdateOneWithoutChatNestedInput
   }
 
-  export type SpaceCreateOrConnectWithoutProjectInput = {
-    where: SpaceWhereUniqueInput
-    create: XOR<SpaceCreateWithoutProjectInput, SpaceUncheckedCreateWithoutProjectInput>
+  export type ChatUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
+    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
+    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
+    User?: UserUncheckedUpdateOneWithoutChatNestedInput
   }
 
-  export type SpaceCreateManyProjectInputEnvelope = {
-    data: Enumerable<SpaceCreateManyProjectInput>
-    skipDuplicates?: boolean
+  export type UserUpsertWithoutOwnedProjectsInput = {
+    update: XOR<UserUpdateWithoutOwnedProjectsInput, UserUncheckedUpdateWithoutOwnedProjectsInput>
+    create: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
+  }
+
+  export type UserUpdateWithoutOwnedProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOwnedProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type ProjectSettingsUpsertWithoutProjectInput = {
@@ -19446,78 +19486,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserUpsertWithoutOwnedProjectsInput = {
-    update: XOR<UserUpdateWithoutOwnedProjectsInput, UserUncheckedUpdateWithoutOwnedProjectsInput>
-    create: XOR<UserCreateWithoutOwnedProjectsInput, UserUncheckedCreateWithoutOwnedProjectsInput>
-  }
-
-  export type UserUpdateWithoutOwnedProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
-    chat?: ChatUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutOwnedProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ChatUpsertWithoutProjectInput = {
-    update: XOR<ChatUpdateWithoutProjectInput, ChatUncheckedUpdateWithoutProjectInput>
-    create: XOR<ChatCreateWithoutProjectInput, ChatUncheckedCreateWithoutProjectInput>
-  }
-
-  export type ChatUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUpdateManyWithoutChatNestedInput
-    Task?: TaskUpdateOneWithoutChatNestedInput
-    Space?: SpaceUpdateOneWithoutChatNestedInput
-    User?: UserUpdateOneWithoutChatNestedInput
-  }
-
-  export type ChatUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
-    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
-    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
-    User?: UserUncheckedUpdateOneWithoutChatNestedInput
-  }
-
   export type ProjectsOnUsersUpsertWithWhereUniqueWithoutProjectInput = {
     where: ProjectsOnUsersWhereUniqueInput
     update: XOR<ProjectsOnUsersUpdateWithoutProjectInput, ProjectsOnUsersUncheckedUpdateWithoutProjectInput>
@@ -19532,22 +19500,6 @@ export namespace Prisma {
   export type ProjectsOnUsersUpdateManyWithWhereWithoutProjectInput = {
     where: ProjectsOnUsersScalarWhereInput
     data: XOR<ProjectsOnUsersUpdateManyMutationInput, ProjectsOnUsersUncheckedUpdateManyWithoutUsersInput>
-  }
-
-  export type TaskUpsertWithWhereUniqueWithoutProjectInput = {
-    where: TaskWhereUniqueInput
-    update: XOR<TaskUpdateWithoutProjectInput, TaskUncheckedUpdateWithoutProjectInput>
-    create: XOR<TaskCreateWithoutProjectInput, TaskUncheckedCreateWithoutProjectInput>
-  }
-
-  export type TaskUpdateWithWhereUniqueWithoutProjectInput = {
-    where: TaskWhereUniqueInput
-    data: XOR<TaskUpdateWithoutProjectInput, TaskUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type TaskUpdateManyWithWhereWithoutProjectInput = {
-    where: TaskScalarWhereInput
-    data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutTasksInput>
   }
 
   export type SpaceUpsertWithWhereUniqueWithoutProjectInput = {
@@ -19566,18 +19518,34 @@ export namespace Prisma {
     data: XOR<SpaceUpdateManyMutationInput, SpaceUncheckedUpdateManyWithoutSpacesInput>
   }
 
+  export type TaskUpsertWithWhereUniqueWithoutProjectInput = {
+    where: TaskWhereUniqueInput
+    update: XOR<TaskUpdateWithoutProjectInput, TaskUncheckedUpdateWithoutProjectInput>
+    create: XOR<TaskCreateWithoutProjectInput, TaskUncheckedCreateWithoutProjectInput>
+  }
+
+  export type TaskUpdateWithWhereUniqueWithoutProjectInput = {
+    where: TaskWhereUniqueInput
+    data: XOR<TaskUpdateWithoutProjectInput, TaskUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type TaskUpdateManyWithWhereWithoutProjectInput = {
+    where: TaskScalarWhereInput
+    data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutTasksInput>
+  }
+
   export type ProjectCreateWithoutSettingsInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     title: string
     description?: string | null
-    workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
+    workspace: WorkspaceCreateNestedOneWithoutProjectsInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutSettingsInput = {
@@ -19590,8 +19558,8 @@ export namespace Prisma {
     ownerId: string
     chatId?: string | null
     users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
     spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutSettingsInput = {
@@ -19610,12 +19578,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
     chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
+    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
     users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutSettingsInput = {
@@ -19628,8 +19596,8 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type WorkspaceSettingsCreateWithoutWorkspaceInput = {
@@ -19664,14 +19632,14 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
     chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUncheckedCreateWithoutWorkspacesInput = {
@@ -19684,15 +19652,15 @@ export namespace Prisma {
     lastname?: string | null
     username: string
     active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
     chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
   export type UserCreateOrConnectWithoutWorkspacesInput = {
@@ -19706,12 +19674,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     title: string
     description?: string | null
-    settings: ProjectSettingsCreateNestedOneWithoutProjectInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
+    settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutWorkspaceInput = {
@@ -19724,8 +19692,8 @@ export namespace Prisma {
     ownerId: string
     chatId?: string | null
     users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
     spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutWorkspaceInput = {
@@ -19775,14 +19743,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
     chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWorkspacesInput = {
@@ -19795,15 +19763,15 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type ProjectUpsertWithWhereUniqueWithoutWorkspaceInput = {
@@ -19874,12 +19842,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     title: string
     description?: string | null
+    chat?: ChatCreateNestedOneWithoutProjectInput
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
     settings: ProjectSettingsCreateNestedOneWithoutProjectInput
     workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
-    chat?: ChatCreateNestedOneWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
     spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutUsersInput = {
@@ -19892,8 +19860,8 @@ export namespace Prisma {
     workspaceId: string
     ownerId: string
     chatId?: string | null
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
     spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutUsersInput = {
@@ -19912,14 +19880,14 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
     chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUncheckedCreateWithoutProjectsInput = {
@@ -19932,15 +19900,15 @@ export namespace Prisma {
     lastname?: string | null
     username: string
     active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
     chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
   export type UserCreateOrConnectWithoutProjectsInput = {
@@ -19959,12 +19927,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
     settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
     workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
-    chat?: ChatUpdateOneWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutUsersInput = {
@@ -19977,8 +19945,8 @@ export namespace Prisma {
     workspaceId?: StringFieldUpdateOperationsInput | string
     ownerId?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutProjectsInput = {
@@ -19997,14 +19965,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
     chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -20017,28 +19985,28 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type TaskCreateWithoutAssignesInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    creator?: UserCreateNestedOneWithoutCreatedTasksInput
-    parent?: TaskCreateNestedOneWithoutSubTasksInput
-    subTasks?: TaskCreateNestedManyWithoutParentInput
     status?: string
     details: string
     chat?: ChatCreateNestedOneWithoutTaskInput
+    creator?: UserCreateNestedOneWithoutCreatedTasksInput
+    parent?: TaskCreateNestedOneWithoutSubTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    subTasks?: TaskCreateNestedManyWithoutParentInput
   }
 
   export type TaskUncheckedCreateWithoutAssignesInput = {
@@ -20048,10 +20016,10 @@ export namespace Prisma {
     projectId?: string | null
     creatorId?: string | null
     parentId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
     status?: string
     details: string
     chatId?: string | null
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type TaskCreateOrConnectWithoutAssignesInput = {
@@ -20070,14 +20038,14 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
     chat?: ChatCreateNestedOneWithoutUserInput
+    comments?: MessageCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTasksInput = {
@@ -20090,15 +20058,15 @@ export namespace Prisma {
     lastname?: string | null
     username: string
     active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
     chatId?: string | null
+    role: Role
+    comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -20115,13 +20083,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chat?: ChatUpdateOneWithoutTaskNestedInput
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutAssignesInput = {
@@ -20131,10 +20099,10 @@ export namespace Prisma {
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type UserUpsertWithoutAssignedTasksInput = {
@@ -20153,14 +20121,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
     chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTasksInput = {
@@ -20173,62 +20141,40 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
-  export type UserCreateWithoutCommentsInput = {
+  export type ChatCreateWithoutMessagesInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
-    chat?: ChatCreateNestedOneWithoutUserInput
+    Project?: ProjectCreateNestedOneWithoutChatInput
+    Space?: SpaceCreateNestedOneWithoutChatInput
+    Task?: TaskCreateNestedOneWithoutChatInput
+    User?: UserCreateNestedOneWithoutChatInput
   }
 
-  export type UserUncheckedCreateWithoutCommentsInput = {
+  export type ChatUncheckedCreateWithoutMessagesInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    email: string
-    password: string
-    firstname?: string | null
-    lastname?: string | null
-    username: string
-    active: boolean
-    role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
-    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
-    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
-    chatId?: string | null
+    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
+    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
+    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
+    User?: UserUncheckedCreateNestedOneWithoutChatInput
   }
 
-  export type UserCreateOrConnectWithoutCommentsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  export type ChatCreateOrConnectWithoutMessagesInput = {
+    where: ChatWhereUniqueInput
+    create: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
   }
 
   export type MessageCreateWithoutSubMessagesInput = {
@@ -20238,9 +20184,9 @@ export namespace Prisma {
     content: string
     contentType?: string
     type?: string
-    sender?: UserCreateNestedOneWithoutCommentsInput
-    parent?: MessageCreateNestedOneWithoutSubMessagesInput
     chat: ChatCreateNestedOneWithoutMessagesInput
+    parent?: MessageCreateNestedOneWithoutSubMessagesInput
+    sender?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type MessageUncheckedCreateWithoutSubMessagesInput = {
@@ -20260,6 +20206,53 @@ export namespace Prisma {
     create: XOR<MessageCreateWithoutSubMessagesInput, MessageUncheckedCreateWithoutSubMessagesInput>
   }
 
+  export type UserCreateWithoutCommentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    role: Role
+    chat?: ChatCreateNestedOneWithoutUserInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email: string
+    password: string
+    firstname?: string | null
+    lastname?: string | null
+    username: string
+    active: boolean
+    chatId?: string | null
+    role: Role
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
+    projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
+    assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
   export type MessageCreateWithoutParentInput = {
     id?: string
     createdAt?: Date | string
@@ -20267,9 +20260,9 @@ export namespace Prisma {
     content: string
     contentType?: string
     type?: string
+    chat: ChatCreateNestedOneWithoutMessagesInput
     sender?: UserCreateNestedOneWithoutCommentsInput
     subMessages?: MessageCreateNestedManyWithoutParentInput
-    chat: ChatCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateWithoutParentInput = {
@@ -20280,8 +20273,8 @@ export namespace Prisma {
     contentType?: string
     type?: string
     senderId?: string | null
-    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
     chatId: string
+    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type MessageCreateOrConnectWithoutParentInput = {
@@ -20294,29 +20287,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChatCreateWithoutMessagesInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Task?: TaskCreateNestedOneWithoutChatInput
-    Space?: SpaceCreateNestedOneWithoutChatInput
-    User?: UserCreateNestedOneWithoutChatInput
-    Project?: ProjectCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatUncheckedCreateWithoutMessagesInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Task?: TaskUncheckedCreateNestedOneWithoutChatInput
-    Space?: SpaceUncheckedCreateNestedOneWithoutChatInput
-    User?: UserUncheckedCreateNestedOneWithoutChatInput
-    Project?: ProjectUncheckedCreateNestedOneWithoutChatInput
-  }
-
-  export type ChatCreateOrConnectWithoutMessagesInput = {
-    where: ChatWhereUniqueInput
+  export type ChatUpsertWithoutMessagesInput = {
+    update: XOR<ChatUpdateWithoutMessagesInput, ChatUncheckedUpdateWithoutMessagesInput>
     create: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type ChatUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Project?: ProjectUpdateOneWithoutChatNestedInput
+    Space?: SpaceUpdateOneWithoutChatNestedInput
+    Task?: TaskUpdateOneWithoutChatNestedInput
+    User?: UserUpdateOneWithoutChatNestedInput
+  }
+
+  export type ChatUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
+    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
+    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
+    User?: UserUncheckedUpdateOneWithoutChatNestedInput
+  }
+
+  export type MessageUpsertWithoutSubMessagesInput = {
+    update: XOR<MessageUpdateWithoutSubMessagesInput, MessageUncheckedUpdateWithoutSubMessagesInput>
+    create: XOR<MessageCreateWithoutSubMessagesInput, MessageUncheckedCreateWithoutSubMessagesInput>
+  }
+
+  export type MessageUpdateWithoutSubMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
+    parent?: MessageUpdateOneWithoutSubMessagesNestedInput
+    sender?: UserUpdateOneWithoutCommentsNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutSubMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    contentType?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    senderId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    chatId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUpsertWithoutCommentsInput = {
@@ -20335,14 +20357,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
     chat?: ChatUpdateOneWithoutUserNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -20355,44 +20377,15 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | Role
     ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
     projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type MessageUpsertWithoutSubMessagesInput = {
-    update: XOR<MessageUpdateWithoutSubMessagesInput, MessageUncheckedUpdateWithoutSubMessagesInput>
-    create: XOR<MessageCreateWithoutSubMessagesInput, MessageUncheckedCreateWithoutSubMessagesInput>
-  }
-
-  export type MessageUpdateWithoutSubMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
-    contentType?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    sender?: UserUpdateOneWithoutCommentsNestedInput
-    parent?: MessageUpdateOneWithoutSubMessagesNestedInput
-    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
-  }
-
-  export type MessageUncheckedUpdateWithoutSubMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
-    contentType?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    senderId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    chatId?: StringFieldUpdateOperationsInput | string
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type MessageUpsertWithWhereUniqueWithoutParentInput = {
@@ -20411,31 +20404,6 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutSubMessagesInput>
   }
 
-  export type ChatUpsertWithoutMessagesInput = {
-    update: XOR<ChatUpdateWithoutMessagesInput, ChatUncheckedUpdateWithoutMessagesInput>
-    create: XOR<ChatCreateWithoutMessagesInput, ChatUncheckedCreateWithoutMessagesInput>
-  }
-
-  export type ChatUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Task?: TaskUpdateOneWithoutChatNestedInput
-    Space?: SpaceUpdateOneWithoutChatNestedInput
-    User?: UserUpdateOneWithoutChatNestedInput
-    Project?: ProjectUpdateOneWithoutChatNestedInput
-  }
-
-  export type ChatUncheckedUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Task?: TaskUncheckedUpdateOneWithoutChatNestedInput
-    Space?: SpaceUncheckedUpdateOneWithoutChatNestedInput
-    User?: UserUncheckedUpdateOneWithoutChatNestedInput
-    Project?: ProjectUncheckedUpdateOneWithoutChatNestedInput
-  }
-
   export type MessageCreateWithoutChatInput = {
     id?: string
     createdAt?: Date | string
@@ -20443,8 +20411,8 @@ export namespace Prisma {
     content: string
     contentType?: string
     type?: string
-    sender?: UserCreateNestedOneWithoutCommentsInput
     parent?: MessageCreateNestedOneWithoutSubMessagesInput
+    sender?: UserCreateNestedOneWithoutCommentsInput
     subMessages?: MessageCreateNestedManyWithoutParentInput
   }
 
@@ -20470,46 +20438,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type TaskCreateWithoutChatInput = {
+  export type ProjectCreateWithoutChatInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutTasksInput
-    creator?: UserCreateNestedOneWithoutCreatedTasksInput
-    parent?: TaskCreateNestedOneWithoutSubTasksInput
-    subTasks?: TaskCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
+    title: string
+    description?: string | null
+    owner: UserCreateNestedOneWithoutOwnedProjectsInput
+    settings: ProjectSettingsCreateNestedOneWithoutProjectInput
+    workspace: WorkspaceCreateNestedOneWithoutProjectsInput
+    users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
+    spaces?: SpaceCreateNestedManyWithoutProjectInput
+    tasks?: TaskCreateNestedManyWithoutProjectInput
   }
 
-  export type TaskUncheckedCreateWithoutChatInput = {
+  export type ProjectUncheckedCreateWithoutChatInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    projectId?: string | null
-    creatorId?: string | null
-    parentId?: string | null
-    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
-    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
-    status?: string
-    details: string
+    title: string
+    description?: string | null
+    settingsId: string
+    workspaceId: string
+    ownerId: string
+    users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
+    spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
   }
 
-  export type TaskCreateOrConnectWithoutChatInput = {
-    where: TaskWhereUniqueInput
-    create: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+  export type ProjectCreateOrConnectWithoutChatInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
   }
 
   export type SpaceCreateWithoutChatInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    view: SpaceViewCreateNestedOneWithoutSpaceInput
-    project: ProjectCreateNestedOneWithoutSpacesInput
-    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
     spaceType: string
     parent?: SpaceCreateNestedOneWithoutSubspacesInput
+    project: ProjectCreateNestedOneWithoutSpacesInput
+    settings: SpaceSettingsCreateNestedOneWithoutSpaceInput
+    view: SpaceViewCreateNestedOneWithoutSpaceInput
     subspaces?: SpaceCreateNestedManyWithoutParentInput
   }
 
@@ -20530,6 +20500,37 @@ export namespace Prisma {
     create: XOR<SpaceCreateWithoutChatInput, SpaceUncheckedCreateWithoutChatInput>
   }
 
+  export type TaskCreateWithoutChatInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    status?: string
+    details: string
+    creator?: UserCreateNestedOneWithoutCreatedTasksInput
+    parent?: TaskCreateNestedOneWithoutSubTasksInput
+    project?: ProjectCreateNestedOneWithoutTasksInput
+    subTasks?: TaskCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskUncheckedCreateWithoutChatInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projectId?: string | null
+    creatorId?: string | null
+    parentId?: string | null
+    status?: string
+    details: string
+    subTasks?: TaskUncheckedCreateNestedManyWithoutParentInput
+    assignes?: UserAssignedTasksUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskCreateOrConnectWithoutChatInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+  }
+
   export type UserCreateWithoutChatInput = {
     id?: string
     createdAt?: Date | string
@@ -20541,14 +20542,14 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
     comments?: MessageCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceCreateNestedManyWithoutUserInput
-    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
-    followedBy?: UserCreateNestedManyWithoutFollowingInput
-    following?: UserCreateNestedManyWithoutFollowedByInput
+    ownedProjects?: ProjectCreateNestedManyWithoutOwnerInput
     projects?: ProjectsOnUsersCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatorInput
     assignedTasks?: UserAssignedTasksCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceCreateNestedOneWithoutUserInput
+    User_B?: UserCreateNestedManyWithoutUser_AInput
+    User_A?: UserCreateNestedManyWithoutUser_BInput
   }
 
   export type UserUncheckedCreateWithoutChatInput = {
@@ -20562,52 +20563,19 @@ export namespace Prisma {
     username: string
     active: boolean
     role: Role
-    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
     comments?: MessageUncheckedCreateNestedManyWithoutSenderInput
-    workspaces?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
-    followedBy?: UserUncheckedCreateNestedManyWithoutFollowingInput
-    following?: UserUncheckedCreateNestedManyWithoutFollowedByInput
+    ownedProjects?: ProjectUncheckedCreateNestedManyWithoutOwnerInput
     projects?: ProjectsOnUsersUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatorInput
     assignedTasks?: UserAssignedTasksUncheckedCreateNestedManyWithoutUserInput
+    workspaces?: WorkspaceUncheckedCreateNestedOneWithoutUserInput
+    User_B?: UserUncheckedCreateNestedManyWithoutUser_AInput
+    User_A?: UserUncheckedCreateNestedManyWithoutUser_BInput
   }
 
   export type UserCreateOrConnectWithoutChatInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutChatInput, UserUncheckedCreateWithoutChatInput>
-  }
-
-  export type ProjectCreateWithoutChatInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    description?: string | null
-    settings: ProjectSettingsCreateNestedOneWithoutProjectInput
-    workspace: WorkspaceCreateNestedOneWithoutProjectsInput
-    owner: UserCreateNestedOneWithoutOwnedProjectsInput
-    users?: ProjectsOnUsersCreateNestedManyWithoutProjectInput
-    tasks?: TaskCreateNestedManyWithoutProjectInput
-    spaces?: SpaceCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUncheckedCreateWithoutChatInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    description?: string | null
-    settingsId: string
-    workspaceId: string
-    ownerId: string
-    users?: ProjectsOnUsersUncheckedCreateNestedManyWithoutProjectInput
-    tasks?: TaskUncheckedCreateNestedManyWithoutProjectInput
-    spaces?: SpaceUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectCreateOrConnectWithoutChatInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
   }
 
   export type MessageUpsertWithWhereUniqueWithoutChatInput = {
@@ -20626,35 +20594,37 @@ export namespace Prisma {
     data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutMessagesInput>
   }
 
-  export type TaskUpsertWithoutChatInput = {
-    update: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
-    create: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+  export type ProjectUpsertWithoutChatInput = {
+    update: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
+    create: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
   }
 
-  export type TaskUpdateWithoutChatInput = {
+  export type ProjectUpdateWithoutChatInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
+    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
+    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
+    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
-  export type TaskUncheckedUpdateWithoutChatInput = {
+  export type ProjectUncheckedUpdateWithoutChatInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    settingsId?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    ownerId?: StringFieldUpdateOperationsInput | string
+    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type SpaceUpsertWithoutChatInput = {
@@ -20666,11 +20636,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
-    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
-    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
     spaceType?: StringFieldUpdateOperationsInput | string
     parent?: SpaceUpdateOneWithoutSubspacesNestedInput
+    project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
+    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
     subspaces?: SpaceUpdateManyWithoutParentNestedInput
   }
 
@@ -20684,6 +20654,37 @@ export namespace Prisma {
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type TaskUpsertWithoutChatInput = {
+    update: XOR<TaskUpdateWithoutChatInput, TaskUncheckedUpdateWithoutChatInput>
+    create: XOR<TaskCreateWithoutChatInput, TaskUncheckedCreateWithoutChatInput>
+  }
+
+  export type TaskUpdateWithoutChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutChatInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type UserUpsertWithoutChatInput = {
@@ -20702,14 +20703,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
     comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
     projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
     assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatInput = {
@@ -20723,58 +20724,14 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     active?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
     projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
     assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type ProjectUpsertWithoutChatInput = {
-    update: XOR<ProjectUpdateWithoutChatInput, ProjectUncheckedUpdateWithoutChatInput>
-    create: XOR<ProjectCreateWithoutChatInput, ProjectUncheckedCreateWithoutChatInput>
-  }
-
-  export type ProjectUpdateWithoutChatInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
-    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
-    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutChatInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settingsId?: StringFieldUpdateOperationsInput | string
-    workspaceId?: StringFieldUpdateOperationsInput | string
-    ownerId?: StringFieldUpdateOperationsInput | string
-    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectCreateManyOwnerInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    description?: string | null
-    settingsId: string
-    workspaceId: string
-    chatId?: string | null
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
   }
 
   export type MessageCreateManySenderInput = {
@@ -20788,12 +20745,21 @@ export namespace Prisma {
     chatId: string
   }
 
-  export type WorkspaceCreateManyUserInput = {
+  export type ProjectCreateManyOwnerInput = {
     id?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     title: string
+    description?: string | null
     settingsId: string
+    workspaceId: string
+    chatId?: string | null
+  }
+
+  export type ProjectsOnUsersCreateManyUserInput = {
+    projectId: string
+    assignedAt?: Date | string
+    assignedBy: string
   }
 
   export type TaskCreateManyCreatorInput = {
@@ -20807,55 +20773,10 @@ export namespace Prisma {
     chatId?: string | null
   }
 
-  export type ProjectsOnUsersCreateManyUserInput = {
-    projectId: string
-    assignedAt?: Date | string
-    assignedBy: string
-  }
-
   export type UserAssignedTasksCreateManyUserInput = {
     taskId: string
     assignedAt?: Date | string
     assignedBy: string
-  }
-
-  export type ProjectUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
-    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
-    chat?: ChatUpdateOneWithoutProjectNestedInput
-    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutOwnerInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settingsId?: StringFieldUpdateOperationsInput | string
-    workspaceId?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
-    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateManyWithoutOwnedProjectsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    settingsId?: StringFieldUpdateOperationsInput | string
-    workspaceId?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageUpdateWithoutSenderInput = {
@@ -20865,9 +20786,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
     parent?: MessageUpdateOneWithoutSubMessagesNestedInput
     subMessages?: MessageUpdateManyWithoutParentNestedInput
-    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutSenderInput = {
@@ -20878,8 +20799,8 @@ export namespace Prisma {
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
     chatId?: StringFieldUpdateOperationsInput | string
+    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type MessageUncheckedUpdateManyWithoutCommentsInput = {
@@ -20893,185 +20814,49 @@ export namespace Prisma {
     chatId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type WorkspaceUpdateWithoutUserInput = {
+  export type ProjectUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
-    settings?: WorkspaceSettingsUpdateOneRequiredWithoutWorkspaceNestedInput
-    projects?: ProjectUpdateManyWithoutWorkspaceNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    chat?: ChatUpdateOneWithoutProjectNestedInput
+    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
+    workspace?: WorkspaceUpdateOneRequiredWithoutProjectsNestedInput
+    users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
-  export type WorkspaceUncheckedUpdateWithoutUserInput = {
+  export type ProjectUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     settingsId?: StringFieldUpdateOperationsInput | string
-    projects?: ProjectUncheckedUpdateManyWithoutWorkspaceNestedInput
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
+    spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
-  export type WorkspaceUncheckedUpdateManyWithoutWorkspacesInput = {
+  export type ProjectUncheckedUpdateManyWithoutOwnedProjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     settingsId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TaskUpdateWithoutCreatorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chat?: ChatUpdateOneWithoutTaskNestedInput
-  }
-
-  export type TaskUncheckedUpdateWithoutCreatorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TaskUncheckedUpdateManyWithoutCreatedTasksInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUpdateWithoutFollowingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUpdateManyWithoutFollowingNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
-    chat?: ChatUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutFollowingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    followedBy?: UserUncheckedUpdateManyWithoutFollowingNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUncheckedUpdateManyWithoutFollowedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUpdateWithoutFollowedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
-    following?: UserUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
-    chat?: ChatUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutFollowedByInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
-    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
-    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
-    workspaces?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
-    following?: UserUncheckedUpdateManyWithoutFollowedByNestedInput
-    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
-    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type UserUncheckedUpdateManyWithoutFollowingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: StringFieldUpdateOperationsInput | string
-    active?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumRoleFieldUpdateOperationsInput | Role
+    workspaceId?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectsOnUsersUpdateWithoutUserInput = {
-    project?: ProjectUpdateOneRequiredWithoutUsersNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    project?: ProjectUpdateOneRequiredWithoutUsersNestedInput
   }
 
   export type ProjectsOnUsersUncheckedUpdateWithoutUserInput = {
@@ -21086,10 +20871,47 @@ export namespace Prisma {
     assignedBy?: StringFieldUpdateOperationsInput | string
   }
 
+  export type TaskUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutTaskNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutCreatorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateManyWithoutCreatedTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserAssignedTasksUpdateWithoutUserInput = {
-    task?: TaskUpdateOneRequiredWithoutAssignesNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    task?: TaskUpdateOneRequiredWithoutAssignesNestedInput
   }
 
   export type UserAssignedTasksUncheckedUpdateWithoutUserInput = {
@@ -21102,6 +20924,118 @@ export namespace Prisma {
     taskId?: StringFieldUpdateOperationsInput | string
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUpdateWithoutUser_AInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_B?: UserUpdateManyWithoutUser_ANestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_AInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_B?: UserUncheckedUpdateManyWithoutUser_ANestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutUser_BInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+  }
+
+  export type UserUpdateWithoutUser_BInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    chat?: ChatUpdateOneWithoutUserNestedInput
+    comments?: MessageUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUpdateOneWithoutUserNestedInput
+    User_A?: UserUpdateManyWithoutUser_BNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_BInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
+    comments?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedProjects?: ProjectUncheckedUpdateManyWithoutOwnerNestedInput
+    projects?: ProjectsOnUsersUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatorNestedInput
+    assignedTasks?: UserAssignedTasksUncheckedUpdateManyWithoutUserNestedInput
+    workspaces?: WorkspaceUncheckedUpdateOneWithoutUserNestedInput
+    User_A?: UserUncheckedUpdateManyWithoutUser_BNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutUser_AInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    firstname?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | Role
   }
 
   export type TaskCreateManyParentInput = {
@@ -21125,13 +21059,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutTasksNestedInput
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chat?: ChatUpdateOneWithoutTaskNestedInput
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    project?: ProjectUpdateOneWithoutTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutParentInput = {
@@ -21140,11 +21074,11 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     creatorId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
     status?: StringFieldUpdateOperationsInput | string
     details?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
   }
 
   export type TaskUncheckedUpdateManyWithoutSubTasksInput = {
@@ -21159,9 +21093,9 @@ export namespace Prisma {
   }
 
   export type UserAssignedTasksUpdateWithoutTaskInput = {
-    user?: UserUpdateOneRequiredWithoutAssignedTasksNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutAssignedTasksNestedInput
   }
 
   export type UserAssignedTasksUncheckedUpdateWithoutTaskInput = {
@@ -21191,12 +21125,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
+    spaceType?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutSpaceNestedInput
     project?: ProjectUpdateOneRequiredWithoutSpacesNestedInput
     settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
-    spaceType?: StringFieldUpdateOperationsInput | string
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
     subspaces?: SpaceUpdateManyWithoutParentNestedInput
-    chat?: ChatUpdateOneWithoutSpaceNestedInput
   }
 
   export type SpaceUncheckedUpdateWithoutParentInput = {
@@ -21207,8 +21141,8 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     settingsId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
-    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceUncheckedUpdateManyWithoutSubspacesInput = {
@@ -21228,17 +21162,6 @@ export namespace Prisma {
     assignedBy: string
   }
 
-  export type TaskCreateManyProjectInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    creatorId?: string | null
-    parentId?: string | null
-    status?: string
-    details: string
-    chatId?: string | null
-  }
-
   export type SpaceCreateManyProjectInput = {
     id?: string
     createdAt?: Date | string
@@ -21250,10 +21173,21 @@ export namespace Prisma {
     chatId?: string | null
   }
 
+  export type TaskCreateManyProjectInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creatorId?: string | null
+    parentId?: string | null
+    status?: string
+    details: string
+    chatId?: string | null
+  }
+
   export type ProjectsOnUsersUpdateWithoutProjectInput = {
-    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedBy?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
   }
 
   export type ProjectsOnUsersUncheckedUpdateWithoutProjectInput = {
@@ -21268,53 +21202,16 @@ export namespace Prisma {
     assignedBy?: StringFieldUpdateOperationsInput | string
   }
 
-  export type TaskUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
-    parent?: TaskUpdateOneWithoutSubTasksNestedInput
-    subTasks?: TaskUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chat?: ChatUpdateOneWithoutTaskNestedInput
-  }
-
-  export type TaskUncheckedUpdateWithoutProjectInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
-    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type TaskUncheckedUpdateManyWithoutTasksInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
-    parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    details?: StringFieldUpdateOperationsInput | string
-    chatId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type SpaceUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
-    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
     spaceType?: StringFieldUpdateOperationsInput | string
-    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
-    subspaces?: SpaceUpdateManyWithoutParentNestedInput
     chat?: ChatUpdateOneWithoutSpaceNestedInput
+    parent?: SpaceUpdateOneWithoutSubspacesNestedInput
+    settings?: SpaceSettingsUpdateOneRequiredWithoutSpaceNestedInput
+    view?: SpaceViewUpdateOneRequiredWithoutSpaceNestedInput
+    subspaces?: SpaceUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceUncheckedUpdateWithoutProjectInput = {
@@ -21325,8 +21222,8 @@ export namespace Prisma {
     settingsId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
-    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subspaces?: SpaceUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type SpaceUncheckedUpdateManyWithoutSpacesInput = {
@@ -21337,6 +21234,43 @@ export namespace Prisma {
     settingsId?: StringFieldUpdateOperationsInput | string
     spaceType?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TaskUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneWithoutTaskNestedInput
+    creator?: UserUpdateOneWithoutCreatedTasksNestedInput
+    parent?: TaskUpdateOneWithoutSubTasksNestedInput
+    subTasks?: TaskUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
+    chatId?: NullableStringFieldUpdateOperationsInput | string | null
+    subTasks?: TaskUncheckedUpdateManyWithoutParentNestedInput
+    assignes?: UserAssignedTasksUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateManyWithoutTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    details?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -21357,12 +21291,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
-    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
     chat?: ChatUpdateOneWithoutProjectNestedInput
+    owner?: UserUpdateOneRequiredWithoutOwnedProjectsNestedInput
+    settings?: ProjectSettingsUpdateOneRequiredWithoutProjectNestedInput
     users?: ProjectsOnUsersUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutWorkspaceInput = {
@@ -21375,8 +21309,8 @@ export namespace Prisma {
     ownerId?: StringFieldUpdateOperationsInput | string
     chatId?: NullableStringFieldUpdateOperationsInput | string | null
     users?: ProjectsOnUsersUncheckedUpdateManyWithoutProjectNestedInput
-    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
     spaces?: SpaceUncheckedUpdateManyWithoutProjectNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutProjectsInput = {
@@ -21408,9 +21342,9 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
     sender?: UserUpdateOneWithoutCommentsNestedInput
     subMessages?: MessageUpdateManyWithoutParentNestedInput
-    chat?: ChatUpdateOneRequiredWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateWithoutParentInput = {
@@ -21421,8 +21355,8 @@ export namespace Prisma {
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     senderId?: NullableStringFieldUpdateOperationsInput | string | null
-    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
     chatId?: StringFieldUpdateOperationsInput | string
+    subMessages?: MessageUncheckedUpdateManyWithoutParentNestedInput
   }
 
   export type MessageUncheckedUpdateManyWithoutSubMessagesInput = {
@@ -21454,8 +21388,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     contentType?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
-    sender?: UserUpdateOneWithoutCommentsNestedInput
     parent?: MessageUpdateOneWithoutSubMessagesNestedInput
+    sender?: UserUpdateOneWithoutCommentsNestedInput
     subMessages?: MessageUpdateManyWithoutParentNestedInput
   }
 

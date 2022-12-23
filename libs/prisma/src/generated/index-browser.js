@@ -97,8 +97,8 @@ exports.Prisma.UserScalarFieldEnum = makeEnum({
   lastname: 'lastname',
   username: 'username',
   active: 'active',
-  role: 'role',
-  chatId: 'chatId'
+  chatId: 'chatId',
+  role: 'role'
 });
 
 exports.Prisma.TaskScalarFieldEnum = makeEnum({

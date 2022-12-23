@@ -12,53 +12,53 @@ Table User {
   lastname String
   username String [not null]
   active Boolean [not null]
-  role Role [not null]
-  ownedProjects Project [not null]
-  comments Message [not null]
-  workspaces Workspace [not null]
-  createdTasks Task [not null]
-  followedBy User [not null]
-  following User [not null]
-  projects ProjectsOnUsers [not null]
-  assignedTasks UserAssignedTasks [not null]
-  chat Chat
   chatId String [unique]
+  role Role [not null]
+  chat Chat
+  comments Message [not null]
+  ownedProjects Project [not null]
+  projects ProjectsOnUsers [not null]
+  createdTasks Task [not null]
+  assignedTasks UserAssignedTasks [not null]
+  workspaces Workspace
+  User_B User [not null]
+  User_A User [not null]
 }
 
 Table Task {
   id String [pk]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  project Project
   projectId String
-  creator User
   creatorId String
   parentId String
-  parent Task
-  subTasks Task [not null]
-  assignes UserAssignedTasks [not null]
   status String [not null, default: 'TODO']
   details String [not null]
-  chat Chat
   chatId String [unique]
+  chat Chat
+  creator User
+  parent Task
+  project Project
+  subTasks Task [not null]
+  assignes UserAssignedTasks [not null]
 }
 
 Table Space {
   id String [pk]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  view SpaceView [not null]
   viewId String [unique, not null]
-  project Project [not null]
   projectId String [not null]
-  settings SpaceSettings [not null]
   settingsId String [unique, not null]
   spaceType String [not null]
   parentId String
-  parent Space
-  subspaces Space [not null]
-  chat Chat
   chatId String [unique]
+  chat Chat
+  parent Space
+  project Project [not null]
+  settings SpaceSettings [not null]
+  view SpaceView [not null]
+  subspaces Space [not null]
 }
 
 Table SpaceView {
@@ -66,8 +66,8 @@ Table SpaceView {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   localId String [not null]
-  space Space
   spaceId String [not null]
+  space Space
 }
 
 Table SpaceSettings {
@@ -75,8 +75,8 @@ Table SpaceSettings {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   localId String [not null]
-  space Space
   spaceId String [not null]
+  space Space
 }
 
 Table Project {
@@ -85,17 +85,17 @@ Table Project {
   updatedAt DateTime [not null]
   title String [not null]
   description String
-  settings ProjectSettings [not null]
   settingsId String [unique, not null]
-  workspace Workspace [not null]
   workspaceId String [not null]
-  owner User [not null]
   ownerId String [not null]
-  chat Chat
   chatId String [unique]
+  chat Chat
+  owner User [not null]
+  settings ProjectSettings [not null]
+  workspace Workspace [not null]
   users ProjectsOnUsers [not null]
-  tasks Task [not null]
   spaces Space [not null]
+  tasks Task [not null]
 }
 
 Table ProjectSettings {
@@ -103,8 +103,8 @@ Table ProjectSettings {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   localId String [not null]
-  project Project
   projectId String [not null]
+  project Project
 }
 
 Table Workspace {
@@ -112,10 +112,10 @@ Table Workspace {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   title String [not null]
-  settings WorkspaceSettings [not null]
   settingsId String [unique, not null]
-  user User [not null]
   userId String [unique, not null]
+  settings WorkspaceSettings [not null]
+  user User [not null]
   projects Project [not null]
 }
 
@@ -124,17 +124,17 @@ Table WorkspaceSettings {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   localId String [not null]
-  workspace Workspace
   workspaceId String [not null]
+  workspace Workspace
 }
 
 Table ProjectsOnUsers {
-  project Project [not null]
   projectId String [not null]
-  user User [not null]
   userId String [not null]
   assignedAt DateTime [default: `now()`, not null]
   assignedBy String [not null]
+  project Project [not null]
+  user User [not null]
 
   indexes {
     (projectId, userId) [pk]
@@ -142,12 +142,12 @@ Table ProjectsOnUsers {
 }
 
 Table UserAssignedTasks {
-  task Task [not null]
   taskId String [not null]
-  user User [not null]
   userId String [not null]
   assignedAt DateTime [default: `now()`, not null]
   assignedBy String [not null]
+  task Task [not null]
+  user User [not null]
 
   indexes {
     (taskId, userId) [pk]
@@ -161,13 +161,13 @@ Table Message {
   content String [not null]
   contentType String [not null, default: 'string']
   type String [not null, default: 'message']
-  sender User
   senderId String
   parentId String
-  parent Message
-  subMessages Message [not null]
-  chat Chat [not null]
   chatId String [not null]
+  chat Chat [not null]
+  parent Message
+  sender User
+  subMessages Message [not null]
 }
 
 Table Chat {
@@ -175,15 +175,15 @@ Table Chat {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   messages Message [not null]
-  Task Task
-  Space Space
-  User User
   Project Project
+  Space Space
+  Task Task
+  User User
 }
 
 Table UserFollows {
-  followedbyId String [ref: > User.id]
-  followingId String [ref: > User.id]
+  user_bId String [ref: > User.id]
+  user_aId String [ref: > User.id]
 }
 
 Enum Role {
@@ -193,35 +193,35 @@ Enum Role {
 
 Ref: User.chatId - Chat.id
 
-Ref: Task.projectId > Project.id
+Ref: Task.chatId - Chat.id
 
 Ref: Task.creatorId > User.id
 
 Ref: Task.parentId - Task.id
 
-Ref: Task.chatId - Chat.id
+Ref: Task.projectId > Project.id
 
-Ref: Space.viewId - SpaceView.id
+Ref: Space.chatId - Chat.id
+
+Ref: Space.parentId - Space.id
 
 Ref: Space.projectId > Project.id
 
 Ref: Space.settingsId - SpaceSettings.id
 
-Ref: Space.parentId - Space.id
+Ref: Space.viewId - SpaceView.id
 
-Ref: Space.chatId - Chat.id
+Ref: Project.chatId - Chat.id
+
+Ref: Project.ownerId > User.id
 
 Ref: Project.settingsId - ProjectSettings.id
 
 Ref: Project.workspaceId > Workspace.id
 
-Ref: Project.ownerId > User.id
-
-Ref: Project.chatId - Chat.id
-
 Ref: Workspace.settingsId - WorkspaceSettings.id
 
-Ref: Workspace.userId > User.id
+Ref: Workspace.userId - User.id
 
 Ref: ProjectsOnUsers.projectId > Project.id
 
@@ -231,8 +231,8 @@ Ref: UserAssignedTasks.taskId > Task.id
 
 Ref: UserAssignedTasks.userId > User.id
 
-Ref: Message.senderId > User.id
+Ref: Message.chatId > Chat.id
 
 Ref: Message.parentId - Message.id
 
-Ref: Message.chatId > Chat.id
+Ref: Message.senderId > User.id
