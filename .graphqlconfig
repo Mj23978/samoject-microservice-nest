@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "nest-prisma-starter": {
+      "schemaPath": "apps/gateway-web/schema.graphql",
+      "extensions": {
+        "endpoints": {
+          "dev": "http://localhost:5000/graphql"
+        }
+      }
+    }
+  }
+}

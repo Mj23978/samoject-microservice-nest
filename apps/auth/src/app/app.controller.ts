@@ -1,11 +1,11 @@
 import { Controller, Logger, Body, Post, Res, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthApiError } from '@supabase/supabase-js';
-import { LoginInput, SignupInput } from '../dto';
-import { FastifyReply } from 'fastify';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { CreateUserInput } from '@samoject/interface';
+import { AuthEvent, CreateUserInput, LoginInput, SignupInput } from '@samoject/interface';
+import { Response } from 'express';
+import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
@@ -13,19 +13,21 @@ export class AppController {
   private readonly logger = new Logger(AppController.name);
 
   @Post('signup')
-  async signup(@Body() data: SignupInput) {
+  @MessagePattern({ cmd: AuthEvent.SIGN_UP })
+  async signup(@Body() data: SignupInput, @Res() res: Response) {
     this.logger.log('GET /auth/email called');
-    const result = await this.appService.signup(data.email, data.password, data.username, data.firstname, data.lastname);
-    // if (result instanceof AuthApiError) {
-    //   return res.status(result.status).send(result);
-    // }
+    const result = await this.appService.signup(data);
+    if (result instanceof AuthApiError) {
+      return res.status(result.status).json(result);
+    }
     if (result instanceof Observable<CreateUserInput>) {
       return result.pipe(tap(result => this.logger.log('AuthController: signup result', result)));
     }
     return result
   }
-
+  
   @Post('email')
+  @MessagePattern({ cmd: AuthEvent.SIGN_IN_WITH_EMAIL })
   async authEmail(@Body() data: LoginInput) {
     this.logger.log('GET /auth/email called');
     return await this.appService.signInWithEmail(data.email, data.password);

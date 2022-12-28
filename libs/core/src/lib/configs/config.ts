@@ -31,5 +31,12 @@ export const config = (): Config => ({
    database: process.env.SURREALDB_DATABASE || 'test',
    user: process.env.SURREALDB_USER || 'root',
    pass: process.env.SURREALDB_PASS || 'root',
+  },
+  gateway: {
+    production: false
+  },
+  redis: {    
+    port: 6379,
+    host: 'localhost'
   }
 });

@@ -18,7 +18,6 @@ specifiers:
   '@nestjs/microservices': ^9.2.1
   '@nestjs/passport': ^9.0.0
   '@nestjs/platform-express': '>=9.0.0 <10.0.0'
-  '@nestjs/platform-fastify': ^8.4.0
   '@nestjs/schematics': ^9.0.0
   '@nestjs/swagger': ^6.1.3
   '@nestjs/testing': ^9.0.0
@@ -34,14 +33,14 @@ specifiers:
   '@prisma/client': 4.1.0
   '@supabase/supabase-js': ^2.1.3
   '@types/express': 4.17.13
-  '@types/ioredis': ^4.28.8
+  '@types/ioredis': ^5.0.0
   '@types/jest': 28.1.1
   '@types/node': 18.7.1
   '@types/passport-jwt': ^3.0.7
   '@typescript-eslint/eslint-plugin': ^5.36.1
   '@typescript-eslint/parser': ^5.36.1
+  apollo-server-core: ^3.11.1
   apollo-server-express: 3.10.0
-  apollo-server-fastify: ^3.6.3
   babel-core: ^6.26.3
   bcrypt: ^5.1.0
   class-transformer: 0.5.1
@@ -51,10 +50,11 @@ specifiers:
   express: ^4.17.1
   fastify: ^4.10.2
   graphql: '>=16.0.0'
+  graphql-redis-subscriptions: ^2.6.0
   graphql-scalars: 1.17.0
   graphql-subscriptions: 2.0.0
   graphql-type-json: ^0.3.2
-  ioredis: ^4.28.5
+  ioredis: ^5.2.4
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
   joi: ^17.6.0
@@ -87,23 +87,22 @@ dependencies:
   '@apollo/gateway': 2.2.2_graphql@16.6.0
   '@devoxa/prisma-relay-cursor-connection': 2.2.2_@prisma+client@4.1.0
   '@golevelup/nestjs-modules': 0.6.1_dilk3li5i7sa63oq35hxgg4sbu
-  '@liaoliaots/nestjs-redis': 6.0.0_ruve4nnrymwr4j2pcaeecjezmq
-  '@nestjs/apollo': 10.0.19_zpn2mjjulx4kuemfbesq46zlbe
+  '@liaoliaots/nestjs-redis': 6.0.0_mcijkclrzahmvzs6uioeankb6i
+  '@nestjs/apollo': 10.0.19_7d4ao4zjzvyudrhll6qy4cj24m
   '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
   '@nestjs/config': 2.2.0_q6tehokzwy3z4akuawpn6kiwbe
   '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
   '@nestjs/graphql': 10.1.7_jankzusrxgakxrfasqusgppqmm
   '@nestjs/jwt': 9.0.0_@nestjs+common@8.4.7
   '@nestjs/mapped-types': 1.2.0_7zw7e46jhcfuw5vwuwho2brjki
-  '@nestjs/microservices': 9.2.1_oxgyofadbqa4jm3qezkadvsn7y
+  '@nestjs/microservices': 9.2.1_7irujq75qrl3fbsbxlikvrnee4
   '@nestjs/passport': 9.0.0_ajebcnomotz225cztrmzhvaeiq
   '@nestjs/platform-express': 9.2.1_7tsmhnugyerf5okgqzer2mfqme
-  '@nestjs/platform-fastify': 8.4.7_7tsmhnugyerf5okgqzer2mfqme
   '@nestjs/swagger': 6.1.4_jgos3tknxr3npmt3x2cmlilqyq
   '@prisma/client': 4.1.0_prisma@4.1.0
   '@supabase/supabase-js': 2.2.1
+  apollo-server-core: 3.11.1_graphql@16.6.0
   apollo-server-express: 3.10.0_5ha345eiak62qiwwva5z4dp6gu
-  apollo-server-fastify: 3.11.1_fygroej5rbwcvkqhor3au7mcry
   babel-core: 6.26.3
   bcrypt: 5.1.0
   class-transformer: 0.5.1
@@ -111,10 +110,11 @@ dependencies:
   express: 4.18.2
   fastify: 4.10.2
   graphql: 16.6.0
+  graphql-redis-subscriptions: 2.6.0_nsv4zbviaf54hk5nfhl4slig7i
   graphql-scalars: 1.17.0_graphql@16.6.0
   graphql-subscriptions: 2.0.0_graphql@16.6.0
   graphql-type-json: 0.3.2_graphql@16.6.0
-  ioredis: 4.28.5
+  ioredis: 5.2.4
   joi: 17.7.0
   kafkajs: 1.16.0
   nats: 2.10.0
@@ -143,7 +143,7 @@ devDependencies:
   '@nrwl/tao': 13.8.3
   '@nrwl/workspace': 15.3.3_324d72diffomyyym6tiz4paiyq
   '@types/express': 4.17.13
-  '@types/ioredis': 4.28.10
+  '@types/ioredis': 5.0.0
   '@types/jest': 28.1.1
   '@types/node': 18.7.1
   '@types/passport-jwt': 3.0.8
@@ -933,20 +933,6 @@ packages:
       - supports-color
     dev: true
 
-  /@fastify/accepts/3.0.0:
-    resolution: {integrity: sha512-+ldBB3O59p/z9Uc1LSZqAA4/oZaNbRtCVMwjgJOahl+PKmx4ciRRoWVht77kFOb36lRE5MPEba4Vt78H7PKfQw==}
-    engines: {node: '>=10'}
-    dependencies:
-      accepts: 1.3.8
-      fastify-plugin: 3.0.1
-    dev: false
-
-  /@fastify/ajv-compiler/1.1.0:
-    resolution: {integrity: sha512-gvCOUNpXsWrIQ3A4aXCLIdblL0tDq42BG/2Xw7oxbil9h11uow10ztS2GuFazNBfjbrsZ5nl+nPl5jDSjj5TSg==}
-    dependencies:
-      ajv: 6.12.6
-    dev: false
-
   /@fastify/ajv-compiler/3.5.0:
     resolution: {integrity: sha512-ebbEtlI7dxXF5ziNdr05mOY8NnDiPB1XvAlLHctRt/Rc+C3LCOVW5imUVX+mhvUhnNzmPBHewUkOFgGlCxgdAA==}
     dependencies:
@@ -955,19 +941,8 @@ packages:
       fast-uri: 2.2.0
     dev: false
 
-  /@fastify/cors/7.0.0:
-    resolution: {integrity: sha512-nlo6ScwagBNJacAZD3KX90xjWLIoV0vN9QqoX1wUE9ZeZMdvkVkMZCGlxEtr00NshV0X5wDge4w5rwox7rRzSg==}
-    dependencies:
-      fastify-plugin: 3.0.1
-      vary: 1.1.2
-    dev: false
-
   /@fastify/deepmerge/1.3.0:
     resolution: {integrity: sha512-J8TOSBq3SoZbDhM9+R/u77hP93gz/rajSA+K2kGyijPpORPWUXHUpTaleoj+92As0S9uPRP7Oi8IqMf0u+ro6A==}
-    dev: false
-
-  /@fastify/error/2.0.0:
-    resolution: {integrity: sha512-wI3fpfDT0t7p8E6dA2eTECzzOd+bZsZCJ2Hcv+Onn2b7ZwK3RwD27uW2QDaMtQhAfWQQP+WNK7nKf0twLsBf9w==}
     dev: false
 
   /@fastify/error/3.2.0:
@@ -1124,6 +1099,9 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@ioredis/commands/1.2.0:
+    resolution: {integrity: sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg==}
 
   /@istanbuljs/load-nyc-config/1.1.0:
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
@@ -1470,7 +1448,7 @@ packages:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
 
-  /@liaoliaots/nestjs-redis/6.0.0_ruve4nnrymwr4j2pcaeecjezmq:
+  /@liaoliaots/nestjs-redis/6.0.0_mcijkclrzahmvzs6uioeankb6i:
     resolution: {integrity: sha512-D2SNd//By+NFnYYLL5FLeG9PRzP6MzLvfTFp32Zp9HWH3VnZ5wcmjtrMnvMmThaLt65RZLbRyVRX1KCFR2EGLA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -1485,7 +1463,7 @@ packages:
       '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
       '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
       '@types/promise.allsettled': 1.0.3
-      ioredis: 4.28.5
+      ioredis: 5.2.4
       promise.allsettled: 1.0.5
       redis-errors: 1.2.0
       tslib: 2.3.1
@@ -1524,7 +1502,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nestjs/apollo/10.0.19_zpn2mjjulx4kuemfbesq46zlbe:
+  /@nestjs/apollo/10.0.19_7d4ao4zjzvyudrhll6qy4cj24m:
     resolution: {integrity: sha512-uj10uZOQYBeUMYnKma0gpBSFDubZnXp4mqIRMJFNTF/0lEywFUEmdIc4IiRFSN3C4SY4EDIbUyDAMDRE3Ablew==}
     peerDependencies:
       '@apollo/gateway': ^0.44.1 || ^0.46.0 || ^0.48.0 || ^0.49.0 || ^0.50.0 || ^2.0.0
@@ -1549,8 +1527,8 @@ packages:
       '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
       '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
       '@nestjs/graphql': 10.1.7_jankzusrxgakxrfasqusgppqmm
+      apollo-server-core: 3.11.1_graphql@16.6.0
       apollo-server-express: 3.10.0_5ha345eiak62qiwwva5z4dp6gu
-      apollo-server-fastify: 3.11.1_fygroej5rbwcvkqhor3au7mcry
       graphql: 16.6.0
       iterall: 1.3.0
       lodash.omit: 4.5.0
@@ -1654,7 +1632,7 @@ packages:
         optional: true
     dependencies:
       '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
-      '@nestjs/microservices': 9.2.1_oxgyofadbqa4jm3qezkadvsn7y
+      '@nestjs/microservices': 9.2.1_7irujq75qrl3fbsbxlikvrnee4
       '@nestjs/platform-express': 9.2.1_7tsmhnugyerf5okgqzer2mfqme
       '@nuxtjs/opencollective': 0.3.2
       fast-safe-stringify: 2.1.1
@@ -1744,7 +1722,7 @@ packages:
       reflect-metadata: 0.1.13
     dev: false
 
-  /@nestjs/microservices/9.2.1_oxgyofadbqa4jm3qezkadvsn7y:
+  /@nestjs/microservices/9.2.1_7irujq75qrl3fbsbxlikvrnee4:
     resolution: {integrity: sha512-ve4dqgoIaUG9VtinHHGCvf6SvtPjd3I44Mj8z8mSkcB8BEPfJnf4FNOShFBgsedtxLaiZyjpv8NCLcNVv5KKGg==}
     peerDependencies:
       '@grpc/grpc-js': '*'
@@ -1782,7 +1760,7 @@ packages:
     dependencies:
       '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
       '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
-      ioredis: 4.28.5
+      ioredis: 5.2.4
       iterare: 1.2.1
       kafkajs: 1.16.0
       nats: 2.10.0
@@ -1815,25 +1793,6 @@ packages:
       tslib: 2.4.1
     transitivePeerDependencies:
       - supports-color
-
-  /@nestjs/platform-fastify/8.4.7_7tsmhnugyerf5okgqzer2mfqme:
-    resolution: {integrity: sha512-3miB5AYQMlwTAC6W3HE3UTfsQF5RcCsellIEHhNKWN9jGA3C++zr24nEBzw61+Ca2fOG4+ccg4agtODn53d+UA==}
-    peerDependencies:
-      '@nestjs/common': ^8.0.0
-      '@nestjs/core': ^8.0.0
-    dependencies:
-      '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
-      '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
-      fastify: 3.29.0
-      fastify-cors: 6.1.0
-      fastify-formbody: 5.3.0
-      light-my-request: 5.0.0
-      middie: 6.1.0
-      path-to-regexp: 3.2.0
-      tslib: 2.4.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /@nestjs/schematics/9.0.3_nobats3jkocaued6l3papcxri4:
     resolution: {integrity: sha512-kZrU/lrpVd2cnK8I3ibDb3Wi1ppl3wX3U3lVWoL+DzRRoezWKkh8upEL4q0koKmuXnsmLiu3UPxFeMOrJV7TSA==}
@@ -1909,7 +1868,7 @@ packages:
     dependencies:
       '@nestjs/common': 8.4.7_ufuujcqbszwis444rmt5m3dshy
       '@nestjs/core': 8.4.7_v5pt743aqs6g66opntjykczf6y
-      '@nestjs/microservices': 9.2.1_oxgyofadbqa4jm3qezkadvsn7y
+      '@nestjs/microservices': 9.2.1_7irujq75qrl3fbsbxlikvrnee4
       '@nestjs/platform-express': 9.2.1_7tsmhnugyerf5okgqzer2mfqme
       tslib: 2.4.1
     dev: true
@@ -2846,10 +2805,13 @@ packages:
       '@types/node': 18.11.17
     dev: true
 
-  /@types/ioredis/4.28.10:
-    resolution: {integrity: sha512-69LyhUgrXdgcNDv7ogs1qXZomnfOEnSmrmMFqKgt1XMJxmoOSG/u3wYy13yACIfKuMJ8IhKgHafDO3sx19zVQQ==}
+  /@types/ioredis/5.0.0:
+    resolution: {integrity: sha512-zJbJ3FVE17CNl5KXzdeSPtdltc4tMT3TzC6fxQS0sQngkbFZ6h+0uTafsRqu+eSLIugf6Yb0Ea0SUuRr42Nk9g==}
+    deprecated: This is a stub types definition. ioredis provides its own type definitions, so you do not need this installed.
     dependencies:
-      '@types/node': 18.11.17
+      ioredis: 5.2.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -3460,6 +3422,7 @@ packages:
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
+    dev: true
 
   /ajv/8.11.0:
     resolution: {integrity: sha512-wGgprdCvMalC0BztXvitD2hC04YffAvtsUn93JbGXYLAtCUO4xd17mCCZQxUOItiBwZvJScWo8NIvQMQ71rdpg==}
@@ -3647,24 +3610,6 @@ packages:
       - supports-color
     dev: false
 
-  /apollo-server-fastify/3.11.1_fygroej5rbwcvkqhor3au7mcry:
-    resolution: {integrity: sha512-yJBn2Ef2LFip8K2spD2db2MaN4Q/XoFDcOdU/G4hAL6gqw1UX3lSVbbzEbq4ToYmkODzXnCHRW/4Ch4K8FmNxw==}
-    engines: {node: '>=12.0'}
-    deprecated: The `apollo-server-fastify` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
-    peerDependencies:
-      fastify: ^3.17.0
-      graphql: ^15.3.0 || ^16.0.0
-    dependencies:
-      '@fastify/accepts': 3.0.0
-      '@fastify/cors': 7.0.0
-      apollo-server-core: 3.11.1_graphql@16.6.0
-      apollo-server-types: 3.7.1_graphql@16.6.0
-      fastify: 4.10.2
-      graphql: 16.6.0
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
   /apollo-server-plugin-base/3.7.1_graphql@16.6.0:
     resolution: {integrity: sha512-g3vJStmQtQvjGI289UkLMfThmOEOddpVgHLHT2bNj0sCD/bbisj4xKbBHETqaURokteqSWyyd4RDTUe0wAUDNQ==}
     engines: {node: '>=12.0'}
@@ -3844,17 +3789,6 @@ packages:
   /available-typed-arrays/1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
-    dev: false
-
-  /avvio/7.2.5:
-    resolution: {integrity: sha512-AOhBxyLVdpOad3TujtC9kL/9r3HnTkxwQ5ggOsYrvvZP1cCFvzHWJd5XxZDFuTn+IN8vkKSG5SEJrd27vCSbeA==}
-    dependencies:
-      archy: 1.0.0
-      debug: 4.3.4
-      fastq: 1.14.0
-      queue-microtask: 1.2.3
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /avvio/8.2.0:
@@ -5047,6 +4981,7 @@ packages:
   /deepmerge/4.2.2:
     resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /default-gateway/6.0.3:
     resolution: {integrity: sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==}
@@ -5095,8 +5030,8 @@ packages:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
     dev: false
 
-  /denque/1.5.1:
-    resolution: {integrity: sha512-XwE+iZ4D6ZUB7mfYRMb5wByE8L74HCn30FBN7sWnXksWc1LO1bPDl67pBR9o/kC4z/xSNAwkMYcGgqDV3BE3Hw==}
+  /denque/2.1.0:
+    resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
     engines: {node: '>=0.10'}
 
   /depd/1.1.2:
@@ -5770,16 +5705,6 @@ packages:
   /fast-json-stable-stringify/2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
 
-  /fast-json-stringify/2.7.13:
-    resolution: {integrity: sha512-ar+hQ4+OIurUGjSJD1anvYSDcUflywhKjfxnsW4TBTD7+u0tJufv6DKRWoQk3vI6YBOWMoz0TQtfbe7dxbQmvA==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      ajv: 6.12.6
-      deepmerge: 4.2.2
-      rfdc: 1.3.0
-      string-similarity: 4.0.4
-    dev: false
-
   /fast-json-stringify/5.5.0:
     resolution: {integrity: sha512-rmw2Z8/mLkND8zI+3KTYIkNPEoF5v6GqDP/o+g7H3vjdWjBwuKpgAYFHIzL6ORRB+iqDjjtJnLIW9Mzxn5szOA==}
     dependencies:
@@ -5816,59 +5741,6 @@ packages:
   /fast-write-atomic/0.2.1:
     resolution: {integrity: sha512-WvJe06IfNYlr+6cO3uQkdKdy3Cb1LlCJSF8zRs2eT8yuhdbSlR9nIt+TgQ92RUxiRrQm+/S7RARnMfCs5iuAjw==}
     dev: true
-
-  /fastify-cors/6.0.3:
-    resolution: {integrity: sha512-fMbXubKKyBHHCfSBtsCi3+7VyVRdhJQmGes5gM+eGKkRErCdm0NaYO0ozd31BQBL1ycoTIjbqOZhJo4RTF/Vlg==}
-    dependencies:
-      fastify-plugin: 3.0.1
-      vary: 1.1.2
-    dev: false
-
-  /fastify-cors/6.1.0:
-    resolution: {integrity: sha512-QBKz32IoY/iuT74CunRY1XOSpjSTIOh9E3FxulXIBhd0D2vdgG0kDvy0eG6HA/88sRfWHeba43LkGEXPz0Rh8g==}
-    dependencies:
-      fastify-cors-deprecated: /fastify-cors/6.0.3
-      process-warning: 1.0.0
-    dev: false
-
-  /fastify-formbody/5.2.0:
-    resolution: {integrity: sha512-d8Y5hCL82akPyoFiXh2wYOm3es0pV9jqoPo3pO9OV2cNF0cQx39J5WAVXzCh4MSt9Z2qF4Fy5gHlvlyESwjtvg==}
-    dependencies:
-      fastify-plugin: 3.0.1
-    dev: false
-
-  /fastify-formbody/5.3.0:
-    resolution: {integrity: sha512-7cjFV2HE/doojyfTwCLToIFD6Hmbw2jVTbfqZ2lbUZznQWlSXu+MBQgqBU8T2nHcMfqSi9vx6PyX0LwTehuKkg==}
-    dependencies:
-      fastify-formbody-deprecated: /fastify-formbody/5.2.0
-      process-warning: 1.0.0
-    dev: false
-
-  /fastify-plugin/3.0.1:
-    resolution: {integrity: sha512-qKcDXmuZadJqdTm6vlCqioEbyewF60b/0LOFCcYN1B6BIZGlYJumWWOYs70SFYLDAH4YqdE1cxH/RKMG7rFxgA==}
-    dev: false
-
-  /fastify/3.29.0:
-    resolution: {integrity: sha512-zXSiDTdHJCHcmDrSje1f1RfzTmUTjMtHnPhh6cdokgfHhloQ+gy0Du+KlEjwTbcNC3Djj4GAsBzl6KvfI9Ah2g==}
-    dependencies:
-      '@fastify/ajv-compiler': 1.1.0
-      '@fastify/error': 2.0.0
-      abstract-logging: 2.0.1
-      avvio: 7.2.5
-      fast-json-stringify: 2.7.13
-      find-my-way: 4.5.1
-      flatstr: 1.0.12
-      light-my-request: 4.12.0
-      pino: 6.14.0
-      process-warning: 1.0.0
-      proxy-addr: 2.0.7
-      rfdc: 1.3.0
-      secure-json-parse: 2.6.0
-      semver: 7.3.8
-      tiny-lru: 8.0.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
 
   /fastify/4.10.2:
     resolution: {integrity: sha512-0T+4zI6N3S8ex0LCZi3H4FasJR4AzWw834fUkPWvV8r6GBJkLmAOfFxH8f5V29Plef24IK0QSQD/tz1Nx+1UOA==}
@@ -5990,16 +5862,6 @@ packages:
       pkg-dir: 4.2.0
     dev: true
 
-  /find-my-way/4.5.1:
-    resolution: {integrity: sha512-kE0u7sGoUFbMXcOG/xpkmz4sRLCklERnBcg7Ftuu1iAxsfEt2S46RLJ3Sq7vshsEy2wJT2hZxE58XZK27qa8kg==}
-    engines: {node: '>=10'}
-    dependencies:
-      fast-decode-uri-component: 1.0.1
-      fast-deep-equal: 3.1.3
-      safe-regex2: 2.0.0
-      semver-store: 0.3.0
-    dev: false
-
   /find-my-way/7.3.1:
     resolution: {integrity: sha512-kGvM08SOkqvheLcuQ8GW9t/H901Qb9rZEbcNWbXopzy4jDRoaJpJoObPSKf4MnQLZ20ZTp7rL5MpF6rf+pqmyg==}
     engines: {node: '>=14'}
@@ -6037,10 +5899,6 @@ packages:
     resolution: {integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==}
     hasBin: true
     dev: true
-
-  /flatstr/1.0.12:
-    resolution: {integrity: sha512-4zPxDyhCyiN2wIAtSLI6gc82/EjqZc1onI4Mz/l0pWrAlsSfYH/2ZIcU+e3oA2wDwbzIWNKwa23F8rh6+DRWkw==}
-    dev: false
 
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
@@ -6408,6 +6266,18 @@ packages:
 
   /graphql-fields/2.0.3:
     resolution: {integrity: sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==}
+    dev: false
+
+  /graphql-redis-subscriptions/2.6.0_nsv4zbviaf54hk5nfhl4slig7i:
+    resolution: {integrity: sha512-hWAPkCNSFKpEOJBMLAcbpGl/gv+s1Yho2JIwP9MK2RlvqlWiqhAYqjA/HVRK86nkYsRkBwGgqvaNxtV1fAexBQ==}
+    peerDependencies:
+      graphql-subscriptions: ^1.0.0 || ^2.0.0
+    dependencies:
+      graphql-subscriptions: 2.0.0_graphql@16.6.0
+    optionalDependencies:
+      ioredis: 5.2.4
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /graphql-scalars/1.17.0_graphql@16.6.0:
@@ -6817,18 +6687,16 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /ioredis/4.28.5:
-    resolution: {integrity: sha512-3GYo0GJtLqgNXj4YhrisLaNNvWSNwSS2wS4OELGfGxH8I69+XfNdnmV1AyN+ZqMh0i7eX+SWjrwFKDBDgfBC1A==}
-    engines: {node: '>=6'}
+  /ioredis/5.2.4:
+    resolution: {integrity: sha512-qIpuAEt32lZJQ0XyrloCRdlEdUUNGG9i0UOk6zgzK6igyudNWqEBxfH6OlbnOOoBBvr1WB02mm8fR55CnikRng==}
+    engines: {node: '>=12.22.0'}
     dependencies:
+      '@ioredis/commands': 1.2.0
       cluster-key-slot: 1.1.2
       debug: 4.3.4
-      denque: 1.5.1
+      denque: 2.1.0
       lodash.defaults: 4.2.0
-      lodash.flatten: 4.4.0
       lodash.isarguments: 3.1.0
-      p-map: 2.1.0
-      redis-commands: 1.7.0
       redis-errors: 1.2.0
       redis-parser: 3.0.0
       standard-as-callback: 2.1.0
@@ -7844,6 +7712,7 @@ packages:
 
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
+    dev: true
 
   /json-schema-traverse/1.0.0:
     resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
@@ -8012,24 +7881,6 @@ packages:
       webpack-sources: 3.2.3
     dev: true
 
-  /light-my-request/4.12.0:
-    resolution: {integrity: sha512-0y+9VIfJEsPVzK5ArSIJ8Dkxp8QMP7/aCuxCUtG/tr9a2NoOf/snATE/OUc05XUplJCEnRh6gTkH7xh9POt1DQ==}
-    dependencies:
-      ajv: 8.11.2
-      cookie: 0.5.0
-      process-warning: 1.0.0
-      set-cookie-parser: 2.5.1
-    dev: false
-
-  /light-my-request/5.0.0:
-    resolution: {integrity: sha512-0OPHKV+uHgBOnRokzL1LqeMCnSAo5l/rZS7kyB6G1I8qxGCvhXpq1M6WK565Y9A5CSn50l3DVaHnJ5FCdpguZQ==}
-    dependencies:
-      ajv: 8.11.2
-      cookie: 0.5.0
-      process-warning: 1.0.0
-      set-cookie-parser: 2.5.1
-    dev: false
-
   /light-my-request/5.8.0:
     resolution: {integrity: sha512-4BtD5C+VmyTpzlDPCZbsatZMJVgUIciSOwYhJDCbLffPZ35KoDkDj4zubLeHDEb35b4kkPeEv5imbh+RJxK/Pg==}
     dependencies:
@@ -8084,6 +7935,7 @@ packages:
 
   /lodash.flatten/4.4.0:
     resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
+    dev: true
 
   /lodash.includes/4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
@@ -8297,15 +8149,6 @@ packages:
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
-
-  /middie/6.1.0:
-    resolution: {integrity: sha512-akpWXv9QFJ3mXq26kiej7nI4EiID1zEVLq5dxRbrkESMUNNOdTFJjt7Uk9mkcR7D9oR+6km3l3Oah9uQof+Uig==}
-    engines: {node: '>=10.0.0'}
-    dependencies:
-      fastify-plugin: 3.0.1
-      path-to-regexp: 6.2.1
-      reusify: 1.0.4
-    dev: false
 
   /mime-db/1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
@@ -8894,6 +8737,7 @@ packages:
   /p-map/2.1.0:
     resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
     engines: {node: '>=6'}
+    dev: true
 
   /p-map/4.0.0:
     resolution: {integrity: sha512-/bjOqmgETBYB5BoEeGVea8dmvHb2m9GLy1E9W43yeyfP6QQCZGFNa+XRceJEuDB6zqr+gKpIAmlLebMpykw/MQ==}
@@ -9004,10 +8848,6 @@ packages:
   /path-to-regexp/3.2.0:
     resolution: {integrity: sha512-jczvQbCUS7XmS7o+y1aEO9OBVFeZBQ1MDSEqmO7xSoPgOPoowY/SxLpZ6Vh97/8qHZOteiCKb7gkG9gA2ZUxJA==}
 
-  /path-to-regexp/6.2.1:
-    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
-    dev: false
-
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
@@ -9053,25 +8893,8 @@ packages:
       split2: 4.1.0
     dev: false
 
-  /pino-std-serializers/3.2.0:
-    resolution: {integrity: sha512-EqX4pwDPrt3MuOAAUBMU0Tk5kR/YcCM5fNPEzgCO2zJ5HfX0vbiH9HbJglnyeQsN96Kznae6MWD47pZB5avTrg==}
-    dev: false
-
   /pino-std-serializers/6.0.0:
     resolution: {integrity: sha512-mMMOwSKrmyl+Y12Ri2xhH1lbzQxwwpuru9VjyJpgFIH4asSj88F2csdMwN6+M5g1Ll4rmsYghHLQJw81tgZ7LQ==}
-    dev: false
-
-  /pino/6.14.0:
-    resolution: {integrity: sha512-iuhEDel3Z3hF9Jfe44DPXR8l07bhjuFY3GMHIXbjnY9XcafbyDDwl2sN2vw2GjMPf5Nkoe+OFao7ffn9SXaKDg==}
-    hasBin: true
-    dependencies:
-      fast-redact: 3.1.2
-      fast-safe-stringify: 2.1.1
-      flatstr: 1.0.12
-      pino-std-serializers: 3.2.0
-      process-warning: 1.0.0
-      quick-format-unescaped: 4.0.4
-      sonic-boom: 1.4.1
     dev: false
 
   /pino/8.8.0:
@@ -9597,10 +9420,6 @@ packages:
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
-  /process-warning/1.0.0:
-    resolution: {integrity: sha512-du4wfLyj4yCZq1VupnVSZmRsPJsNuxoDQFdCFHLaYiEbFBD7QE0a+I4D7hOxrVnh78QE/YipFAj9lXHiXocV+Q==}
-    dev: false
-
   /process-warning/2.1.0:
     resolution: {integrity: sha512-9C20RLxrZU/rFnxWncDkuF6O999NdIf3E1ws4B0ZeY3sRVPzWBMsYDE2lxjxhiXxg464cQTgKUGm8/i6y2YGXg==}
     dev: false
@@ -9867,9 +9686,6 @@ packages:
     dependencies:
       resolve: 1.22.1
     dev: true
-
-  /redis-commands/1.7.0:
-    resolution: {integrity: sha512-nJWqw3bTFy21hX/CPKHth6sfhZbdiHP6bTawSgQBlKOVRG7EZkfHbbHwQJnrE4vsQf0CMNE+3gJ4Fmm16vdVlQ==}
 
   /redis-errors/1.2.0:
     resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
@@ -10146,10 +9962,6 @@ packages:
       node-forge: 1.3.1
     dev: true
 
-  /semver-store/0.3.0:
-    resolution: {integrity: sha512-TcZvGMMy9vodEFSse30lWinkj+JgOBvPn8wRItpQRSayhc+4ssDs335uklkfvQQJgL/WvmHLVj4Ycv2s7QCQMg==}
-    dev: false
-
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
@@ -10351,13 +10163,6 @@ packages:
       smart-buffer: 4.2.0
     dev: false
 
-  /sonic-boom/1.4.1:
-    resolution: {integrity: sha512-LRHh/A8tpW7ru89lrlkU4AszXt1dbwSjVWguGrmlxE7tawVmDBlI1PILMkXAxJTwqhgsEeTHzj36D5CmHgQmNg==}
-    dependencies:
-      atomic-sleep: 1.0.0
-      flatstr: 1.0.12
-    dev: false
-
   /sonic-boom/3.2.1:
     resolution: {integrity: sha512-iITeTHxy3B9FGu8aVdiDXUVAcHMF9Ss0cCsAOo2HfCrmVGT3/DT5oYaeu0M/YKZDlKTvChEyPq0zI9Hf33EX6A==}
     dependencies:
@@ -10555,10 +10360,6 @@ packages:
       char-regex: 1.0.2
       strip-ansi: 6.0.1
     dev: true
-
-  /string-similarity/4.0.4:
-    resolution: {integrity: sha512-/q/8Q4Bl4ZKAPjj8WerIBJWALKkaPRfrvhfF8k/B23i4nzrlRj2/go1m90In7nG/3XDSbOo0+pu6RvCTM9RGMQ==}
-    dev: false
 
   /string-width/4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -10980,11 +10781,6 @@ packages:
 
   /tiny-lru/10.0.1:
     resolution: {integrity: sha512-Vst+6kEsWvb17Zpz14sRJV/f8bUWKhqm6Dc+v08iShmIJ/WxqWytHzCTd6m88pS33rE2zpX34TRmOpAJPloNCA==}
-    engines: {node: '>=6'}
-    dev: false
-
-  /tiny-lru/8.0.2:
-    resolution: {integrity: sha512-ApGvZ6vVvTNdsmt676grvCkUCGwzG9IqXma5Z07xJgiC5L7akUMof5U8G2JTI9Rz/ovtVhJBlY6mNhEvtjzOIg==}
     engines: {node: '>=6'}
     dev: false
 

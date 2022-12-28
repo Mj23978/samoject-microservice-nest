@@ -1,38 +1,67 @@
-import {
-  EnvironmentVariables,
-  EnvModule
-} from '@samoject/env';
-import { HealthModule } from '@samoject/health';
-import { MongoModule } from '@samoject/mongo';
-// import { kafkaClientConfig } from '@samoject/kafka';
-// import { RedisModule } from '@samoject/redis';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { config, GatewayConfig, SecurityConfig } from '@samoject/core';
+import { PubsubModule } from '@samoject/redis';
+import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { GqlAuthGuard } from './gql-auth.guard';
 import { UserModule } from './user/user.module';
+
 
 @Module({
   imports: [
-    HealthModule,
-    EnvModule,
-    GraphQLModule.forRootAsync<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      useFactory: async (config: ConfigService<EnvironmentVariables>) => ({
-        autoSchemaFile: true,
-        debug: !config.get('isProduction'),
-        playground: !config.get('isProduction'),
-        introspection: !config.get('isProduction'),
-        buildSchemaOptions: {
-          dateScalarMode: 'isoDate',
-          numberScalarMode: 'integer',
-        },
-      }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config],
+    }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => {
+        const securityConfig = configService.get<SecurityConfig>('security');
+        return {
+          secret: configService.get<string>('JWT_ACCESS_SECRET'),
+          signOptions: {
+            expiresIn: securityConfig.expiresIn,
+          },
+        };
+      },
       inject: [ConfigService],
     }),
-    MongoModule,
-    // RedisModule,
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      useFactory: async (configService: ConfigService) => {
+        const gatewayConfig = configService.get<GatewayConfig>('gateway');
+        return {
+          autoSchemaFile: true,
+          debug: !gatewayConfig.production,
+          playground: false,
+          introspection: !gatewayConfig.production,
+          installSubscriptionHandlers: true,
+          plugins: [ ApolloServerPluginLandingPageLocalDefault() ],
+          subscriptions: {
+            'graphql-ws': true
+          },
+          buildSchemaOptions: {
+            dateScalarMode: 'timestamp',
+            numberScalarMode: 'integer',
+          },
+        };
+      },
+      inject: [ConfigService],
+    }),
+    PubsubModule,
     UserModule,
+    SupabaseModule,
   ],
+  providers: [
+    SupabaseStrategy,
+    GqlAuthGuard,
+  ],
+  exports: [GqlAuthGuard],
+
 })
 export class AppModule { }

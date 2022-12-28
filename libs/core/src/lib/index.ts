@@ -3,7 +3,6 @@ export * from './pagination/pagination';
 export * from './pagination/page-info.model';
 export * from './order/order';
 export * from './order/order-direction';
-export * from './models';
 export * from './decorators/user.decorator';
 export * from './configs';
 export * from './middleware/logging.middleware';

@@ -1,6 +1,7 @@
 import {
   IncomingMessage,
   CreateUserInput,
+  UserEvent,
 } from '@samoject/interface';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
@@ -20,7 +21,7 @@ export class AppController {
     return this.appService.sum(data);
   }
 
-  @MessagePattern({ cmd: 'user.createUser'})
+  @MessagePattern({ cmd: UserEvent.CREATE_USER })
   @Post('user')
   async create(@Body() data: CreateUserInput, @Payload() message: IncomingMessage<CreateUserInput>) {
     if (data.username) {
@@ -31,23 +32,23 @@ export class AppController {
     }
   }
 
-  @MessagePattern('user.findAllUser')
+  @MessagePattern({ cmd: UserEvent.FIND_ALL_USER })
   findAll() {
     return this.appService.findAll();
   }
 
-  @MessagePattern('user.findOneUser')
+  @MessagePattern({ cmd: UserEvent.FIND_ONE_USER })
   findOne(@Payload() message: IncomingMessage<{ id: string }>) {
     return this.appService.findOne(message.value.id);
   }
 
-  @MessagePattern('user.updateUser')
+  @MessagePattern({ cmd: UserEvent.UPDATE_USER })
   update(@Payload() message: IncomingMessage<CreateUserInput & { id: string }>) {
     const user = message.value;
     return this.appService.update(message.value.id, { ...user });
   }
 
-  @MessagePattern('user.removeUser')
+  @MessagePattern({ cmd: UserEvent.REMOVE_USER })
   remove(@Payload() message: IncomingMessage<{ id: string }>) {
     return this.appService.remove(message.value.id);
   }

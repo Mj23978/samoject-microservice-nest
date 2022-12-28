@@ -5,6 +5,8 @@ export interface Config {
   graphql: GraphqlConfig;
   security: SecurityConfig;
   surreal: SurrealConfig;
+  gateway: GatewayConfig;
+  redis: RedisConfig
 }
 
 export interface NestConfig {
@@ -42,4 +44,13 @@ export interface SurrealConfig {
   database: string;
   user: string;
   pass: string;
+}
+
+export interface GatewayConfig {
+  production: boolean;
+}
+
+export interface RedisConfig {
+  host: string;
+  port: number;
 }

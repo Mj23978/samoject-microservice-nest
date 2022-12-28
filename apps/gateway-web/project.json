@@ -4,13 +4,19 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:build",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
+        "target": "node",
+        "compiler": "tsc",
         "outputPath": "dist/apps/gateway-web",
         "main": "apps/gateway-web/src/main.ts",
         "tsConfig": "apps/gateway-web/tsconfig.app.json",
-        "assets": ["apps/gateway-web/src/assets"]
+        "assets": [
+          "apps/gateway-web/src/assets"
+        ]
       },
       "configurations": {
         "production": {
@@ -27,9 +33,14 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/node:execute",
+      "executor": "@nrwl/js:node",
       "options": {
         "buildTarget": "gateway-web:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "gateway-web:build:production"
+        }
       }
     },
     "lint": {

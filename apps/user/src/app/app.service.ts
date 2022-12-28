@@ -15,7 +15,6 @@ export class AppService {
   }
 
   public sum(data: number[]): number {
-    console.log('MinionAppService: sum', data);
     return (data || []).reduce((a, b) => a + b);
   }
 
