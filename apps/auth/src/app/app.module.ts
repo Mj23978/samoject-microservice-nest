@@ -1,13 +1,13 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
-import { config, natsConfig, SecurityConfig } from '@samoject/core';
-import { GqlAuthGuard } from './gql-auth.guard';
+import { config, LoggerMiddleware, natsConfig, SecurityConfig } from '@samoject/core';
 import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
-import { AppService } from './app.service';
 import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { GqlAuthGuard } from './gql-auth.guard';
 
 @Module({
   imports: [
@@ -42,4 +42,10 @@ import { AppController } from './app.controller';
   controllers: [AppController],
   exports: [GqlAuthGuard],
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(() => new LoggerMiddleware("Auth"))
+      .forRoutes(AppController);
+  }
+}

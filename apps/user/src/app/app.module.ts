@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { config } from '@samoject/core';
+import { config, LoggerMiddleware } from '@samoject/core';
 import { PrismaModule } from '@samoject/prisma';
 
 import { AppController } from './app.controller';
@@ -17,4 +17,10 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(() => new LoggerMiddleware("Auth"))
+      .forRoutes(AppController);
+  }
+}

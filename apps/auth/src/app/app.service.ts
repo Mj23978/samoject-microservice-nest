@@ -3,11 +3,10 @@ import {
   Injectable
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateUserInput, UserEvent } from '@samoject/interface';
+import { SignupInput } from '@samoject/interface';
 import { Supabase } from '@samoject/supabase';
-import { AuthApiError, AuthError } from '@supabase/supabase-js';
+import { AuthApiError, AuthError, Session, User } from '@supabase/supabase-js';
 import { Observable } from 'rxjs';
-import { SignupInput } from '../dto';
 
 @Injectable()
 export class AppService {
@@ -16,7 +15,7 @@ export class AppService {
     private readonly supabase: Supabase,
   ) { }
 
-  async signup(_data: SignupInput): Promise<Observable<CreateUserInput> | AuthApiError | AuthError> {
+  async signup(_data: SignupInput): Promise<{user: User; session: Session; } | AuthApiError | AuthError> {
     const client = this.supabase.getClient();
     const { data, error } = await client.auth.signUp({
       email: _data.email,
@@ -31,11 +30,7 @@ export class AppService {
       return error;
     }
 
-    return this.client.send<CreateUserInput>({ cmd: UserEvent.CREATE_USER }, {
-      ..._data,
-      active: true,
-      role: 'USER',
-    });
+    return data;
   }
 
   async signInWithEmail(email: string, password: string): Promise<AuthApiError | AuthError | { user; session; }> {
@@ -44,7 +39,7 @@ export class AppService {
       email: email,
       password: password,
     });
-    if (error.name === 'AuthApiError') {
+    if (error?.name === 'AuthApiError') {
       return error as AuthApiError
     }
 

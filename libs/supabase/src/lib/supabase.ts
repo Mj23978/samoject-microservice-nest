@@ -36,7 +36,7 @@ export class Supabase {
         },
         global: {
           headers: {
-            Authorization: `Bearer ${ExtractJwt.fromAuthHeaderAsBearerToken()(this.request)}`,
+            // Authorization: `Bearer ${ExtractJwt.fromAuthHeaderAsBearerToken()(this.request)}`,
           },
         },
       },

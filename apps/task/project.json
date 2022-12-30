@@ -10,6 +10,7 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
+        
         "outputPath": "dist/apps/task",
         "main": "apps/task/src/main.ts",
         "tsConfig": "apps/task/tsconfig.app.json",

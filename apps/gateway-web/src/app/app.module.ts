@@ -8,6 +8,7 @@ import { config, GatewayConfig, SecurityConfig } from '@samoject/core';
 import { PubsubModule } from '@samoject/redis';
 import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { AuthModule } from './auth/auth.module';
 import { GqlAuthGuard } from './gql-auth.guard';
 import { UserModule } from './user/user.module';
 
@@ -38,10 +39,9 @@ import { UserModule } from './user/user.module';
         return {
           autoSchemaFile: true,
           debug: !gatewayConfig.production,
-          playground: false,
+          playground: !gatewayConfig.production,
           introspection: !gatewayConfig.production,
           installSubscriptionHandlers: true,
-          plugins: [ ApolloServerPluginLandingPageLocalDefault() ],
           subscriptions: {
             'graphql-ws': true
           },
@@ -55,6 +55,7 @@ import { UserModule } from './user/user.module';
     }),
     PubsubModule,
     UserModule,
+    AuthModule,
     SupabaseModule,
   ],
   providers: [

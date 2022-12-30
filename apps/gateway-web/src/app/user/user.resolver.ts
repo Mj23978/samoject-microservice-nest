@@ -10,7 +10,10 @@ import { UserService } from './user.service';
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(@Inject(PUB_SUB) private readonly pubSub: RedisPubSub, private readonly userService: UserService,) { }
+  constructor(
+    @Inject(PUB_SUB) private readonly pubSub: RedisPubSub,
+     private readonly userService: UserService,
+    ) { }
   allSubscribers: User[] = [];
 
   @Mutation(() => User)

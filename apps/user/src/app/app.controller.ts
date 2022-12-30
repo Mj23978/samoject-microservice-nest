@@ -1,15 +1,14 @@
-import {
-  IncomingMessage,
-  CreateUserInput,
-  UserEvent,
-} from '@samoject/interface';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { PrismaClientExceptionFilter } from '@samoject/core';
+import {
+  CreateUserInput, IncomingMessage, UserEvent
+} from '@samoject/interface';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getData() {
@@ -23,6 +22,7 @@ export class AppController {
 
   @MessagePattern({ cmd: UserEvent.CREATE_USER })
   @Post('user')
+  @UseFilters(PrismaClientExceptionFilter)
   async create(@Body() data: CreateUserInput, @Payload() message: IncomingMessage<CreateUserInput>) {
     if (data.username) {
       return await this.appService.create(data);
@@ -49,7 +49,8 @@ export class AppController {
   }
 
   @MessagePattern({ cmd: UserEvent.REMOVE_USER })
-  remove(@Payload() message: IncomingMessage<{ id: string }>) {
-    return this.appService.remove(message.value.id);
+  @UseFilters(PrismaClientExceptionFilter)
+  remove(@Body() data: { id: string }, @Payload() message: IncomingMessage<{ id: string }>) {
+    return this.appService.remove(data.id);
   }
 }

@@ -50,6 +50,7 @@ specifiers:
   express: ^4.17.1
   fastify: ^4.10.2
   graphql: '>=16.0.0'
+  graphql-nats-subscriptions: ^1.5.0
   graphql-redis-subscriptions: ^2.6.0
   graphql-scalars: 1.17.0
   graphql-subscriptions: 2.0.0
@@ -110,6 +111,7 @@ dependencies:
   express: 4.18.2
   fastify: 4.10.2
   graphql: 16.6.0
+  graphql-nats-subscriptions: 1.5.0_cuuydqkblo3epcnfin5baecrky
   graphql-redis-subscriptions: 2.6.0_nsv4zbviaf54hk5nfhl4slig7i
   graphql-scalars: 1.17.0_graphql@16.6.0
   graphql-subscriptions: 2.0.0_graphql@16.6.0
@@ -892,6 +894,10 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
+
+  /@cdm-logger/core/7.0.14:
+    resolution: {integrity: sha512-+Y2YBTlklRc0lQ/nfzkAPEBjYJTgTST2K1YLbO8w1OYnYGXu82zIOILn2P+6/4FkCldB+BZT6/F4qxEmKd0J1A==}
+    dev: false
 
   /@colors/colors/1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -6266,6 +6272,21 @@ packages:
 
   /graphql-fields/2.0.3:
     resolution: {integrity: sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==}
+    dev: false
+
+  /graphql-nats-subscriptions/1.5.0_cuuydqkblo3epcnfin5baecrky:
+    resolution: {integrity: sha512-qG8Yw64LHuIvDre92Eyoj07aHYUbcKI3kWJCYDC5u2XS5eL6yISSDpeyTKx0icY0iRsg533P/W7+f2stcDiOEw==}
+    peerDependencies:
+      '@cdm-logger/core': ^7.0.7
+      graphql: ^0.10.5 || ^0.11.3 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+      graphql-subscriptions: ^1.2.0
+      nats: '>=1.2.0'
+    dependencies:
+      '@cdm-logger/core': 7.0.14
+      graphql: 16.6.0
+      graphql-subscriptions: 2.0.0_graphql@16.6.0
+      lodash: 4.17.21
+      nats: 2.10.0
     dev: false
 
   /graphql-redis-subscriptions/2.6.0_nsv4zbviaf54hk5nfhl4slig7i:
