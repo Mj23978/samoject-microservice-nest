@@ -1,0 +1,127 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+type Auth {
+  """JWT access token"""
+  accessToken: JWT!
+
+  """JWT refresh token"""
+  refreshToken: String!
+
+  """Token Type"""
+  tokenType: String!
+
+  """Token Type"""
+  expiresAt: Int!
+
+  """Usser Auth Status"""
+  aud: String!
+}
+
+input CreateUserInput {
+  """Username"""
+  username: String!
+
+  """FirstName"""
+  firstname: String!
+
+  """LastName"""
+  lastname: String!
+
+  """Password"""
+  password: String!
+
+  """Email"""
+  email: String!
+
+  """Active"""
+  active: Boolean!
+
+  """Role"""
+  role: String!
+}
+
+type DeleteUserOutput {
+  deleted: Boolean!
+}
+
+"""
+A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
+"""
+scalar JWT
+
+input LoginInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(_id: String!): DeleteUserOutput!
+  addPerson(person: CreateUserInput!): User!
+  signup(createUserInput: CreateUserInput!): User!
+}
+
+type Query {
+  users: [User!]!
+  user(_id: String!): User!
+  signInWithEmail(loginInput: LoginInput!): Auth!
+}
+
+type Subscription {
+  newPerson: User!
+}
+
+"""
+The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+input UpdateUserInput {
+  """ID"""
+  id: String!
+
+  """Username"""
+  username: String!
+
+  """FirstName"""
+  firstName: String!
+
+  """LastName"""
+  lastName: String!
+
+  """Password"""
+  password: String!
+
+  """Email"""
+  email: String!
+
+  """Active"""
+  active: Boolean!
+
+  """Role"""
+  role: String!
+}
+
+type User {
+  id: ID!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: Timestamp!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: Timestamp!
+  email: String!
+  firstname: String
+  lastname: String
+  username: String!
+  active: String
+  chatId: String
+  role: String
+}
+

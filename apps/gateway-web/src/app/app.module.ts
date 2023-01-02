@@ -7,9 +7,9 @@ import { PassportModule } from '@nestjs/passport';
 import { config, GatewayConfig, SecurityConfig } from '@samoject/core';
 import { PubsubModule } from '@samoject/redis';
 import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { AuthModule } from './auth/auth.module';
 import { GqlAuthGuard } from './gql-auth.guard';
+import { TaskModule } from './task/task.module';
 import { UserModule } from './user/user.module';
 
 
@@ -45,6 +45,7 @@ import { UserModule } from './user/user.module';
           subscriptions: {
             'graphql-ws': true
           },
+          plugins: [],
           buildSchemaOptions: {
             dateScalarMode: 'timestamp',
             numberScalarMode: 'integer',
@@ -55,6 +56,7 @@ import { UserModule } from './user/user.module';
     }),
     PubsubModule,
     UserModule,
+    TaskModule,
     AuthModule,
     SupabaseModule,
   ],

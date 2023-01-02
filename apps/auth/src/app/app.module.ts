@@ -7,7 +7,6 @@ import { config, LoggerMiddleware, natsConfig, SecurityConfig } from '@samoject/
 import { SupabaseModule, SupabaseStrategy } from '@samoject/supabase';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GqlAuthGuard } from './gql-auth.guard';
 
 @Module({
   imports: [
@@ -37,10 +36,8 @@ import { GqlAuthGuard } from './gql-auth.guard';
   providers: [
     AppService,
     SupabaseStrategy,
-    GqlAuthGuard,
   ],
   controllers: [AppController],
-  exports: [GqlAuthGuard],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

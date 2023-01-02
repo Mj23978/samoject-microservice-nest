@@ -1,0 +1,34 @@
+import { Field } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { MessageUncheckedCreateNestedManyWithoutParentInput } from './message-unchecked-create-nested-many-without-parent.input';
+
+@InputType()
+export class MessageUncheckedCreateWithoutSenderInput {
+
+    @Field(() => String, {nullable:true})
+    id?: string;
+
+    @Field(() => Date, {nullable:true})
+    createdAt?: Date | string;
+
+    @Field(() => Date, {nullable:true})
+    updatedAt?: Date | string;
+
+    @Field(() => String, {nullable:false})
+    content!: string;
+
+    @Field(() => String, {nullable:true})
+    contentType?: string;
+
+    @Field(() => String, {nullable:true})
+    type?: string;
+
+    @Field(() => String, {nullable:true})
+    parentId?: string;
+
+    @Field(() => String, {nullable:false})
+    chatId!: string;
+
+    @Field(() => MessageUncheckedCreateNestedManyWithoutParentInput, {nullable:true})
+    subMessages?: MessageUncheckedCreateNestedManyWithoutParentInput;
+}

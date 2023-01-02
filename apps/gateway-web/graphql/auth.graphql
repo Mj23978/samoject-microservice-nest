@@ -1,41 +1,52 @@
-mutation Admin {
-  login(data: { email: "bart@simpson.com", password: "secret42" }) {
+mutation Signup($data: CreateUserInput!) {
+  signup(createUserInput: $data) {
+    ...UserData
+  }
+}
+
+query SignInWithEmail($data: LoginInput!) {
+  signInWithEmail(loginInput: $data) {
     ...AuthTokens
   }
 }
 
-mutation User {
-  login(data: { email: "lisa@simpson.com", password: "secret42" }) {
-    ...AuthTokens
-  }
-}
+# mutation RefreshToken {
+#   refreshToken(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja3lqdDZrdmkwMDIxcHdldmM0OW8zYTAyIiwiaWF0IjoxNjQ0ODMyNzYyLCJleHAiOjE2NDU0Mzc1NjJ9.eSD3zIsVBNS1pTRtYjjYrCWUYBcUL5ZeCpPTDXEc68Y") {
+#     ...TokenData
+#   }
+# }
 
-mutation AuthUser {
-  signup(data: { email: "bart@simpson.com", password: "secret42" }) {
-    ...AuthTokens
-  }
-}
+# query Me {
+#   me {
+#     ...UserData
+#   }
+# }
 
-mutation RefreshToken {
-  refreshToken(token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja3lqdDZrdmkwMDIxcHdldmM0OW8zYTAyIiwiaWF0IjoxNjQ0ODMyNzYyLCJleHAiOjE2NDU0Mzc1NjJ9.eSD3zIsVBNS1pTRtYjjYrCWUYBcUL5ZeCpPTDXEc68Y") {
-    ...TokenData
-  }
-}
+
+# mutation ChangePassword {
+#   changePassword(data: { oldPassword: "secret42", newPassword: "secret42" }) {
+#     ...UserData
+#   }
+# }
 
 fragment UserData on User {
   id
   email
+  createdAt
+  updatedAt
+  email
+  firstname
+  lastname
+  username
+  active
+  chatId
+  role
 }
 
 fragment AuthTokens on Auth {
   accessToken
   refreshToken
-  user {
-    ...UserData
-  }
-}
-
-fragment TokenData on Token {
-  accessToken
-  refreshToken
+  tokenType
+  expiresAt
+  aud
 }

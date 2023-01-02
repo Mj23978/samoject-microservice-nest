@@ -1,25 +1,29 @@
-query Me {
-  me {
+mutation UpdateUser($data: UpdateUserInput!) {
+  updateUser(updateUserInput: $data) {
     ...UserData
   }
 }
 
-mutation UpdateUser {
-  updateUser(data: { firstname: "Bart", lastname: "Simpson" }) {
-    ...UserData
-  }
-}
-
-mutation ChangePassword {
-  changePassword(data: { oldPassword: "secret42", newPassword: "secret42" }) {
-    ...UserData
+mutation DeleteUser($data: String!) {
+  removeUser(_id: $data) {
+    ...RemoveData
   }
 }
 
 fragment UserData on User {
   id
   email
+  createdAt
+  updatedAt
+  email
   firstname
   lastname
+  username
+  active
+  chatId
   role
+}
+
+fragment RemoveData on DeleteUserOutput {
+  deleted
 }
