@@ -1,9 +1,10 @@
+/* eslint-disable no-prototype-builtins */
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import {
-  Auth,
-  AuthEvent, CreateUserInput, LoginInput, User, UserEvent
+  Auth, AuthEvent, CreateUserInput, LoginInput, UserEvent
 } from '@samoject/interface';
+import { User } from '@samoject/prisma';
 import { Session } from '@supabase/supabase-js';
 import { firstValueFrom } from 'rxjs';
 

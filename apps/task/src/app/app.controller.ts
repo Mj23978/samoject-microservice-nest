@@ -1,9 +1,8 @@
-import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Body, Controller, Get, UseFilters } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { PrismaClientExceptionFilter } from '@samoject/core';
-import {
-  CreateTaskInput, IncomingMessage, TaskEvent
-} from '@samoject/interface';
+import { IncomingMessage, TaskEvent } from '@samoject/interface';
+import { TaskCreateInput, TaskUpdateInput } from '@samoject/prisma';
 import { AppService } from './app.service';
 
 @Controller()
@@ -17,7 +16,7 @@ export class AppController {
 
   @MessagePattern({ cmd: TaskEvent.CREATE_TASK })
   @UseFilters(PrismaClientExceptionFilter)
-  async create(@Body() data: CreateTaskInput) {
+  async create(@Body() data: TaskCreateInput) {
     return await this.appService.create(data);
   }
 
@@ -32,8 +31,8 @@ export class AppController {
   }
 
   @MessagePattern({ cmd: TaskEvent.UPDATE_TASK })
-  update(@Body() data: CreateTaskInput & { id: string }) {
-    return this.appService.update(data.id, data);
+  update(@Body() data: TaskUpdateInput) {
+    return this.appService.update(data.id.set, data);
   }
 
   @MessagePattern({ cmd: TaskEvent.REMOVE_TASK })

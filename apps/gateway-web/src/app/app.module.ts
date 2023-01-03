@@ -2,6 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { TypeGraphQLModule } from 'typegraphql-nestjs';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { config, GatewayConfig, SecurityConfig } from '@samoject/core';
@@ -32,28 +33,39 @@ import { UserModule } from './user/user.module';
       },
       inject: [ConfigService],
     }),
-    GraphQLModule.forRootAsync<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      useFactory: async (configService: ConfigService) => {
-        const gatewayConfig = configService.get<GatewayConfig>('gateway');
+    TypeGraphQLModule.forRootAsync({
+
+      useFactory(configService: ConfigService) {
         return {
-          autoSchemaFile: true,
-          debug: !gatewayConfig.production,
-          playground: !gatewayConfig.production,
-          introspection: !gatewayConfig.production,
-          installSubscriptionHandlers: true,
-          subscriptions: {
-            'graphql-ws': true
-          },
-          plugins: [],
-          buildSchemaOptions: {
-            dateScalarMode: 'timestamp',
-            numberScalarMode: 'integer',
-          },
+          emitSchemaFile: true,
+          dateScalarMode: "timestamp",
+          context: ({ req }) => ({ currentUser: req.user }),
         };
       },
       inject: [ConfigService],
     }),
+    // GraphQLModule.forRootAsync<ApolloDriverConfig>({
+    //   driver: ApolloDriver,
+    //   useFactory: async (configService: ConfigService) => {
+    //     const gatewayConfig = configService.get<GatewayConfig>('gateway');
+    //     return {
+    //       autoSchemaFile: true,
+    //       debug: !gatewayConfig.production,
+    //       playground: !gatewayConfig.production,
+    //       introspection: !gatewayConfig.production,
+    //       installSubscriptionHandlers: true,
+    //       subscriptions: {
+    //         'graphql-ws': true
+    //       },
+    //       plugins: [],
+    //       buildSchemaOptions: {
+    //         dateScalarMode: 'timestamp',
+    //         numberScalarMode: 'float',
+    //       },
+    //     };
+    //   },
+    //   inject: [ConfigService],
+    // }),
     PubsubModule,
     UserModule,
     TaskModule,

@@ -1,0 +1,14 @@
+export { AggregateSpaceSettingsArgs } from "./AggregateSpaceSettingsArgs";
+export { CreateManySpaceSettingsArgs } from "./CreateManySpaceSettingsArgs";
+export { CreateOneSpaceSettingsArgs } from "./CreateOneSpaceSettingsArgs";
+export { DeleteManySpaceSettingsArgs } from "./DeleteManySpaceSettingsArgs";
+export { DeleteOneSpaceSettingsArgs } from "./DeleteOneSpaceSettingsArgs";
+export { FindFirstSpaceSettingsArgs } from "./FindFirstSpaceSettingsArgs";
+export { FindFirstSpaceSettingsOrThrowArgs } from "./FindFirstSpaceSettingsOrThrowArgs";
+export { FindManySpaceSettingsArgs } from "./FindManySpaceSettingsArgs";
+export { FindUniqueSpaceSettingsArgs } from "./FindUniqueSpaceSettingsArgs";
+export { FindUniqueSpaceSettingsOrThrowArgs } from "./FindUniqueSpaceSettingsOrThrowArgs";
+export { GroupBySpaceSettingsArgs } from "./GroupBySpaceSettingsArgs";
+export { UpdateManySpaceSettingsArgs } from "./UpdateManySpaceSettingsArgs";
+export { UpdateOneSpaceSettingsArgs } from "./UpdateOneSpaceSettingsArgs";
+export { UpsertOneSpaceSettingsArgs } from "./UpsertOneSpaceSettingsArgs";

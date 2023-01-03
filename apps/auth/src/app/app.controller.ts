@@ -1,12 +1,10 @@
-import { Controller, Logger, Body, Post, Res, Get, Query, UseFilters } from '@nestjs/common';
-import { AppService } from './app.service';
-import { AuthApiError } from '@supabase/supabase-js';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { AuthEvent, CreateUserInput, LoginInput, SignupInput } from '@samoject/interface';
-import { Response } from 'express';
+import { Body, Controller, Post, Res, UseFilters } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { PrismaClientExceptionFilter } from '@samoject/core';
+import { AuthEvent, LoginInput, SignupInput } from '@samoject/interface';
+import { AuthApiError } from '@supabase/supabase-js';
+import { Response } from 'express';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
@@ -24,7 +22,7 @@ export class AppController {
     }
     return result
   }
-  
+
   @Post('email')
   @UseFilters(PrismaClientExceptionFilter)
   @MessagePattern({ cmd: AuthEvent.SIGN_IN_WITH_EMAIL })

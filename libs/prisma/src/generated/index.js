@@ -25,11 +25,11 @@ exports.Prisma = Prisma
 
 /**
  * Prisma Client JS version: 4.1.0
- * Query Engine version: 8d8414deb360336e4698a65aa45a1fbaf1ce13d8
+ * Query Engine version: d6e67a83f971b175a593ccc12e15c4a757f93ffe
  */
 Prisma.prismaVersion = {
   client: "4.1.0",
-  engine: "8d8414deb360336e4698a65aa45a1fbaf1ce13d8"
+  engine: "d6e67a83f971b175a593ccc12e15c4a757f93ffe"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -273,7 +273,7 @@ const config = {
   },
   "relativePath": "..\\..\\prisma",
   "clientVersion": "4.1.0",
-  "engineVersion": "8d8414deb360336e4698a65aa45a1fbaf1ce13d8",
+  "engineVersion": "d6e67a83f971b175a593ccc12e15c4a757f93ffe",
   "datasourceNames": [
     "db"
   ],

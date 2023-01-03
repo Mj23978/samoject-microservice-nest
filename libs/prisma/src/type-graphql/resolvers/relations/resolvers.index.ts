@@ -1,0 +1,13 @@
+export { ChatRelationsResolver } from "./Chat/ChatRelationsResolver";
+export { MessageRelationsResolver } from "./Message/MessageRelationsResolver";
+export { ProjectRelationsResolver } from "./Project/ProjectRelationsResolver";
+export { ProjectSettingsRelationsResolver } from "./ProjectSettings/ProjectSettingsRelationsResolver";
+export { ProjectsOnUsersRelationsResolver } from "./ProjectsOnUsers/ProjectsOnUsersRelationsResolver";
+export { SpaceRelationsResolver } from "./Space/SpaceRelationsResolver";
+export { SpaceSettingsRelationsResolver } from "./SpaceSettings/SpaceSettingsRelationsResolver";
+export { SpaceViewRelationsResolver } from "./SpaceView/SpaceViewRelationsResolver";
+export { TaskRelationsResolver } from "./Task/TaskRelationsResolver";
+export { UserRelationsResolver } from "./User/UserRelationsResolver";
+export { UserAssignedTasksRelationsResolver } from "./UserAssignedTasks/UserAssignedTasksRelationsResolver";
+export { WorkspaceRelationsResolver } from "./Workspace/WorkspaceRelationsResolver";
+export { WorkspaceSettingsRelationsResolver } from "./WorkspaceSettings/WorkspaceSettingsRelationsResolver";

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { User } from './user.model';
+import { User } from '@samoject/prisma';
 import { Token } from './token.model';
 
 @ObjectType()

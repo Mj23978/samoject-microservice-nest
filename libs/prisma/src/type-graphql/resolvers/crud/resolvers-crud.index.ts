@@ -1,0 +1,13 @@
+export { ChatCrudResolver } from "./Chat/ChatCrudResolver";
+export { MessageCrudResolver } from "./Message/MessageCrudResolver";
+export { ProjectCrudResolver } from "./Project/ProjectCrudResolver";
+export { ProjectSettingsCrudResolver } from "./ProjectSettings/ProjectSettingsCrudResolver";
+export { ProjectsOnUsersCrudResolver } from "./ProjectsOnUsers/ProjectsOnUsersCrudResolver";
+export { SpaceCrudResolver } from "./Space/SpaceCrudResolver";
+export { SpaceSettingsCrudResolver } from "./SpaceSettings/SpaceSettingsCrudResolver";
+export { SpaceViewCrudResolver } from "./SpaceView/SpaceViewCrudResolver";
+export { TaskCrudResolver } from "./Task/TaskCrudResolver";
+export { UserCrudResolver } from "./User/UserCrudResolver";
+export { UserAssignedTasksCrudResolver } from "./UserAssignedTasks/UserAssignedTasksCrudResolver";
+export { WorkspaceCrudResolver } from "./Workspace/WorkspaceCrudResolver";
+export { WorkspaceSettingsCrudResolver } from "./WorkspaceSettings/WorkspaceSettingsCrudResolver";

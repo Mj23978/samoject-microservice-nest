@@ -13,10 +13,9 @@ generator erd {
   theme    = "forest"
 }
 
-generator nestgraphql {
-    provider = "node node_modules/prisma-nestjs-graphql"
-    output = "../src/graphql"
-    reExport = All
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/type-graphql"
 }
 
 datasource db {

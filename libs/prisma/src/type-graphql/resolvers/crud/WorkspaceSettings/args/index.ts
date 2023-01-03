@@ -1,0 +1,14 @@
+export { AggregateWorkspaceSettingsArgs } from "./AggregateWorkspaceSettingsArgs";
+export { CreateManyWorkspaceSettingsArgs } from "./CreateManyWorkspaceSettingsArgs";
+export { CreateOneWorkspaceSettingsArgs } from "./CreateOneWorkspaceSettingsArgs";
+export { DeleteManyWorkspaceSettingsArgs } from "./DeleteManyWorkspaceSettingsArgs";
+export { DeleteOneWorkspaceSettingsArgs } from "./DeleteOneWorkspaceSettingsArgs";
+export { FindFirstWorkspaceSettingsArgs } from "./FindFirstWorkspaceSettingsArgs";
+export { FindFirstWorkspaceSettingsOrThrowArgs } from "./FindFirstWorkspaceSettingsOrThrowArgs";
+export { FindManyWorkspaceSettingsArgs } from "./FindManyWorkspaceSettingsArgs";
+export { FindUniqueWorkspaceSettingsArgs } from "./FindUniqueWorkspaceSettingsArgs";
+export { FindUniqueWorkspaceSettingsOrThrowArgs } from "./FindUniqueWorkspaceSettingsOrThrowArgs";
+export { GroupByWorkspaceSettingsArgs } from "./GroupByWorkspaceSettingsArgs";
+export { UpdateManyWorkspaceSettingsArgs } from "./UpdateManyWorkspaceSettingsArgs";
+export { UpdateOneWorkspaceSettingsArgs } from "./UpdateOneWorkspaceSettingsArgs";
+export { UpsertOneWorkspaceSettingsArgs } from "./UpsertOneWorkspaceSettingsArgs";

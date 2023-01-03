@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import {
-  CreateTaskInput,
-  UpdateTaskInputWithoutSubTasks,
-} from '@samoject/interface';
+  TaskCreateInput,
+  TaskUpdateInput,
+} from '@samoject/prisma';
 import { PrismaService } from '@samoject/prisma';
 
 @Injectable()
@@ -13,41 +13,9 @@ export class AppService {
     return { message: 'Welcome to user!' };
   }
 
-  async create(data: CreateTaskInput) {
+  async create(data: TaskCreateInput) {
     return await this.prisma.task.create({
-      data: {
-        details: data.details,
-        // assignes: {
-        //   connect: data.assignes.map((v) => ({
-        //     taskId_userId: {
-        //       userId: v,
-        //       taskId: null
-        //     }
-        //   }))
-        // },
-        // parent: {
-        //   connect: {
-        //     id: data.parentId
-        //   }
-        // },
-        parentId: data.parentId,
-        status: data.status,
-        //   project: {
-        //     connect: {
-        //       id: data.projectId
-        //     }
-        //   },
-        //   creator: {
-        //     connect: {
-        //       id: data.userId
-        //     }
-        //   },
-        //   chat: {
-        //     create: {
-        //       User: { connect: { id: data.userId } }
-        //     }
-        //   }
-      },
+      data,
     });
   }
 
@@ -62,30 +30,11 @@ export class AppService {
     });
   }
 
-  async update(id: string, data: UpdateTaskInputWithoutSubTasks) {
+  async update(id: string, data: TaskUpdateInput) {
     return this.prisma.task.update({
       where: { id },
       data: {
-        details: data.details,
-        assignes: {
-          connect: data.assignes.map((v) => ({
-            taskId_userId: {
-              userId: v,
-              taskId: null,
-            },
-          })),
-        },
-        parent: {
-          connect: {
-            id: data.parentId,
-          },
-        },
-        status: data.status,
-        project: {
-          connect: {
-            id: data.projectId,
-          },
-        },
+        ...data
       },
     });
   }

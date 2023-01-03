@@ -1,0 +1,14 @@
+export { AggregateProjectsOnUsersArgs } from "./AggregateProjectsOnUsersArgs";
+export { CreateManyProjectsOnUsersArgs } from "./CreateManyProjectsOnUsersArgs";
+export { CreateOneProjectsOnUsersArgs } from "./CreateOneProjectsOnUsersArgs";
+export { DeleteManyProjectsOnUsersArgs } from "./DeleteManyProjectsOnUsersArgs";
+export { DeleteOneProjectsOnUsersArgs } from "./DeleteOneProjectsOnUsersArgs";
+export { FindFirstProjectsOnUsersArgs } from "./FindFirstProjectsOnUsersArgs";
+export { FindFirstProjectsOnUsersOrThrowArgs } from "./FindFirstProjectsOnUsersOrThrowArgs";
+export { FindManyProjectsOnUsersArgs } from "./FindManyProjectsOnUsersArgs";
+export { FindUniqueProjectsOnUsersArgs } from "./FindUniqueProjectsOnUsersArgs";
+export { FindUniqueProjectsOnUsersOrThrowArgs } from "./FindUniqueProjectsOnUsersOrThrowArgs";
+export { GroupByProjectsOnUsersArgs } from "./GroupByProjectsOnUsersArgs";
+export { UpdateManyProjectsOnUsersArgs } from "./UpdateManyProjectsOnUsersArgs";
+export { UpdateOneProjectsOnUsersArgs } from "./UpdateOneProjectsOnUsersArgs";
+export { UpsertOneProjectsOnUsersArgs } from "./UpsertOneProjectsOnUsersArgs";

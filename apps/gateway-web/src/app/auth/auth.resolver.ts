@@ -1,8 +1,9 @@
 import { Inject } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import {
-  Auth, CreateUserInput, LoginInput, RefreshTokenInput, Token, User
+  Auth, CreateUserInput, LoginInput
 } from '@samoject/interface';
+import { User } from '@samoject/prisma';
 import { PUB_SUB } from '@samoject/redis';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { AuthService } from './auth.service';

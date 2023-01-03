@@ -1,8 +1,9 @@
 import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import {
-  CreateUserInput, DeleteUserOutput, UpdateUserInput, User
+  CreateUserInput, DeleteUserOutput, UpdateUserInput
 } from '@samoject/interface';
+import { User } from '@samoject/prisma';
 import { PUB_SUB, SUBSCRIPTION_EVENTS } from '@samoject/redis';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { GqlAuthGuard } from '../gql-auth.guard';

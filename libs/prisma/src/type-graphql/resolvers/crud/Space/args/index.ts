@@ -1,0 +1,14 @@
+export { AggregateSpaceArgs } from "./AggregateSpaceArgs";
+export { CreateManySpaceArgs } from "./CreateManySpaceArgs";
+export { CreateOneSpaceArgs } from "./CreateOneSpaceArgs";
+export { DeleteManySpaceArgs } from "./DeleteManySpaceArgs";
+export { DeleteOneSpaceArgs } from "./DeleteOneSpaceArgs";
+export { FindFirstSpaceArgs } from "./FindFirstSpaceArgs";
+export { FindFirstSpaceOrThrowArgs } from "./FindFirstSpaceOrThrowArgs";
+export { FindManySpaceArgs } from "./FindManySpaceArgs";
+export { FindUniqueSpaceArgs } from "./FindUniqueSpaceArgs";
+export { FindUniqueSpaceOrThrowArgs } from "./FindUniqueSpaceOrThrowArgs";
+export { GroupBySpaceArgs } from "./GroupBySpaceArgs";
+export { UpdateManySpaceArgs } from "./UpdateManySpaceArgs";
+export { UpdateOneSpaceArgs } from "./UpdateOneSpaceArgs";
+export { UpsertOneSpaceArgs } from "./UpsertOneSpaceArgs";

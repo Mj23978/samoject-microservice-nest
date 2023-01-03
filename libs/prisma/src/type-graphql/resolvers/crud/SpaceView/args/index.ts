@@ -1,0 +1,14 @@
+export { AggregateSpaceViewArgs } from "./AggregateSpaceViewArgs";
+export { CreateManySpaceViewArgs } from "./CreateManySpaceViewArgs";
+export { CreateOneSpaceViewArgs } from "./CreateOneSpaceViewArgs";
+export { DeleteManySpaceViewArgs } from "./DeleteManySpaceViewArgs";
+export { DeleteOneSpaceViewArgs } from "./DeleteOneSpaceViewArgs";
+export { FindFirstSpaceViewArgs } from "./FindFirstSpaceViewArgs";
+export { FindFirstSpaceViewOrThrowArgs } from "./FindFirstSpaceViewOrThrowArgs";
+export { FindManySpaceViewArgs } from "./FindManySpaceViewArgs";
+export { FindUniqueSpaceViewArgs } from "./FindUniqueSpaceViewArgs";
+export { FindUniqueSpaceViewOrThrowArgs } from "./FindUniqueSpaceViewOrThrowArgs";
+export { GroupBySpaceViewArgs } from "./GroupBySpaceViewArgs";
+export { UpdateManySpaceViewArgs } from "./UpdateManySpaceViewArgs";
+export { UpdateOneSpaceViewArgs } from "./UpdateOneSpaceViewArgs";
+export { UpsertOneSpaceViewArgs } from "./UpsertOneSpaceViewArgs";

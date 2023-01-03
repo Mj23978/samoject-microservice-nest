@@ -1,0 +1,14 @@
+export { AggregateProjectSettingsArgs } from "./AggregateProjectSettingsArgs";
+export { CreateManyProjectSettingsArgs } from "./CreateManyProjectSettingsArgs";
+export { CreateOneProjectSettingsArgs } from "./CreateOneProjectSettingsArgs";
+export { DeleteManyProjectSettingsArgs } from "./DeleteManyProjectSettingsArgs";
+export { DeleteOneProjectSettingsArgs } from "./DeleteOneProjectSettingsArgs";
+export { FindFirstProjectSettingsArgs } from "./FindFirstProjectSettingsArgs";
+export { FindFirstProjectSettingsOrThrowArgs } from "./FindFirstProjectSettingsOrThrowArgs";
+export { FindManyProjectSettingsArgs } from "./FindManyProjectSettingsArgs";
+export { FindUniqueProjectSettingsArgs } from "./FindUniqueProjectSettingsArgs";
+export { FindUniqueProjectSettingsOrThrowArgs } from "./FindUniqueProjectSettingsOrThrowArgs";
+export { GroupByProjectSettingsArgs } from "./GroupByProjectSettingsArgs";
+export { UpdateManyProjectSettingsArgs } from "./UpdateManyProjectSettingsArgs";
+export { UpdateOneProjectSettingsArgs } from "./UpdateOneProjectSettingsArgs";
+export { UpsertOneProjectSettingsArgs } from "./UpsertOneProjectSettingsArgs";
