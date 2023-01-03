@@ -15,7 +15,7 @@ generator erd {
 
 generator nestgraphql {
     provider = "node node_modules/prisma-nestjs-graphql"
-    output = "../src/generated"
+    output = "../src/graphql"
     reExport = All
 }
 

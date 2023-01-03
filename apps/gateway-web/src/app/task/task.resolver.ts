@@ -1,8 +1,7 @@
 import { Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import {
-  Task, CreateTaskInput, UpdateTaskInput, DeleteTaskOutput
-} from '@samoject/interface';
+import { DeleteTaskOutput } from '@samoject/interface';
+import { Task, TaskCreateInput, TaskUpdateInput } from '@samoject/prisma';
 import { PUB_SUB } from '@samoject/redis';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 import { GqlAuthGuard } from '../gql-auth.guard';
@@ -12,11 +11,11 @@ import { TaskService } from './task.service';
 export class TaskResolver {
   constructor(
     @Inject(PUB_SUB) private readonly pubSub: RedisPubSub,
-    private readonly taskService: TaskService,
-  ) { }
+    private readonly taskService: TaskService
+  ) {}
 
   @Mutation(() => Task)
-  createTask(@Args('createTaskInput') createTaskInput: CreateTaskInput) {
+  createTask(@Args('createTaskInput') createTaskInput: TaskCreateInput) {
     return this.taskService.create(createTaskInput);
   }
 
@@ -32,14 +31,12 @@ export class TaskResolver {
   }
 
   @Mutation(() => Task)
-  updateTask(@Args('updateTaskInput') updateTaskInput: UpdateTaskInput) {
-    return this.taskService.update(updateTaskInput.id, updateTaskInput);
+  updateTask(@Args('updateTaskInput') updateTaskInput: TaskUpdateInput) {
+    return this.taskService.update(updateTaskInput.id.set, updateTaskInput);
   }
 
   @Mutation(() => DeleteTaskOutput)
   removeTask(@Args('_id', { type: () => String }) _id: string) {
     return this.taskService.remove(_id);
   }
-
-
 }

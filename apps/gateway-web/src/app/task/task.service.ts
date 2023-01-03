@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateTaskInput, LoginInput, Task, TaskEvent, UpdateTaskInput } from '@samoject/interface';
-import { Session } from '@supabase/supabase-js';
+import { TaskEvent } from '@samoject/interface';
+import { TaskCreateInput, Task, TaskUpdateInput } from '@samoject/prisma';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -10,10 +10,9 @@ export class TaskService {
     @Inject('TASK_SERVICE') private taskClient: ClientProxy,
   ) { }
 
-  async create(data: CreateTaskInput): Promise<Task> {
+  async create(data: TaskCreateInput): Promise<Task> {
     const taskCreateObs = this.taskClient.send<Task | { error: any }>({ cmd: TaskEvent.CREATE_TASK }, {
       ...data,
-      active: true,
     });
     const taskCreateRes = await firstValueFrom(taskCreateObs);
     if (taskCreateRes.hasOwnProperty('error')) {
@@ -32,7 +31,7 @@ export class TaskService {
     return taskFindRes;
   }
 
-  update(id: string, updateTaskInput: UpdateTaskInput) {
+  update(id: string, updateTaskInput: TaskUpdateInput) {
     return this.taskClient.send({ cmd: TaskEvent.UPDATE_TASK }, {
       id,
       ...updateTaskInput,
