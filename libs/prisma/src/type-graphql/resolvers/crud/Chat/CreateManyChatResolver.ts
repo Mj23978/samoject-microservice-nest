@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { CreateManyChatArgs } from "./args/CreateManyChatArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { CreateManyChatArgs } from "./args/CreateManyChatArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class CreateManyChatResolver {

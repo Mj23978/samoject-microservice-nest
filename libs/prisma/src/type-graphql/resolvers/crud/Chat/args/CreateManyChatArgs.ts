@@ -1,15 +1,13 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { ChatCreateManyInput } from "../../../inputs/ChatCreateManyInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateManyChatArgs {
-  @TypeGraphQL.Field(_type => [ChatCreateManyInput], {
+  @Field(() => [ChatCreateManyInput], {
     nullable: false
   })
   data!: ChatCreateManyInput[];
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: true
   })
   skipDuplicates?: boolean | undefined;

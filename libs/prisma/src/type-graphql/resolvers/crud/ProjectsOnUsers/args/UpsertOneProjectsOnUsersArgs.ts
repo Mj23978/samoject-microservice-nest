@@ -1,22 +1,20 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { ProjectsOnUsersCreateInput } from "../../../inputs/ProjectsOnUsersCreateInput";
 import { ProjectsOnUsersUpdateInput } from "../../../inputs/ProjectsOnUsersUpdateInput";
 import { ProjectsOnUsersWhereUniqueInput } from "../../../inputs/ProjectsOnUsersWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpsertOneProjectsOnUsersArgs {
-  @TypeGraphQL.Field(_type => ProjectsOnUsersWhereUniqueInput, {
+  @Field(() => ProjectsOnUsersWhereUniqueInput, {
     nullable: false
   })
   where!: ProjectsOnUsersWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ProjectsOnUsersCreateInput, {
+  @Field(() => ProjectsOnUsersCreateInput, {
     nullable: false
   })
   create!: ProjectsOnUsersCreateInput;
 
-  @TypeGraphQL.Field(_type => ProjectsOnUsersUpdateInput, {
+  @Field(() => ProjectsOnUsersUpdateInput, {
     nullable: false
   })
   update!: ProjectsOnUsersUpdateInput;

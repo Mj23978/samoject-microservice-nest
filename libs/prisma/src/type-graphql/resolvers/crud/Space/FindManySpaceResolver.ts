@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindManySpaceArgs } from "./args/FindManySpaceArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Space } from "../../../models/Space";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindManySpaceArgs } from "./args/FindManySpaceArgs";
 
 @TypeGraphQL.Resolver(_of => Space)
 export class FindManySpaceResolver {

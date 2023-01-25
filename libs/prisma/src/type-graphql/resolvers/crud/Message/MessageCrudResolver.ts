@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { Message } from "../../../models/Message";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateMessage } from "../../outputs/AggregateMessage";
+import { MessageGroupBy } from "../../outputs/MessageGroupBy";
 import { AggregateMessageArgs } from "./args/AggregateMessageArgs";
 import { CreateManyMessageArgs } from "./args/CreateManyMessageArgs";
 import { CreateOneMessageArgs } from "./args/CreateOneMessageArgs";
@@ -14,11 +18,6 @@ import { GroupByMessageArgs } from "./args/GroupByMessageArgs";
 import { UpdateManyMessageArgs } from "./args/UpdateManyMessageArgs";
 import { UpdateOneMessageArgs } from "./args/UpdateOneMessageArgs";
 import { UpsertOneMessageArgs } from "./args/UpsertOneMessageArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { Message } from "../../../models/Message";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateMessage } from "../../outputs/AggregateMessage";
-import { MessageGroupBy } from "../../outputs/MessageGroupBy";
 
 @TypeGraphQL.Resolver(_of => Message)
 export class MessageCrudResolver {

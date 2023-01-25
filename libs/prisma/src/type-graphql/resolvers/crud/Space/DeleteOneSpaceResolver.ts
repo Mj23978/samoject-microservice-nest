@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteOneSpaceArgs } from "./args/DeleteOneSpaceArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Space } from "../../../models/Space";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteOneSpaceArgs } from "./args/DeleteOneSpaceArgs";
 
 @TypeGraphQL.Resolver(_of => Space)
 export class DeleteOneSpaceResolver {

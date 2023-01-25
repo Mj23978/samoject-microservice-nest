@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpdateManyProjectArgs } from "./args/UpdateManyProjectArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Project } from "../../../models/Project";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpdateManyProjectArgs } from "./args/UpdateManyProjectArgs";
 
 @TypeGraphQL.Resolver(_of => Project)
 export class UpdateManyProjectResolver {

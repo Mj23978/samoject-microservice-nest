@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteManyWorkspaceSettingsArgs } from "./args/DeleteManyWorkspaceSettingsArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteManyWorkspaceSettingsArgs } from "./args/DeleteManyWorkspaceSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => WorkspaceSettings)
 export class DeleteManyWorkspaceSettingsResolver {

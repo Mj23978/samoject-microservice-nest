@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueUserArgs } from "./args/FindUniqueUserArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { User } from "../../../models/User";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueUserArgs } from "./args/FindUniqueUserArgs";
 
 @TypeGraphQL.Resolver(_of => User)
 export class FindUniqueUserResolver {

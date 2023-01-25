@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { GroupByChatArgs } from "./args/GroupByChatArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { ChatGroupBy } from "../../outputs/ChatGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { GroupByChatArgs } from "./args/GroupByChatArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class GroupByChatResolver {

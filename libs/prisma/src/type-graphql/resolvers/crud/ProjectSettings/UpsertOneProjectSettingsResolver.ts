@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpsertOneProjectSettingsArgs } from "./args/UpsertOneProjectSettingsArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { ProjectSettings } from "../../../models/ProjectSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpsertOneProjectSettingsArgs } from "./args/UpsertOneProjectSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => ProjectSettings)
 export class UpsertOneProjectSettingsResolver {

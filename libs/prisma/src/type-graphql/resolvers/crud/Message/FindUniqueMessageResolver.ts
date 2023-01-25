@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueMessageArgs } from "./args/FindUniqueMessageArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Message } from "../../../models/Message";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueMessageArgs } from "./args/FindUniqueMessageArgs";
 
 @TypeGraphQL.Resolver(_of => Message)
 export class FindUniqueMessageResolver {

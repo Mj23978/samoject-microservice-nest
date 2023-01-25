@@ -1,12 +1,11 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Task } from "../../../models/Task";
 import { User } from "../../../models/User";
 import { UserAssignedTasks } from "../../../models/UserAssignedTasks";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => UserAssignedTasks)
 export class UserAssignedTasksRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Task, {
+  @FieldResolver(() => Task, {
     nullable: false
   })
   async task(@TypeGraphQL.Root() userAssignedTasks: UserAssignedTasks, @TypeGraphQL.Ctx() ctx: any): Promise<Task> {
@@ -20,7 +19,7 @@ export class UserAssignedTasksRelationsResolver {
     }).task({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: false
   })
   async user(@TypeGraphQL.Root() userAssignedTasks: UserAssignedTasks, @TypeGraphQL.Ctx() ctx: any): Promise<User> {

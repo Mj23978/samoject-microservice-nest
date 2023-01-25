@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpsertOneMessageArgs } from "./args/UpsertOneMessageArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Message } from "../../../models/Message";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpsertOneMessageArgs } from "./args/UpsertOneMessageArgs";
 
 @TypeGraphQL.Resolver(_of => Message)
 export class UpsertOneMessageResolver {

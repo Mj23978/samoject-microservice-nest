@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { CreateManySpaceSettingsArgs } from "./args/CreateManySpaceSettingsArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { SpaceSettings } from "../../../models/SpaceSettings";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { CreateManySpaceSettingsArgs } from "./args/CreateManySpaceSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => SpaceSettings)
 export class CreateManySpaceSettingsResolver {

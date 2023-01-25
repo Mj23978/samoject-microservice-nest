@@ -1,38 +1,36 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
+import { ChatScalarFieldEnum } from "../../../../enums/ChatScalarFieldEnum";
 import { ChatOrderByWithRelationInput } from "../../../inputs/ChatOrderByWithRelationInput";
 import { ChatWhereInput } from "../../../inputs/ChatWhereInput";
 import { ChatWhereUniqueInput } from "../../../inputs/ChatWhereUniqueInput";
-import { ChatScalarFieldEnum } from "../../../../enums/ChatScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstChatOrThrowArgs {
-  @TypeGraphQL.Field(_type => ChatWhereInput, {
+  @Field(() => ChatWhereInput, {
     nullable: true
   })
   where?: ChatWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ChatOrderByWithRelationInput], {
+  @Field(() => [ChatOrderByWithRelationInput], {
     nullable: true
   })
   orderBy?: ChatOrderByWithRelationInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => ChatWhereUniqueInput, {
+  @Field(() => ChatWhereUniqueInput, {
     nullable: true
   })
   cursor?: ChatWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [ChatScalarFieldEnum], {
+  @Field(() => [ChatScalarFieldEnum], {
     nullable: true
   })
   distinct?: Array<"id" | "createdAt" | "updatedAt"> | undefined;

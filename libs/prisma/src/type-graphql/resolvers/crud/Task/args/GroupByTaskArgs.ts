@@ -1,38 +1,36 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
+import { TaskScalarFieldEnum } from "../../../../enums/TaskScalarFieldEnum";
 import { TaskOrderByWithAggregationInput } from "../../../inputs/TaskOrderByWithAggregationInput";
 import { TaskScalarWhereWithAggregatesInput } from "../../../inputs/TaskScalarWhereWithAggregatesInput";
 import { TaskWhereInput } from "../../../inputs/TaskWhereInput";
-import { TaskScalarFieldEnum } from "../../../../enums/TaskScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class GroupByTaskArgs {
-  @TypeGraphQL.Field(_type => TaskWhereInput, {
+  @Field(() => TaskWhereInput, {
     nullable: true
   })
   where?: TaskWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [TaskOrderByWithAggregationInput], {
+  @Field(() => [TaskOrderByWithAggregationInput], {
     nullable: true
   })
   orderBy?: TaskOrderByWithAggregationInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [TaskScalarFieldEnum], {
+  @Field(() => [TaskScalarFieldEnum], {
     nullable: false
   })
   by!: Array<"id" | "createdAt" | "updatedAt" | "projectId" | "creatorId" | "parentId" | "status" | "details" | "chatId">;
 
-  @TypeGraphQL.Field(_type => TaskScalarWhereWithAggregatesInput, {
+  @Field(() => TaskScalarWhereWithAggregatesInput, {
     nullable: true
   })
   having?: TaskScalarWhereWithAggregatesInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   skip?: number | undefined;

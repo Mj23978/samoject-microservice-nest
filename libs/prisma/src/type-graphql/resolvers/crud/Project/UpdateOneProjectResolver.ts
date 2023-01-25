@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpdateOneProjectArgs } from "./args/UpdateOneProjectArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Project } from "../../../models/Project";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpdateOneProjectArgs } from "./args/UpdateOneProjectArgs";
 
 @TypeGraphQL.Resolver(_of => Project)
 export class UpdateOneProjectResolver {

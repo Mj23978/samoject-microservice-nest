@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpsertOneChatArgs } from "./args/UpsertOneChatArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpsertOneChatArgs } from "./args/UpsertOneChatArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class UpsertOneChatResolver {

@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { GroupBySpaceViewArgs } from "./args/GroupBySpaceViewArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { SpaceView } from "../../../models/SpaceView";
 import { SpaceViewGroupBy } from "../../outputs/SpaceViewGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { GroupBySpaceViewArgs } from "./args/GroupBySpaceViewArgs";
 
 @TypeGraphQL.Resolver(_of => SpaceView)
 export class GroupBySpaceViewResolver {

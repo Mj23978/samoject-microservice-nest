@@ -33,11 +33,12 @@ import { UserModule } from './user/user.module';
       },
       inject: [ConfigService],
     }),
-    TypeGraphQLModule.forRootAsync({
-
-      useFactory(configService: ConfigService) {
+    TypeGraphQLModule.forRootAsync({      
+      useFactory(_configService: ConfigService) {
         return {
-          emitSchemaFile: true,
+          directives: [],
+          driver: ApolloDriver,
+          emitSchemaFile: false,
           dateScalarMode: "timestamp",
           context: ({ req }) => ({ currentUser: req.user }),
         };

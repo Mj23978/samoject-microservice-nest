@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteManySpaceViewArgs } from "./args/DeleteManySpaceViewArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { SpaceView } from "../../../models/SpaceView";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteManySpaceViewArgs } from "./args/DeleteManySpaceViewArgs";
 
 @TypeGraphQL.Resolver(_of => SpaceView)
 export class DeleteManySpaceViewResolver {

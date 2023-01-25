@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateWorkspaceSettings } from "../../outputs/AggregateWorkspaceSettings";
+import { WorkspaceSettingsGroupBy } from "../../outputs/WorkspaceSettingsGroupBy";
 import { AggregateWorkspaceSettingsArgs } from "./args/AggregateWorkspaceSettingsArgs";
 import { CreateManyWorkspaceSettingsArgs } from "./args/CreateManyWorkspaceSettingsArgs";
 import { CreateOneWorkspaceSettingsArgs } from "./args/CreateOneWorkspaceSettingsArgs";
@@ -14,11 +18,6 @@ import { GroupByWorkspaceSettingsArgs } from "./args/GroupByWorkspaceSettingsArg
 import { UpdateManyWorkspaceSettingsArgs } from "./args/UpdateManyWorkspaceSettingsArgs";
 import { UpdateOneWorkspaceSettingsArgs } from "./args/UpdateOneWorkspaceSettingsArgs";
 import { UpsertOneWorkspaceSettingsArgs } from "./args/UpsertOneWorkspaceSettingsArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateWorkspaceSettings } from "../../outputs/AggregateWorkspaceSettings";
-import { WorkspaceSettingsGroupBy } from "../../outputs/WorkspaceSettingsGroupBy";
 
 @TypeGraphQL.Resolver(_of => WorkspaceSettings)
 export class WorkspaceSettingsCrudResolver {

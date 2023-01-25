@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { GroupByProjectSettingsArgs } from "./args/GroupByProjectSettingsArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { ProjectSettings } from "../../../models/ProjectSettings";
 import { ProjectSettingsGroupBy } from "../../outputs/ProjectSettingsGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { GroupByProjectSettingsArgs } from "./args/GroupByProjectSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => ProjectSettings)
 export class GroupByProjectSettingsResolver {

@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { Task } from "../../../models/Task";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateTask } from "../../outputs/AggregateTask";
+import { TaskGroupBy } from "../../outputs/TaskGroupBy";
 import { AggregateTaskArgs } from "./args/AggregateTaskArgs";
 import { CreateManyTaskArgs } from "./args/CreateManyTaskArgs";
 import { CreateOneTaskArgs } from "./args/CreateOneTaskArgs";
@@ -14,11 +18,6 @@ import { GroupByTaskArgs } from "./args/GroupByTaskArgs";
 import { UpdateManyTaskArgs } from "./args/UpdateManyTaskArgs";
 import { UpdateOneTaskArgs } from "./args/UpdateOneTaskArgs";
 import { UpsertOneTaskArgs } from "./args/UpsertOneTaskArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { Task } from "../../../models/Task";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateTask } from "../../outputs/AggregateTask";
-import { TaskGroupBy } from "../../outputs/TaskGroupBy";
 
 @TypeGraphQL.Resolver(_of => Task)
 export class TaskCrudResolver {

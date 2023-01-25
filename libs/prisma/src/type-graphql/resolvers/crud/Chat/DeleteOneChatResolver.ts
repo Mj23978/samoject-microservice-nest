@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteOneChatArgs } from "./args/DeleteOneChatArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteOneChatArgs } from "./args/DeleteOneChatArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class DeleteOneChatResolver {

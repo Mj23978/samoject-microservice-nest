@@ -1,10 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { SpaceViewCreateInput } from "../../../inputs/SpaceViewCreateInput";
 
 @TypeGraphQL.ArgsType()
 export class CreateOneSpaceViewArgs {
-  @TypeGraphQL.Field(_type => SpaceViewCreateInput, {
+  @Field(() => SpaceViewCreateInput, {
     nullable: false
   })
   data!: SpaceViewCreateInput;

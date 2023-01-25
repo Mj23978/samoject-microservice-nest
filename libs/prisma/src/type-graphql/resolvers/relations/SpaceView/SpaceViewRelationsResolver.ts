@@ -1,11 +1,10 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Space } from "../../../models/Space";
 import { SpaceView } from "../../../models/SpaceView";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => SpaceView)
 export class SpaceViewRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Space, {
+  @FieldResolver(() => Space, {
     nullable: true
   })
   async space(@TypeGraphQL.Root() spaceView: SpaceView, @TypeGraphQL.Ctx() ctx: any): Promise<Space | null> {

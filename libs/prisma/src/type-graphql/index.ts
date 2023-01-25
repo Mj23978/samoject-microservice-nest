@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import * as crudResolversImport from "./resolvers/crud/resolvers-crud.index";
 import * as relationResolversImport from "./resolvers/relations/resolvers.index";
 import { NonEmptyArray } from "type-graphql";

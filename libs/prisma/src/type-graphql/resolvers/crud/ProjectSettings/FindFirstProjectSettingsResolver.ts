@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindFirstProjectSettingsArgs } from "./args/FindFirstProjectSettingsArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { ProjectSettings } from "../../../models/ProjectSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindFirstProjectSettingsArgs } from "./args/FindFirstProjectSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => ProjectSettings)
 export class FindFirstProjectSettingsResolver {

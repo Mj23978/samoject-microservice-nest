@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { GroupByWorkspaceArgs } from "./args/GroupByWorkspaceArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Workspace } from "../../../models/Workspace";
 import { WorkspaceGroupBy } from "../../outputs/WorkspaceGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { GroupByWorkspaceArgs } from "./args/GroupByWorkspaceArgs";
 
 @TypeGraphQL.Resolver(_of => Workspace)
 export class GroupByWorkspaceResolver {

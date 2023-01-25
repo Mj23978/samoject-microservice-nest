@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { Chat } from "../../../models/Chat";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateChat } from "../../outputs/AggregateChat";
+import { ChatGroupBy } from "../../outputs/ChatGroupBy";
 import { AggregateChatArgs } from "./args/AggregateChatArgs";
 import { CreateManyChatArgs } from "./args/CreateManyChatArgs";
 import { CreateOneChatArgs } from "./args/CreateOneChatArgs";
@@ -14,11 +18,6 @@ import { GroupByChatArgs } from "./args/GroupByChatArgs";
 import { UpdateManyChatArgs } from "./args/UpdateManyChatArgs";
 import { UpdateOneChatArgs } from "./args/UpdateOneChatArgs";
 import { UpsertOneChatArgs } from "./args/UpsertOneChatArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { Chat } from "../../../models/Chat";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateChat } from "../../outputs/AggregateChat";
-import { ChatGroupBy } from "../../outputs/ChatGroupBy";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class ChatCrudResolver {

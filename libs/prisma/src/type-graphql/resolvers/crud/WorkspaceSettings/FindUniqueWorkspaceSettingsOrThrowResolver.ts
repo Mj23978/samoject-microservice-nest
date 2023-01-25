@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueWorkspaceSettingsOrThrowArgs } from "./args/FindUniqueWorkspaceSettingsOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueWorkspaceSettingsOrThrowArgs } from "./args/FindUniqueWorkspaceSettingsOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => WorkspaceSettings)
 export class FindUniqueWorkspaceSettingsOrThrowResolver {

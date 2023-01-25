@@ -1,38 +1,36 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
+import { UserScalarFieldEnum } from "../../../../enums/UserScalarFieldEnum";
 import { UserOrderByWithRelationInput } from "../../../inputs/UserOrderByWithRelationInput";
 import { UserWhereInput } from "../../../inputs/UserWhereInput";
 import { UserWhereUniqueInput } from "../../../inputs/UserWhereUniqueInput";
-import { UserScalarFieldEnum } from "../../../../enums/UserScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class FindFirstUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereInput, {
+  @Field(() => UserWhereInput, {
     nullable: true
   })
   where?: UserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [UserOrderByWithRelationInput], {
+  @Field(() => [UserOrderByWithRelationInput], {
     nullable: true
   })
   orderBy?: UserOrderByWithRelationInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true
   })
   cursor?: UserWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [UserScalarFieldEnum], {
+  @Field(() => [UserScalarFieldEnum], {
     nullable: true
   })
   distinct?: Array<"id" | "createdAt" | "updatedAt" | "email" | "password" | "firstname" | "lastname" | "username" | "active" | "chatId" | "role"> | undefined;

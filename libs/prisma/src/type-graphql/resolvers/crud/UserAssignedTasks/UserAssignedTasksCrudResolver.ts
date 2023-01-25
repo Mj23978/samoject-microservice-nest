@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { UserAssignedTasks } from "../../../models/UserAssignedTasks";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateUserAssignedTasks } from "../../outputs/AggregateUserAssignedTasks";
+import { UserAssignedTasksGroupBy } from "../../outputs/UserAssignedTasksGroupBy";
 import { AggregateUserAssignedTasksArgs } from "./args/AggregateUserAssignedTasksArgs";
 import { CreateManyUserAssignedTasksArgs } from "./args/CreateManyUserAssignedTasksArgs";
 import { CreateOneUserAssignedTasksArgs } from "./args/CreateOneUserAssignedTasksArgs";
@@ -14,11 +18,6 @@ import { GroupByUserAssignedTasksArgs } from "./args/GroupByUserAssignedTasksArg
 import { UpdateManyUserAssignedTasksArgs } from "./args/UpdateManyUserAssignedTasksArgs";
 import { UpdateOneUserAssignedTasksArgs } from "./args/UpdateOneUserAssignedTasksArgs";
 import { UpsertOneUserAssignedTasksArgs } from "./args/UpsertOneUserAssignedTasksArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { UserAssignedTasks } from "../../../models/UserAssignedTasks";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateUserAssignedTasks } from "../../outputs/AggregateUserAssignedTasks";
-import { UserAssignedTasksGroupBy } from "../../outputs/UserAssignedTasksGroupBy";
 
 @TypeGraphQL.Resolver(_of => UserAssignedTasks)
 export class UserAssignedTasksCrudResolver {

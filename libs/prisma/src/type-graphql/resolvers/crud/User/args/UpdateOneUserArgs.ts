@@ -1,16 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { UserUpdateInput } from "../../../inputs/UserUpdateInput";
 import { UserWhereUniqueInput } from "../../../inputs/UserWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpdateOneUserArgs {
-  @TypeGraphQL.Field(_type => UserUpdateInput, {
+  @Field(() => UserUpdateInput, {
     nullable: false
   })
   data!: UserUpdateInput;
 
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: false
   })
   where!: UserWhereUniqueInput;

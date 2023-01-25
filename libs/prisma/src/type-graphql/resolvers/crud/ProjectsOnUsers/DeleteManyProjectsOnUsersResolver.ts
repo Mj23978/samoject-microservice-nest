@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteManyProjectsOnUsersArgs } from "./args/DeleteManyProjectsOnUsersArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { ProjectsOnUsers } from "../../../models/ProjectsOnUsers";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteManyProjectsOnUsersArgs } from "./args/DeleteManyProjectsOnUsersArgs";
 
 @TypeGraphQL.Resolver(_of => ProjectsOnUsers)
 export class DeleteManyProjectsOnUsersResolver {

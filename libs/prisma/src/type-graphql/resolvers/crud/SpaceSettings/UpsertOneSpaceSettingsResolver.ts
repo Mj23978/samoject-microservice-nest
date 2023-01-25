@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpsertOneSpaceSettingsArgs } from "./args/UpsertOneSpaceSettingsArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { SpaceSettings } from "../../../models/SpaceSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { UpsertOneSpaceSettingsArgs } from "./args/UpsertOneSpaceSettingsArgs";
 
 @TypeGraphQL.Resolver(_of => SpaceSettings)
 export class UpsertOneSpaceSettingsResolver {

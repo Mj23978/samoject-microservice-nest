@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { AggregateTaskArgs } from "./args/AggregateTaskArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Task } from "../../../models/Task";
 import { AggregateTask } from "../../outputs/AggregateTask";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { AggregateTaskArgs } from "./args/AggregateTaskArgs";
 
 @TypeGraphQL.Resolver(_of => Task)
 export class AggregateTaskResolver {

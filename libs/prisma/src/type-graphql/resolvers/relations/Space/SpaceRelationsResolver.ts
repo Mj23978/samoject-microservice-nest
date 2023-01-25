@@ -1,15 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Project } from "../../../models/Project";
 import { Space } from "../../../models/Space";
 import { SpaceSettings } from "../../../models/SpaceSettings";
 import { SpaceView } from "../../../models/SpaceView";
 import { SpaceSubspacesArgs } from "./args/SpaceSubspacesArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Space)
 export class SpaceRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Chat, {
+  @FieldResolver(() => Chat, {
     nullable: true
   })
   async chat(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any): Promise<Chat | null> {
@@ -20,7 +19,7 @@ export class SpaceRelationsResolver {
     }).chat({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Space, {
+  @FieldResolver(() => Space, {
     nullable: true
   })
   async parent(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any): Promise<Space | null> {
@@ -31,7 +30,7 @@ export class SpaceRelationsResolver {
     }).parent({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Project, {
+  @FieldResolver(() => Project, {
     nullable: false
   })
   async project(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any): Promise<Project> {
@@ -42,7 +41,7 @@ export class SpaceRelationsResolver {
     }).project({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => SpaceSettings, {
+  @FieldResolver(() => SpaceSettings, {
     nullable: false
   })
   async settings(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any): Promise<SpaceSettings> {
@@ -53,7 +52,7 @@ export class SpaceRelationsResolver {
     }).settings({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => SpaceView, {
+  @FieldResolver(() => SpaceView, {
     nullable: false
   })
   async view(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any): Promise<SpaceView> {
@@ -64,7 +63,7 @@ export class SpaceRelationsResolver {
     }).view({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Space], {
+  @FieldResolver(() => [Space], {
     nullable: false
   })
   async subspaces(@TypeGraphQL.Root() space: Space, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: SpaceSubspacesArgs): Promise<Space[]> {

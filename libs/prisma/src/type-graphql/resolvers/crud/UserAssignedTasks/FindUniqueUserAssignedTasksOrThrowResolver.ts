@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueUserAssignedTasksOrThrowArgs } from "./args/FindUniqueUserAssignedTasksOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { UserAssignedTasks } from "../../../models/UserAssignedTasks";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueUserAssignedTasksOrThrowArgs } from "./args/FindUniqueUserAssignedTasksOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => UserAssignedTasks)
 export class FindUniqueUserAssignedTasksOrThrowResolver {

@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { SpaceSettings } from "../../../models/SpaceSettings";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateSpaceSettings } from "../../outputs/AggregateSpaceSettings";
+import { SpaceSettingsGroupBy } from "../../outputs/SpaceSettingsGroupBy";
 import { AggregateSpaceSettingsArgs } from "./args/AggregateSpaceSettingsArgs";
 import { CreateManySpaceSettingsArgs } from "./args/CreateManySpaceSettingsArgs";
 import { CreateOneSpaceSettingsArgs } from "./args/CreateOneSpaceSettingsArgs";
@@ -14,11 +18,6 @@ import { GroupBySpaceSettingsArgs } from "./args/GroupBySpaceSettingsArgs";
 import { UpdateManySpaceSettingsArgs } from "./args/UpdateManySpaceSettingsArgs";
 import { UpdateOneSpaceSettingsArgs } from "./args/UpdateOneSpaceSettingsArgs";
 import { UpsertOneSpaceSettingsArgs } from "./args/UpsertOneSpaceSettingsArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { SpaceSettings } from "../../../models/SpaceSettings";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateSpaceSettings } from "../../outputs/AggregateSpaceSettings";
-import { SpaceSettingsGroupBy } from "../../outputs/SpaceSettingsGroupBy";
 
 @TypeGraphQL.Resolver(_of => SpaceSettings)
 export class SpaceSettingsCrudResolver {

@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { DeleteOneWorkspaceArgs } from "./args/DeleteOneWorkspaceArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Workspace } from "../../../models/Workspace";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { DeleteOneWorkspaceArgs } from "./args/DeleteOneWorkspaceArgs";
 
 @TypeGraphQL.Resolver(_of => Workspace)
 export class DeleteOneWorkspaceResolver {

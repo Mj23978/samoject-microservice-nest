@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { Project } from "../../../models/Project";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateProject } from "../../outputs/AggregateProject";
+import { ProjectGroupBy } from "../../outputs/ProjectGroupBy";
 import { AggregateProjectArgs } from "./args/AggregateProjectArgs";
 import { CreateManyProjectArgs } from "./args/CreateManyProjectArgs";
 import { CreateOneProjectArgs } from "./args/CreateOneProjectArgs";
@@ -14,11 +18,6 @@ import { GroupByProjectArgs } from "./args/GroupByProjectArgs";
 import { UpdateManyProjectArgs } from "./args/UpdateManyProjectArgs";
 import { UpdateOneProjectArgs } from "./args/UpdateOneProjectArgs";
 import { UpsertOneProjectArgs } from "./args/UpsertOneProjectArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { Project } from "../../../models/Project";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateProject } from "../../outputs/AggregateProject";
-import { ProjectGroupBy } from "../../outputs/ProjectGroupBy";
 
 @TypeGraphQL.Resolver(_of => Project)
 export class ProjectCrudResolver {

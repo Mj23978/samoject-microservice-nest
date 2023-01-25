@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { Space } from "../../../models/Space";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateSpace } from "../../outputs/AggregateSpace";
+import { SpaceGroupBy } from "../../outputs/SpaceGroupBy";
 import { AggregateSpaceArgs } from "./args/AggregateSpaceArgs";
 import { CreateManySpaceArgs } from "./args/CreateManySpaceArgs";
 import { CreateOneSpaceArgs } from "./args/CreateOneSpaceArgs";
@@ -14,11 +18,6 @@ import { GroupBySpaceArgs } from "./args/GroupBySpaceArgs";
 import { UpdateManySpaceArgs } from "./args/UpdateManySpaceArgs";
 import { UpdateOneSpaceArgs } from "./args/UpdateOneSpaceArgs";
 import { UpsertOneSpaceArgs } from "./args/UpsertOneSpaceArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { Space } from "../../../models/Space";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateSpace } from "../../outputs/AggregateSpace";
-import { SpaceGroupBy } from "../../outputs/SpaceGroupBy";
 
 @TypeGraphQL.Resolver(_of => Space)
 export class SpaceCrudResolver {

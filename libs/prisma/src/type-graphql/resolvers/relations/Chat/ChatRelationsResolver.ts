@@ -1,4 +1,4 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Message } from "../../../models/Message";
 import { Project } from "../../../models/Project";
@@ -6,11 +6,10 @@ import { Space } from "../../../models/Space";
 import { Task } from "../../../models/Task";
 import { User } from "../../../models/User";
 import { ChatMessagesArgs } from "./args/ChatMessagesArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class ChatRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Message], {
+  @FieldResolver(() => [Message], {
     nullable: false
   })
   async messages(@TypeGraphQL.Root() chat: Chat, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ChatMessagesArgs): Promise<Message[]> {
@@ -21,7 +20,7 @@ export class ChatRelationsResolver {
     }).messages(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => Project, {
+  @FieldResolver(() => Project, {
     nullable: true
   })
   async Project(@TypeGraphQL.Root() chat: Chat, @TypeGraphQL.Ctx() ctx: any): Promise<Project | null> {
@@ -32,7 +31,7 @@ export class ChatRelationsResolver {
     }).Project({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Space, {
+  @FieldResolver(() => Space, {
     nullable: true
   })
   async Space(@TypeGraphQL.Root() chat: Chat, @TypeGraphQL.Ctx() ctx: any): Promise<Space | null> {
@@ -43,7 +42,7 @@ export class ChatRelationsResolver {
     }).Space({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Task, {
+  @FieldResolver(() => Task, {
     nullable: true
   })
   async Task(@TypeGraphQL.Root() chat: Chat, @TypeGraphQL.Ctx() ctx: any): Promise<Task | null> {
@@ -54,7 +53,7 @@ export class ChatRelationsResolver {
     }).Task({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: true
   })
   async User(@TypeGraphQL.Root() chat: Chat, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {

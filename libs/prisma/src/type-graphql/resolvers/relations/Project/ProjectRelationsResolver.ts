@@ -1,4 +1,4 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Project } from "../../../models/Project";
 import { ProjectSettings } from "../../../models/ProjectSettings";
@@ -10,11 +10,10 @@ import { Workspace } from "../../../models/Workspace";
 import { ProjectSpacesArgs } from "./args/ProjectSpacesArgs";
 import { ProjectTasksArgs } from "./args/ProjectTasksArgs";
 import { ProjectUsersArgs } from "./args/ProjectUsersArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Project)
 export class ProjectRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Chat, {
+  @FieldResolver(() => Chat, {
     nullable: true
   })
   async chat(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any): Promise<Chat | null> {
@@ -25,7 +24,7 @@ export class ProjectRelationsResolver {
     }).chat({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: false
   })
   async owner(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
@@ -36,7 +35,7 @@ export class ProjectRelationsResolver {
     }).owner({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => ProjectSettings, {
+  @FieldResolver(() => ProjectSettings, {
     nullable: false
   })
   async settings(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any): Promise<ProjectSettings> {
@@ -47,7 +46,7 @@ export class ProjectRelationsResolver {
     }).settings({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Workspace, {
+  @FieldResolver(() => Workspace, {
     nullable: false
   })
   async workspace(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any): Promise<Workspace> {
@@ -58,7 +57,7 @@ export class ProjectRelationsResolver {
     }).workspace({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [ProjectsOnUsers], {
+  @FieldResolver(() => [ProjectsOnUsers], {
     nullable: false
   })
   async users(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProjectUsersArgs): Promise<ProjectsOnUsers[]> {
@@ -69,7 +68,7 @@ export class ProjectRelationsResolver {
     }).users(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Space], {
+  @FieldResolver(() => [Space], {
     nullable: false
   })
   async spaces(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProjectSpacesArgs): Promise<Space[]> {
@@ -80,7 +79,7 @@ export class ProjectRelationsResolver {
     }).spaces(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Task], {
+  @FieldResolver(() => [Task], {
     nullable: false
   })
   async tasks(@TypeGraphQL.Root() project: Project, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ProjectTasksArgs): Promise<Task[]> {

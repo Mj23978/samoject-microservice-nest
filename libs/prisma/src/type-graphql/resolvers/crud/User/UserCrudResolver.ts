@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { User } from "../../../models/User";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateUser } from "../../outputs/AggregateUser";
+import { UserGroupBy } from "../../outputs/UserGroupBy";
 import { AggregateUserArgs } from "./args/AggregateUserArgs";
 import { CreateManyUserArgs } from "./args/CreateManyUserArgs";
 import { CreateOneUserArgs } from "./args/CreateOneUserArgs";
@@ -14,11 +18,6 @@ import { GroupByUserArgs } from "./args/GroupByUserArgs";
 import { UpdateManyUserArgs } from "./args/UpdateManyUserArgs";
 import { UpdateOneUserArgs } from "./args/UpdateOneUserArgs";
 import { UpsertOneUserArgs } from "./args/UpsertOneUserArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { User } from "../../../models/User";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateUser } from "../../outputs/AggregateUser";
-import { UserGroupBy } from "../../outputs/UserGroupBy";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserCrudResolver {

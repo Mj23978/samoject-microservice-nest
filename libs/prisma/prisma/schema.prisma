@@ -12,12 +12,6 @@ generator erd {
   output   = "../ERD.svg"
   theme    = "forest"
 }
-
-generator typegraphql {
-  provider = "typegraphql-prisma"
-  output   = "../src/type-graphql"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")

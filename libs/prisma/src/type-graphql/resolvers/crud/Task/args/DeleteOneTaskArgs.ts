@@ -1,10 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { TaskWhereUniqueInput } from "../../../inputs/TaskWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class DeleteOneTaskArgs {
-  @TypeGraphQL.Field(_type => TaskWhereUniqueInput, {
+  @Field(() => TaskWhereUniqueInput, {
     nullable: false
   })
   where!: TaskWhereUniqueInput;

@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
   Decimal,
-  objectEnumValues
+  objectEnumValues,
+  makeStrictEnum
 } = require('./runtime/index-browser')
 
 
@@ -12,11 +13,11 @@ const Prisma = {}
 exports.Prisma = Prisma
 
 /**
- * Prisma Client JS version: 4.1.0
+ * Prisma Client JS version: 4.8.0
  * Query Engine version: d6e67a83f971b175a593ccc12e15c4a757f93ffe
  */
 Prisma.prismaVersion = {
-  client: "4.1.0",
+  client: "4.8.0",
   engine: "d6e67a83f971b175a593ccc12e15c4a757f93ffe"
 }
 
@@ -67,6 +68,7 @@ In case this error is unexpected for you, please report it in https://github.com
 )}
 Prisma.validator = () => (val) => val
 
+
 /**
  * Shorthand utilities for JSON filtering
  */
@@ -87,58 +89,22 @@ Prisma.NullTypes = {
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
 
-exports.Prisma.UserScalarFieldEnum = makeEnum({
+exports.Prisma.ChatScalarFieldEnum = makeEnum({
   id: 'id',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  email: 'email',
-  password: 'password',
-  firstname: 'firstname',
-  lastname: 'lastname',
-  username: 'username',
-  active: 'active',
-  chatId: 'chatId',
-  role: 'role'
+  updatedAt: 'updatedAt'
 });
 
-exports.Prisma.TaskScalarFieldEnum = makeEnum({
+exports.Prisma.MessageScalarFieldEnum = makeEnum({
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  projectId: 'projectId',
-  creatorId: 'creatorId',
-  parentId: 'parentId',
-  status: 'status',
-  details: 'details',
-  chatId: 'chatId'
-});
-
-exports.Prisma.SpaceScalarFieldEnum = makeEnum({
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  viewId: 'viewId',
-  projectId: 'projectId',
-  settingsId: 'settingsId',
-  spaceType: 'spaceType',
+  content: 'content',
+  contentType: 'contentType',
+  type: 'type',
+  senderId: 'senderId',
   parentId: 'parentId',
   chatId: 'chatId'
-});
-
-exports.Prisma.SpaceViewScalarFieldEnum = makeEnum({
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  localId: 'localId',
-  spaceId: 'spaceId'
-});
-
-exports.Prisma.SpaceSettingsScalarFieldEnum = makeEnum({
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  localId: 'localId',
-  spaceId: 'spaceId'
 });
 
 exports.Prisma.ProjectScalarFieldEnum = makeEnum({
@@ -161,6 +127,91 @@ exports.Prisma.ProjectSettingsScalarFieldEnum = makeEnum({
   projectId: 'projectId'
 });
 
+exports.Prisma.ProjectsOnUsersScalarFieldEnum = makeEnum({
+  projectId: 'projectId',
+  userId: 'userId',
+  assignedAt: 'assignedAt',
+  assignedBy: 'assignedBy'
+});
+
+exports.Prisma.QueryMode = makeEnum({
+  default: 'default',
+  insensitive: 'insensitive'
+});
+
+exports.Prisma.SortOrder = makeEnum({
+  asc: 'asc',
+  desc: 'desc'
+});
+
+exports.Prisma.SpaceScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  viewId: 'viewId',
+  projectId: 'projectId',
+  settingsId: 'settingsId',
+  spaceType: 'spaceType',
+  parentId: 'parentId',
+  chatId: 'chatId'
+});
+
+exports.Prisma.SpaceSettingsScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  localId: 'localId',
+  spaceId: 'spaceId'
+});
+
+exports.Prisma.SpaceViewScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  localId: 'localId',
+  spaceId: 'spaceId'
+});
+
+exports.Prisma.TaskScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  projectId: 'projectId',
+  creatorId: 'creatorId',
+  parentId: 'parentId',
+  status: 'status',
+  details: 'details',
+  chatId: 'chatId'
+});
+
+exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
+  Serializable: 'Serializable'
+});
+
+exports.Prisma.UserAssignedTasksScalarFieldEnum = makeEnum({
+  taskId: 'taskId',
+  userId: 'userId',
+  assignedAt: 'assignedAt',
+  assignedBy: 'assignedBy'
+});
+
+exports.Prisma.UserScalarFieldEnum = makeEnum({
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  email: 'email',
+  password: 'password',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  username: 'username',
+  active: 'active',
+  chatId: 'chatId',
+  role: 'role'
+});
+
 exports.Prisma.WorkspaceScalarFieldEnum = makeEnum({
   id: 'id',
   createdAt: 'createdAt',
@@ -176,48 +227,6 @@ exports.Prisma.WorkspaceSettingsScalarFieldEnum = makeEnum({
   updatedAt: 'updatedAt',
   localId: 'localId',
   workspaceId: 'workspaceId'
-});
-
-exports.Prisma.ProjectsOnUsersScalarFieldEnum = makeEnum({
-  projectId: 'projectId',
-  userId: 'userId',
-  assignedAt: 'assignedAt',
-  assignedBy: 'assignedBy'
-});
-
-exports.Prisma.UserAssignedTasksScalarFieldEnum = makeEnum({
-  taskId: 'taskId',
-  userId: 'userId',
-  assignedAt: 'assignedAt',
-  assignedBy: 'assignedBy'
-});
-
-exports.Prisma.MessageScalarFieldEnum = makeEnum({
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  content: 'content',
-  contentType: 'contentType',
-  type: 'type',
-  senderId: 'senderId',
-  parentId: 'parentId',
-  chatId: 'chatId'
-});
-
-exports.Prisma.ChatScalarFieldEnum = makeEnum({
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-});
-
-exports.Prisma.SortOrder = makeEnum({
-  asc: 'asc',
-  desc: 'desc'
-});
-
-exports.Prisma.QueryMode = makeEnum({
-  default: 'default',
-  insensitive: 'insensitive'
 });
 exports.Role = makeEnum({
   ADMIN: 'ADMIN',

@@ -1,4 +1,4 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Project } from "../../../models/Project";
 import { Task } from "../../../models/Task";
@@ -6,11 +6,10 @@ import { User } from "../../../models/User";
 import { UserAssignedTasks } from "../../../models/UserAssignedTasks";
 import { TaskAssignesArgs } from "./args/TaskAssignesArgs";
 import { TaskSubTasksArgs } from "./args/TaskSubTasksArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Task)
 export class TaskRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Chat, {
+  @FieldResolver(() => Chat, {
     nullable: true
   })
   async chat(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any): Promise<Chat | null> {
@@ -21,7 +20,7 @@ export class TaskRelationsResolver {
     }).chat({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: true
   })
   async creator(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
@@ -32,7 +31,7 @@ export class TaskRelationsResolver {
     }).creator({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Task, {
+  @FieldResolver(() => Task, {
     nullable: true
   })
   async parent(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any): Promise<Task | null> {
@@ -43,7 +42,7 @@ export class TaskRelationsResolver {
     }).parent({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Project, {
+  @FieldResolver(() => Project, {
     nullable: true
   })
   async project(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any): Promise<Project | null> {
@@ -54,7 +53,7 @@ export class TaskRelationsResolver {
     }).project({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Task], {
+  @FieldResolver(() => [Task], {
     nullable: false
   })
   async subTasks(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: TaskSubTasksArgs): Promise<Task[]> {
@@ -65,7 +64,7 @@ export class TaskRelationsResolver {
     }).subTasks(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [UserAssignedTasks], {
+  @FieldResolver(() => [UserAssignedTasks], {
     nullable: false
   })
   async assignes(@TypeGraphQL.Root() task: Task, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: TaskAssignesArgs): Promise<UserAssignedTasks[]> {

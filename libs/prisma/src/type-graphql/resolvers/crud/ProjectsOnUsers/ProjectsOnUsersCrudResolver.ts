@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { ProjectsOnUsers } from "../../../models/ProjectsOnUsers";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateProjectsOnUsers } from "../../outputs/AggregateProjectsOnUsers";
+import { ProjectsOnUsersGroupBy } from "../../outputs/ProjectsOnUsersGroupBy";
 import { AggregateProjectsOnUsersArgs } from "./args/AggregateProjectsOnUsersArgs";
 import { CreateManyProjectsOnUsersArgs } from "./args/CreateManyProjectsOnUsersArgs";
 import { CreateOneProjectsOnUsersArgs } from "./args/CreateOneProjectsOnUsersArgs";
@@ -14,11 +18,6 @@ import { GroupByProjectsOnUsersArgs } from "./args/GroupByProjectsOnUsersArgs";
 import { UpdateManyProjectsOnUsersArgs } from "./args/UpdateManyProjectsOnUsersArgs";
 import { UpdateOneProjectsOnUsersArgs } from "./args/UpdateOneProjectsOnUsersArgs";
 import { UpsertOneProjectsOnUsersArgs } from "./args/UpsertOneProjectsOnUsersArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { ProjectsOnUsers } from "../../../models/ProjectsOnUsers";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateProjectsOnUsers } from "../../outputs/AggregateProjectsOnUsers";
-import { ProjectsOnUsersGroupBy } from "../../outputs/ProjectsOnUsersGroupBy";
 
 @TypeGraphQL.Resolver(_of => ProjectsOnUsers)
 export class ProjectsOnUsersCrudResolver {

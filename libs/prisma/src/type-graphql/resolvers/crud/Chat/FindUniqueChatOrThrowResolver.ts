@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueChatOrThrowArgs } from "./args/FindUniqueChatOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueChatOrThrowArgs } from "./args/FindUniqueChatOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class FindUniqueChatOrThrowResolver {

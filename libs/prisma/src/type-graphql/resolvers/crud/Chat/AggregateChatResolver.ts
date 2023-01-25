@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { AggregateChatArgs } from "./args/AggregateChatArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { AggregateChat } from "../../outputs/AggregateChat";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { AggregateChatArgs } from "./args/AggregateChatArgs";
 
 @TypeGraphQL.Resolver(_of => Chat)
 export class AggregateChatResolver {

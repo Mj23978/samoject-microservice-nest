@@ -1,11 +1,10 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Project } from "../../../models/Project";
 import { ProjectSettings } from "../../../models/ProjectSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => ProjectSettings)
 export class ProjectSettingsRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Project, {
+  @FieldResolver(() => Project, {
     nullable: true
   })
   async project(@TypeGraphQL.Root() projectSettings: ProjectSettings, @TypeGraphQL.Ctx() ctx: any): Promise<Project | null> {

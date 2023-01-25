@@ -1,38 +1,36 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
+import { WorkspaceScalarFieldEnum } from "../../../../enums/WorkspaceScalarFieldEnum";
 import { WorkspaceOrderByWithAggregationInput } from "../../../inputs/WorkspaceOrderByWithAggregationInput";
 import { WorkspaceScalarWhereWithAggregatesInput } from "../../../inputs/WorkspaceScalarWhereWithAggregatesInput";
 import { WorkspaceWhereInput } from "../../../inputs/WorkspaceWhereInput";
-import { WorkspaceScalarFieldEnum } from "../../../../enums/WorkspaceScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
 export class GroupByWorkspaceArgs {
-  @TypeGraphQL.Field(_type => WorkspaceWhereInput, {
+  @Field(() => WorkspaceWhereInput, {
     nullable: true
   })
   where?: WorkspaceWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [WorkspaceOrderByWithAggregationInput], {
+  @Field(() => [WorkspaceOrderByWithAggregationInput], {
     nullable: true
   })
   orderBy?: WorkspaceOrderByWithAggregationInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [WorkspaceScalarFieldEnum], {
+  @Field(() => [WorkspaceScalarFieldEnum], {
     nullable: false
   })
   by!: Array<"id" | "createdAt" | "updatedAt" | "title" | "settingsId" | "userId">;
 
-  @TypeGraphQL.Field(_type => WorkspaceScalarWhereWithAggregatesInput, {
+  @Field(() => WorkspaceScalarWhereWithAggregatesInput, {
     nullable: true
   })
   having?: WorkspaceScalarWhereWithAggregatesInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   skip?: number | undefined;

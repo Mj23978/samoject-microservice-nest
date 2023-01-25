@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindUniqueSpaceOrThrowArgs } from "./args/FindUniqueSpaceOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Space } from "../../../models/Space";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindUniqueSpaceOrThrowArgs } from "./args/FindUniqueSpaceOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => Space)
 export class FindUniqueSpaceOrThrowResolver {

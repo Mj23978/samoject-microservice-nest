@@ -1,14 +1,13 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Project } from "../../../models/Project";
 import { User } from "../../../models/User";
 import { Workspace } from "../../../models/Workspace";
 import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
 import { WorkspaceProjectsArgs } from "./args/WorkspaceProjectsArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Workspace)
 export class WorkspaceRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => WorkspaceSettings, {
+  @FieldResolver(() => WorkspaceSettings, {
     nullable: false
   })
   async settings(@TypeGraphQL.Root() workspace: Workspace, @TypeGraphQL.Ctx() ctx: any): Promise<WorkspaceSettings> {
@@ -19,7 +18,7 @@ export class WorkspaceRelationsResolver {
     }).settings({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: false
   })
   async user(@TypeGraphQL.Root() workspace: Workspace, @TypeGraphQL.Ctx() ctx: any): Promise<User> {
@@ -30,7 +29,7 @@ export class WorkspaceRelationsResolver {
     }).user({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Project], {
+  @FieldResolver(() => [Project], {
     nullable: false
   })
   async projects(@TypeGraphQL.Root() workspace: Workspace, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: WorkspaceProjectsArgs): Promise<Project[]> {

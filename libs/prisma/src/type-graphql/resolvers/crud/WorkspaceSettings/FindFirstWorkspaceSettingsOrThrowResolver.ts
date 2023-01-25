@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindFirstWorkspaceSettingsOrThrowArgs } from "./args/FindFirstWorkspaceSettingsOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { WorkspaceSettings } from "../../../models/WorkspaceSettings";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindFirstWorkspaceSettingsOrThrowArgs } from "./args/FindFirstWorkspaceSettingsOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => WorkspaceSettings)
 export class FindFirstWorkspaceSettingsOrThrowResolver {

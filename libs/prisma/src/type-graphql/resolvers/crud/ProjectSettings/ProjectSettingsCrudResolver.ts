@@ -1,5 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
+import { ProjectSettings } from "../../../models/ProjectSettings";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateProjectSettings } from "../../outputs/AggregateProjectSettings";
+import { ProjectSettingsGroupBy } from "../../outputs/ProjectSettingsGroupBy";
 import { AggregateProjectSettingsArgs } from "./args/AggregateProjectSettingsArgs";
 import { CreateManyProjectSettingsArgs } from "./args/CreateManyProjectSettingsArgs";
 import { CreateOneProjectSettingsArgs } from "./args/CreateOneProjectSettingsArgs";
@@ -14,11 +18,6 @@ import { GroupByProjectSettingsArgs } from "./args/GroupByProjectSettingsArgs";
 import { UpdateManyProjectSettingsArgs } from "./args/UpdateManyProjectSettingsArgs";
 import { UpdateOneProjectSettingsArgs } from "./args/UpdateOneProjectSettingsArgs";
 import { UpsertOneProjectSettingsArgs } from "./args/UpsertOneProjectSettingsArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
-import { ProjectSettings } from "../../../models/ProjectSettings";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { AggregateProjectSettings } from "../../outputs/AggregateProjectSettings";
-import { ProjectSettingsGroupBy } from "../../outputs/ProjectSettingsGroupBy";
 
 @TypeGraphQL.Resolver(_of => ProjectSettings)
 export class ProjectSettingsCrudResolver {

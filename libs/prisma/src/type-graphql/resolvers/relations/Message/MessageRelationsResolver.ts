@@ -1,13 +1,12 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Message } from "../../../models/Message";
 import { User } from "../../../models/User";
 import { MessageSubMessagesArgs } from "./args/MessageSubMessagesArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Message)
 export class MessageRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Chat, {
+  @FieldResolver(() => Chat, {
     nullable: false
   })
   async chat(@TypeGraphQL.Root() message: Message, @TypeGraphQL.Ctx() ctx: any): Promise<Chat> {
@@ -18,7 +17,7 @@ export class MessageRelationsResolver {
     }).chat({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => Message, {
+  @FieldResolver(() => Message, {
     nullable: true
   })
   async parent(@TypeGraphQL.Root() message: Message, @TypeGraphQL.Ctx() ctx: any): Promise<Message | null> {
@@ -29,7 +28,7 @@ export class MessageRelationsResolver {
     }).parent({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @FieldResolver(() => User, {
     nullable: true
   })
   async sender(@TypeGraphQL.Root() message: Message, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
@@ -40,7 +39,7 @@ export class MessageRelationsResolver {
     }).sender({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Message], {
+  @FieldResolver(() => [Message], {
     nullable: false
   })
   async subMessages(@TypeGraphQL.Root() message: Message, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: MessageSubMessagesArgs): Promise<Message[]> {

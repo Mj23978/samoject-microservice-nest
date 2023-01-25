@@ -7,6 +7,7 @@
     "interface": "libs/interface",
     "kafka": "libs/kafka",
     "prisma": "libs/prisma",
+    "project": "apps/project",
     "redis": "libs/redis",
     "supabase": "libs/supabase",
     "task": "apps/task",

@@ -1,4 +1,4 @@
-import * as TypeGraphQL from "type-graphql";
+import { getPrismaFromContext } from "../../../helpers";
 import { Chat } from "../../../models/Chat";
 import { Message } from "../../../models/Message";
 import { Project } from "../../../models/Project";
@@ -14,11 +14,10 @@ import { UserOwnedProjectsArgs } from "./args/UserOwnedProjectsArgs";
 import { UserProjectsArgs } from "./args/UserProjectsArgs";
 import { UserUser_AArgs } from "./args/UserUser_AArgs";
 import { UserUser_BArgs } from "./args/UserUser_BArgs";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => User)
 export class UserRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Chat, {
+  @FieldResolver(() => Chat, {
     nullable: true
   })
   async chat(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Chat | null> {
@@ -29,7 +28,7 @@ export class UserRelationsResolver {
     }).chat({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Message], {
+  @FieldResolver(() => [Message], {
     nullable: false
   })
   async comments(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserCommentsArgs): Promise<Message[]> {
@@ -40,7 +39,7 @@ export class UserRelationsResolver {
     }).comments(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Project], {
+  @FieldResolver(() => [Project], {
     nullable: false
   })
   async ownedProjects(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserOwnedProjectsArgs): Promise<Project[]> {
@@ -51,7 +50,7 @@ export class UserRelationsResolver {
     }).ownedProjects(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [ProjectsOnUsers], {
+  @FieldResolver(() => [ProjectsOnUsers], {
     nullable: false
   })
   async projects(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserProjectsArgs): Promise<ProjectsOnUsers[]> {
@@ -62,7 +61,7 @@ export class UserRelationsResolver {
     }).projects(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [Task], {
+  @FieldResolver(() => [Task], {
     nullable: false
   })
   async createdTasks(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserCreatedTasksArgs): Promise<Task[]> {
@@ -73,7 +72,7 @@ export class UserRelationsResolver {
     }).createdTasks(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [UserAssignedTasks], {
+  @FieldResolver(() => [UserAssignedTasks], {
     nullable: false
   })
   async assignedTasks(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserAssignedTasksArgs): Promise<UserAssignedTasks[]> {
@@ -84,7 +83,7 @@ export class UserRelationsResolver {
     }).assignedTasks(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => Workspace, {
+  @FieldResolver(() => Workspace, {
     nullable: true
   })
   async workspaces(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Workspace | null> {
@@ -95,7 +94,7 @@ export class UserRelationsResolver {
     }).workspaces({});
   }
 
-  @TypeGraphQL.FieldResolver(_type => [User], {
+  @FieldResolver(() => [User], {
     nullable: false
   })
   async User_B(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserUser_BArgs): Promise<User[]> {
@@ -106,7 +105,7 @@ export class UserRelationsResolver {
     }).User_B(args);
   }
 
-  @TypeGraphQL.FieldResolver(_type => [User], {
+  @FieldResolver(() => [User], {
     nullable: false
   })
   async User_A(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserUser_AArgs): Promise<User[]> {

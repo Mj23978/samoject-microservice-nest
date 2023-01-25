@@ -1,9 +1,8 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { GroupByMessageArgs } from "./args/GroupByMessageArgs";
+import { getPrismaFromContext, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Message } from "../../../models/Message";
 import { MessageGroupBy } from "../../outputs/MessageGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { GroupByMessageArgs } from "./args/GroupByMessageArgs";
 
 @TypeGraphQL.Resolver(_of => Message)
 export class GroupByMessageResolver {

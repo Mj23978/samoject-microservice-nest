@@ -1,32 +1,30 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { UserAssignedTasksOrderByWithRelationInput } from "../../../inputs/UserAssignedTasksOrderByWithRelationInput";
 import { UserAssignedTasksWhereInput } from "../../../inputs/UserAssignedTasksWhereInput";
 import { UserAssignedTasksWhereUniqueInput } from "../../../inputs/UserAssignedTasksWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class AggregateUserAssignedTasksArgs {
-  @TypeGraphQL.Field(_type => UserAssignedTasksWhereInput, {
+  @Field(() => UserAssignedTasksWhereInput, {
     nullable: true
   })
   where?: UserAssignedTasksWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [UserAssignedTasksOrderByWithRelationInput], {
+  @Field(() => [UserAssignedTasksOrderByWithRelationInput], {
     nullable: true
   })
   orderBy?: UserAssignedTasksOrderByWithRelationInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => UserAssignedTasksWhereUniqueInput, {
+  @Field(() => UserAssignedTasksWhereUniqueInput, {
     nullable: true
   })
   cursor?: UserAssignedTasksWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => TypeGraphQL.Int, {
     nullable: true
   })
   skip?: number | undefined;

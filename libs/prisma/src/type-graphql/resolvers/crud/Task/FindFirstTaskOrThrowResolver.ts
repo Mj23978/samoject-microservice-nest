@@ -1,8 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { FindFirstTaskOrThrowArgs } from "./args/FindFirstTaskOrThrowArgs";
+import { getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, transformInfoIntoPrismaArgs } from "../../../helpers";
 import { Task } from "../../../models/Task";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { FindFirstTaskOrThrowArgs } from "./args/FindFirstTaskOrThrowArgs";
 
 @TypeGraphQL.Resolver(_of => Task)
 export class FindFirstTaskOrThrowResolver {

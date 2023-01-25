@@ -1,22 +1,20 @@
-import * as TypeGraphQL from "type-graphql";
-import * as GraphQLScalars from "graphql-scalars";
 import { MessageCreateInput } from "../../../inputs/MessageCreateInput";
 import { MessageUpdateInput } from "../../../inputs/MessageUpdateInput";
 import { MessageWhereUniqueInput } from "../../../inputs/MessageWhereUniqueInput";
 
 @TypeGraphQL.ArgsType()
 export class UpsertOneMessageArgs {
-  @TypeGraphQL.Field(_type => MessageWhereUniqueInput, {
+  @Field(() => MessageWhereUniqueInput, {
     nullable: false
   })
   where!: MessageWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => MessageCreateInput, {
+  @Field(() => MessageCreateInput, {
     nullable: false
   })
   create!: MessageCreateInput;
 
-  @TypeGraphQL.Field(_type => MessageUpdateInput, {
+  @Field(() => MessageUpdateInput, {
     nullable: false
   })
   update!: MessageUpdateInput;

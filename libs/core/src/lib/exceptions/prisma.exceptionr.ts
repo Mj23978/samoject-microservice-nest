@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, HttpStatus } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
 import { RpcException } from '@nestjs/microservices';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '@samoject/prisma';
 import { Response } from 'express';
 
 @Catch(Prisma.PrismaClientKnownRequestError)
