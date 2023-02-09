@@ -98,7 +98,7 @@
     "jest-environment-jsdom": "29.3.1",
     "nx": "15.3.3",
     "prettier": "^2.6.2",
-    "prisma": "4.8.0",
+    "prisma": "4.10.0",
     "prisma-dbml-generator": "0.10.0-dev.0",
     "prisma-erd-generator": "^1.2.4",
     "prisma-graphql-type-decimal": "^2.0.4",
