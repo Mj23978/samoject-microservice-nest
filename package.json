@@ -101,7 +101,7 @@
     "prisma": "4.10.0",
     "prisma-dbml-generator": "0.10.0-dev.0",
     "prisma-erd-generator": "^1.2.4",
-    "prisma-graphql-type-decimal": "^2.0.4",
+    "prisma-graphql-type-decimal": "^2.0.6",
     "supertest": "^6.2.4",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",

@@ -8964,10 +8964,10 @@ prisma-erd-generator@^1.2.4:
     "@prisma/generator-helper" "^4.6.0"
     dotenv "^16.0.3"
 
-prisma-graphql-type-decimal@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/prisma-graphql-type-decimal/-/prisma-graphql-type-decimal-2.0.4.tgz#be33afd57b234b55bce438fe736c894365bc2aea"
-  integrity sha512-HjqDYqpBF8T6XztkYVemcEit+XywoygQPUvM7Cowvd9ExkUz8ofZaTlIkY0Rw7kVOdz4btZhMsj/v/6Bitnn0w==
+prisma-graphql-type-decimal@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/prisma-graphql-type-decimal/-/prisma-graphql-type-decimal-2.0.6.tgz#8b9088e6639e3ddfc24d1dc41583f1a9f6cf615e"
+  integrity sha512-xeJbn6AxCSE4lC39Xbo+VmgrhLNQzBCQoTupN8QtvP+2bpxYZ6ktyyFyub5mkVEtUg2tJs8etBiaKZOn+hMnIA==
 
 prisma@4.10.0:
   version "4.10.0"
