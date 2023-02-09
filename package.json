@@ -59,7 +59,7 @@
     "joi": "^17.6.0",
     "kafkajs": "^2.2.3",
     "nats": "^2.10.0",
-    "nestjs-prisma": "^0.19.0",
+    "nestjs-prisma": "^0.20.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": ">=0.1.13 <0.2.0",
