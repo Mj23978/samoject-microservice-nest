@@ -7962,13 +7962,12 @@ native-request@^1.0.5:
   resolved "https://registry.yarnpkg.com/native-request/-/native-request-1.1.0.tgz#acdb30fe2eefa3e1bc8c54b3a6852e9c5c0d3cb0"
   integrity sha512-uZ5rQaeRn15XmpgE0xoPL8YWqcX90VtCFglYwAgkvKM5e8fog+vePLAhHxuuv/gRkrQxIeh5U3q9sMNUrENqWw==
 
-nats@^2.10.0:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/nats/-/nats-2.10.2.tgz#f60a6658fcc503d9f9064d759f68272daf229ad3"
-  integrity sha512-U+3bjrYT/MqEkWDoHH9ql2rm8qt4s8z49yUjvryBvjEV0GtObTqa+BUpcTK6v2SE5fv09qcP7BcfUK0k0/gB0g==
+nats@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/nats/-/nats-2.12.1.tgz#96733afdd498d813151100b25d86698f11725dc2"
+  integrity sha512-sozm/tpF7KJpjMDfPnlvaED7/+62NrJfKXj2tCE22oi5vpXHT00QccvIuw6cxBrSqD/qw7I06tyjHXoK84Z5kA==
   dependencies:
-    nkeys.js "1.0.4"
-    web-streams-polyfill "^3.2.1"
+    nkeys.js "1.0.5"
 
 natural-compare-lite@^1.4.0:
   version "1.4.0"
@@ -8009,10 +8008,10 @@ next-tick@^1.1.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
   integrity sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==
 
-nkeys.js@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/nkeys.js/-/nkeys.js-1.0.4.tgz#0902bd44129569c4bd3857ce87d8b69f1c0e7253"
-  integrity sha512-xeNDE6Ha5I3b3PnlHyT9AbmBxq3Vb9KHzmaI/h4IXYg0PUVZSUXNHNhTfU20oBsubw2ZdV/1AdC6hnRuMiZfMQ==
+nkeys.js@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/nkeys.js/-/nkeys.js-1.0.5.tgz#3024bde671eb33be0316ff2d5abe8b8cec960158"
+  integrity sha512-u25YnRPHiGVsNzwyHnn+PT90sgAhnS8jUJ1nxmkHMFYCJ6+Ic0lv291w7uhRBpJVJ3PH2GWbYqA151lGCRrB5g==
   dependencies:
     tweetnacl "1.0.3"
 
@@ -10795,11 +10794,6 @@ wcwidth@^1.0.1:
   integrity sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==
   dependencies:
     defaults "^1.0.3"
-
-web-streams-polyfill@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
-  integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
